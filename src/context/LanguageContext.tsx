@@ -58,6 +58,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // Hero Section
       'hero.title': 'Let\u2019s find our way together',
+      'hero.subtitle': 'A temple of no separation where meditation and daily life breathe as one.',
       'hero.email.placeholder': 'Your email address',
       'hero.email.button': 'Keep me updated',
       'hero.gdpr': 'I agree to receive updates about the Temple of the Great Forest and understand I can unsubscribe at any time.',
@@ -143,7 +144,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'footer.terms': 'Terms of Service',
       'footer.contact': 'Contact',
       'footer.rights': 'All rights reserved.',
-      'footer.followUs': 'Follow us:'
+      'footer.followUs': 'Follow us:',
+      
+      // Newsletter Modal
+      'newsletter.title': 'Stay Connected',
+      'newsletter.description': 'Subscribe to our newsletter and stay updated about the Temple.',
+      'newsletter.success': 'Thank you for subscribing to our newsletter!'
     },
     de: {
       // Navigation
@@ -155,6 +161,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // Hero Section
       'hero.title': 'Lass uns gemeinsam unseren Weg finden',
+      'hero.subtitle': 'Ein Tempel ohne Trennung, wo Meditation und Alltag als eins atmen.',
       'hero.email.placeholder': 'Ihre E-Mail-Adresse',
       'hero.email.button': 'Halte mich auf dem Laufenden',
       'hero.gdpr': 'Ich bin damit einverstanden, Updates über den Tempel des Großen Waldes zu erhalten und verstehe, dass ich mich jederzeit abmelden kann.',
@@ -240,7 +247,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'footer.terms': 'Nutzungsbedingungen',
       'footer.contact': 'Kontakt',
       'footer.rights': 'Alle Rechte vorbehalten.',
-      'footer.followUs': 'Folge uns:'
+      'footer.followUs': 'Folge uns:',
+      
+      // Newsletter Modal
+      'newsletter.title': 'Bleib verbunden',
+      'newsletter.description': 'Abonniere unseren Newsletter und bleibe über den Tempel auf dem Laufenden.',
+      'newsletter.success': 'Vielen Dank für dein Abonnement unseres Newsletters!'
     },
     fr: {
       // Navigation
@@ -252,9 +264,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // Hero Section
       'hero.title': 'Trouvons notre chemin ensemble',
+      'hero.subtitle': 'Un temple sans séparation où méditation et vie quotidienne respirent comme un.',
       'hero.email.placeholder': 'Votre adresse e-mail',
       'hero.email.button': 'Me tenir au courant',
-      'hero.gdpr': 'J’accepte de recevoir des mises à jour sur le Temple de la Grande Forêt et comprends que je peux me désinscrire à tout moment.',
+      'hero.gdpr': 'J'accepte de recevoir des mises à jour sur le Temple de la Grande Forêt et comprends que je peux me désinscrire à tout moment.',
       
       // About Section
       'about.title': 'Qu’est-ce que le Temple ?',
@@ -337,7 +350,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'footer.terms': 'Conditions d\'utilisation',
       'footer.contact': 'Contact',
       'footer.rights': 'Tous droits réservés.',
-      'footer.followUs': 'Suivez-nous :'
+      'footer.followUs': 'Suivez-nous :',
+      
+      // Newsletter Modal
+      'newsletter.title': 'Restez connecté',
+      'newsletter.description': 'Abonnez-vous à notre newsletter et restez informé sur le Temple.',
+      'newsletter.success': 'Merci de vous être abonné à notre newsletter !'
     }
   };
 

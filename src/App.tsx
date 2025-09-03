@@ -10,6 +10,7 @@ import Instructors from './components/Instructors';
 import SupportTheTemple from './components/SupportTheTemple';
 import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
+import FloatingMailButton from './components/FloatingMailButton';
 
 function AppContent() {
   const { language, setLanguage } = useLanguage();
@@ -29,6 +30,7 @@ function AppContent() {
       <SupportTheTemple />
       <Newsletter />
       <Footer />
+      <FloatingMailButton />
     </div>
   );
 }

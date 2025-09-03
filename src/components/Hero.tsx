@@ -89,76 +89,9 @@ const Hero: React.FC = () => {
                 {t('hero.title')}
               </h1>
               
-              <p className="text-lg text-white/80 mb-8">
-                Keep me informed about the Temple.
+              <p className="text-lg text-white/80">
+                {t('hero.subtitle')}
               </p>
-
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3 md:mb-4">
-                  <motion.div
-                    className="relative overflow-hidden rounded-xl"
-                    whileHover={{ scale: 1.01 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {/* Glass input background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-xl"></div>
-                    <div className="absolute inset-0 border border-white/20 rounded-xl"></div>
-                    
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder={t('hero.email.placeholder')}
-                      required
-                      className="relative w-full px-3 py-2 md:px-4 md:py-3 rounded-xl bg-transparent text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200"
-                    />
-                  </motion.div>
-                </div>
-                
-                <div className="mb-4 md:mb-6 flex items-start">
-                  <motion.div
-                    className="relative mt-1 mr-3"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {/* Glass checkbox wrapper */}
-                    <div className="relative">
-                      <input
-                        type="checkbox"
-                        id="gdpr"
-                        checked={gdprConsent}
-                        onChange={(e) => setGdprConsent(e.target.checked)}
-                        required
-                        className="appearance-none w-5 h-5 rounded border-2 border-white/30 bg-white/10 backdrop-blur-sm checked:bg-white/30 checked:border-white/50 transition-all duration-200 cursor-pointer"
-                      />
-                      {gdprConsent && (
-                        <motion.svg
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute top-0.5 left-0.5 w-4 h-4 text-white pointer-events-none"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={3}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </motion.svg>
-                      )}
-                    </div>
-                  </motion.div>
-                  <label htmlFor="gdpr" className="text-sm text-white/70 leading-relaxed cursor-pointer">
-                    {t('hero.gdpr')}
-                  </label>
-                </div>
-
-                <GlassButton
-                  type="submit"
-                  variant="green-glass"
-                  className="w-full"
-                >
-                  {t('hero.email.button')}
-                </GlassButton>
-              </form>
             </div>
           </TexturedGlass>
         </div>
