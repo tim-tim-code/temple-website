@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import AnimatedButton from './AnimatedButton';
 
 const SupportTheTemple: React.FC = () => {
   const { t } = useLanguage();
@@ -93,19 +94,15 @@ const SupportTheTemple: React.FC = () => {
                     {card.description}
                   </p>
                   
-                  {/* Modern Button */}
-                  <motion.a
-                    href={card.href}
-                    className="inline-block mt-auto"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <div className="relative overflow-hidden rounded-xl px-8 py-3 bg-forest/90 text-paper font-medium shadow-lg transition-all duration-300 hover:bg-forest hover:shadow-xl">
-                      {/* Button shine effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                      <span className="relative">{card.buttonText}</span>
-                    </div>
-                  </motion.a>
+                  {/* Animated Button */}
+                  <div className="mt-auto">
+                    <AnimatedButton
+                      onClick={() => window.location.href = card.href}
+                      className="w-full text-base"
+                    >
+                      {card.buttonText}
+                    </AnimatedButton>
+                  </div>
                 </div>
 
                 {/* Floating elements for visual interest */}
