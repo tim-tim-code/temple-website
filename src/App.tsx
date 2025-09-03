@@ -9,6 +9,7 @@ import ForWhom from './components/ForWhom';
 import Instructors from './components/Instructors';
 import SupportTheTemple from './components/SupportTheTemple';
 import Newsletter from './components/Newsletter';
+import Footer from './components/Footer';
 
 function AppContent() {
   const { language, setLanguage } = useLanguage();
@@ -27,6 +28,7 @@ function AppContent() {
       <Instructors />
       <SupportTheTemple />
       <Newsletter />
+      <Footer />
     </div>
   );
 }

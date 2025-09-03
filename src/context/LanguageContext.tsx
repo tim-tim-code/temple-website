@@ -135,6 +135,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'Yet it nourishes and completes all things.'
       ],
       'tao.attribution': '— Lao Tzu, Tao Te Ching',
+      
+      // Footer
+      'footer.impressum': 'Impressum',
+      'footer.privacy': 'Privacy Policy', 
+      'footer.terms': 'Terms of Service',
+      'footer.contact': 'Contact',
+      'footer.rights': 'All rights reserved.',
+      'footer.followUs': 'Follow us:'
     },
     de: {
       // Navigation
@@ -223,6 +231,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'Doch es nährt und vollendet alle Dinge.'
       ],
       'tao.attribution': '— Lao Tzu, Tao Te Ching',
+      
+      // Footer
+      'footer.impressum': 'Impressum',
+      'footer.privacy': 'Datenschutzerklärung', 
+      'footer.terms': 'Nutzungsbedingungen',
+      'footer.contact': 'Kontakt',
+      'footer.rights': 'Alle Rechte vorbehalten.',
+      'footer.followUs': 'Folge uns:'
     },
     fr: {
       // Navigation
@@ -310,7 +326,15 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         'Le Tao ne se trouve nulle part.',
         'Pourtant il nourrit et complète toutes choses.'
       ],
-      'tao.attribution': '— Lao Tzu, Tao Te Ching'
+      'tao.attribution': '— Lao Tzu, Tao Te Ching',
+      
+      // Footer
+      'footer.impressum': 'Mentions légales',
+      'footer.privacy': 'Politique de confidentialité', 
+      'footer.terms': 'Conditions d\'utilisation',
+      'footer.contact': 'Contact',
+      'footer.rights': 'Tous droits réservés.',
+      'footer.followUs': 'Suivez-nous :'
     }
   };
 
