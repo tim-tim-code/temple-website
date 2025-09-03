@@ -94,7 +94,7 @@ const Hero: React.FC = () => {
               </p>
 
               <form onSubmit={handleSubmit}>
-                <div className="mb-4">
+                <div className="mb-3 md:mb-4">
                   <motion.div
                     className="relative overflow-hidden rounded-xl"
                     whileHover={{ scale: 1.01 }}
@@ -110,12 +110,12 @@ const Hero: React.FC = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={t('hero.email.placeholder')}
                       required
-                      className="relative w-full px-4 py-3 rounded-xl bg-transparent text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200"
+                      className="relative w-full px-3 py-2 md:px-4 md:py-3 rounded-xl bg-transparent text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200"
                     />
                   </motion.div>
                 </div>
                 
-                <div className="mb-6 flex items-start">
+                <div className="mb-4 md:mb-6 flex items-start">
                   <motion.div
                     className="relative mt-1 mr-3"
                     whileHover={{ scale: 1.1 }}
