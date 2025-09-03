@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Luna",
+    "type": "Pony",
+    "description": "Gentle companion who teaches patience",
+    "image": "/images/animals/luna-pony.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Sage",
+    "type": "Dog",
+    "description": "Guardian of the temple grounds",
+    "image": "/images/animals/sage-dog.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Echo",
+    "type": "Parrot", 
+    "description": "Speaks ancient wisdom in three languages",
+    "image": "/images/animals/echo-parrot.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Shell & Stone",
+    "type": "Turtles",
+    "description": "Masters of slow living and deep time",
+    "image": "/images/animals/turtles.jpg"
+  },
+  {
+    "id": 5,
+    "name": "The Collective",
+    "type": "Axolotls",
+    "description": "Aquatic teachers of regeneration",
+    "image": "/images/animals/axolotls.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Koi Community",
+    "type": "Fish",
+    "description": "Swimming meditation in the temple pond",
+    "image": "/images/animals/koi.jpg"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Grand Master Tim",
+    "role": "Grand Master",
+    "bio": "Cool guy",
+    "image": "/images/Master Tim.png"
+  },
+  {
+    "id": 2,
+    "name": "Master Elie",
+    "role": "Master", 
+    "bio": "Has a great French accent.",
+    "image": "/images/Master Elie.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Amateur Luka",
+    "role": "Amateur",
+    "bio": "21 years of annoying people.",
+    "image": "/images/Master Luka.JPG"
+  }
+]

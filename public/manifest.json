@@ -1,0 +1,15 @@
+{
+  "short_name": "Temple",
+  "name": "Temple of the Great Forest",
+  "icons": [
+    {
+      "src": "images/DaLinSi logo white 4k Kopie.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#1a1a1a"
+}

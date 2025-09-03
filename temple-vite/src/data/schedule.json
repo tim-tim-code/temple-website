@@ -1,0 +1,12 @@
+[
+  { "time": "06:00", "activity": "Morning Bell & Silent Sitting" },
+  { "time": "07:00", "activity": "Walking Meditation in the Forest" },
+  { "time": "08:00", "activity": "Shared Breakfast" },
+  { "time": "09:00", "activity": "Work Practice (Temple Maintenance)" },
+  { "time": "12:00", "activity": "Midday Meal & Rest" },
+  { "time": "14:00", "activity": "Study & Contemplation" },
+  { "time": "16:00", "activity": "Tea & Community Time" },
+  { "time": "18:00", "activity": "Evening Meal" },
+  { "time": "19:30", "activity": "Dharma Talk or Discussion" },
+  { "time": "21:00", "activity": "Night Meditation & Silence" }
+]

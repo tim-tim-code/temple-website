@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Master Chen",
+    "role": "Senior Teacher",
+    "bio": "40 years of meditation practice. Specializes in mindful awareness.",
+    "image": "/images/instructors/chen.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Sister Marie",
+    "role": "Retreat Guide", 
+    "bio": "Former monastery resident. Guides silent retreats.",
+    "image": "/images/instructors/marie.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Teacher David",
+    "role": "Philosophy Instructor",
+    "bio": "Scholar of Eastern wisdom. Teaches Dao De Jing.",
+    "image": "/images/instructors/david.jpg"
+  }
+]
