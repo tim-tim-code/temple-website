@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
-interface SimpleQuotesProps {
-  showQuotes: boolean;
-}
+interface SimpleQuotesProps {}
 
-const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
+const SimpleQuotes: React.FC<SimpleQuotesProps> = () => {
   const { t } = useLanguage();
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   
@@ -48,51 +46,51 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
 
   // Cycle through quotes every 10 seconds
   useEffect(() => {
-    if (!showQuotes) return;
-    
     const interval = setInterval(() => {
       setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
     }, 10000);
     
     return () => clearInterval(interval);
-  }, [showQuotes, quotes.length]);
+  }, [quotes.length]);
 
-  if (!showQuotes) return null;
-
+  // Always show quotes - remove showQuotes condition
   return (
-    <div className="fixed bottom-8 right-8 z-20 pointer-events-none">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentQuoteIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className="text-right"
-        >
-          <div className="text-white/90 font-serif text-xl md:text-2xl leading-relaxed drop-shadow-lg max-w-lg">
-            <div className="mb-3">{quotes[currentQuoteIndex].line1}</div>
-            {quotes[currentQuoteIndex].line2 && (
-              <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
-            )}
-            
-            {/* Attribution - always visible */}
-            <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
-            
-            {/* Progress line - fills piece by piece */}
-            <div className="mt-4 flex justify-end">
-              <div className="w-32 h-0.5 bg-white/20 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-white/70 rounded-full transition-all duration-1000 ease-out"
-                  style={{ 
-                    width: `${((currentQuoteIndex + 1) / quotes.length) * 100}%` 
-                  }}
-                />
-              </div>
+    <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
+      <div className="flex items-center space-x-6">
+        {/* Quote text on the left */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentQuoteIndex}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="text-right"
+          >
+            <div className="text-white/90 font-serif text-xl md:text-2xl leading-relaxed drop-shadow-lg max-w-lg">
+              <div className="mb-3">{quotes[currentQuoteIndex].line1}</div>
+              {quotes[currentQuoteIndex].line2 && (
+                <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
+              )}
+              
+              {/* Attribution - always visible */}
+              <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
             </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Vertical progress line on the right */}
+        <div className="flex flex-col items-center">
+          <div className="w-0.5 h-32 bg-white/20 rounded-full overflow-hidden">
+            <div 
+              className="w-full bg-white/70 rounded-full transition-all duration-1000 ease-out"
+              style={{ 
+                height: `${((currentQuoteIndex + 1) / quotes.length) * 100}%` 
+              }}
+            />
           </div>
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 };
