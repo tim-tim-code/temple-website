@@ -37,3 +37,136 @@ code {
 .animate-nudge {
   animation: nudge 0.8s ease-in-out;
 }
+
+/* Card stack animations */
+@keyframes card1 {
+  0% {
+    transform: rotateZ(0deg);
+    opacity: 0;
+    z-index: -1;
+  }
+  25% {
+    transform: rotateZ(-20deg);
+    opacity: 1;
+    z-index: 0;
+  }
+  50% {
+    transform: rotateZ(0deg);
+    z-index: 1;
+    opacity: 1;
+  }
+  75% {
+    transform: rotateZ(20deg);
+    z-index: 0;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(0deg);
+    z-index: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes card2 {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: -1;
+    opacity: 0;
+  }
+  45% {
+    transform: rotateZ(-15deg);
+    z-index: 0;
+    opacity: 1;
+  }
+  60% {
+    transform: rotateZ(0deg);
+    z-index: 1;
+    opacity: 1;
+  }
+  75% {
+    transform: rotateZ(15deg);
+    z-index: 0;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(0deg);
+    z-index: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes card3 {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: -1;
+    opacity: 0;
+  }
+  45% {
+    transform: rotateZ(-20deg);
+    z-index: 0;
+    opacity: 0;
+  }
+  60% {
+    transform: rotateZ(0deg);
+    z-index: 1;
+    opacity: 1;
+  }
+  75% {
+    transform: rotateZ(20deg);
+    z-index: 0;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(0deg);
+    z-index: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes card4 {
+  0% {
+    transform: rotateZ(0deg);
+    z-index: 0;
+    opacity: 0;
+  }
+  35% {
+    transform: rotateZ(-25deg);
+    z-index: 0;
+    opacity: 0;
+  }
+  75% {
+    transform: rotateZ(0deg);
+    z-index: 1;
+    opacity: 1;
+  }
+  90% {
+    transform: rotateZ(25deg);
+    z-index: 0;
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(0deg);
+    z-index: 0;
+    opacity: 0;
+  }
+}
+
+.animate-card1 {
+  animation: card1 4s 0.5s infinite ease;
+}
+
+.animate-card2 {
+  animation: card2 4s 1s infinite ease;
+}
+
+.animate-card3 {
+  animation: card3 4s 1.5s infinite ease;
+}
+
+.animate-card4 {
+  animation: card4 4s 2s infinite ease;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}

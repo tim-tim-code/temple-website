@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import AnimatedCardStack from './AnimatedCardStack';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
@@ -12,7 +13,7 @@ const About: React.FC = () => {
             {t('about.title')}
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-3 gap-12 items-center">
             <div>
               <p className="text-2xl font-serif text-forest mb-8 text-center">
                 {t('about.subtitle')}
@@ -25,7 +26,7 @@ const About: React.FC = () => {
               </div>
             </div>
             
-            <div className="relative">
+            <div className="relative flex justify-center">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
                 <img 
                   src="/images/Pony under tree.png" 
@@ -33,6 +34,10 @@ const About: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
+            </div>
+
+            <div className="flex justify-center">
+              <AnimatedCardStack />
             </div>
           </div>
         </div>
