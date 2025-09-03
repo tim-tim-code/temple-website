@@ -89,9 +89,63 @@ const Hero: React.FC = () => {
                 {t('hero.title')}
               </h1>
               
-              <p className="text-lg text-white/80">
+              <p className="text-lg text-white/80 mb-8">
                 {t('hero.subtitle')}
               </p>
+              
+              {/* Email signup form - hidden on mobile */}
+              <form onSubmit={handleSubmit} className="hidden md:block space-y-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('hero.email.placeholder')}
+                  required
+                  className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                />
+                
+                <div className="flex items-start space-x-3">
+                  <motion.div
+                    className="relative mt-1"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <input
+                      type="checkbox"
+                      id="hero-gdpr"
+                      checked={gdprConsent}
+                      onChange={(e) => setGdprConsent(e.target.checked)}
+                      required
+                      className="appearance-none w-5 h-5 rounded border-2 border-white/30 bg-white/10 backdrop-blur-sm checked:bg-white/30 checked:border-white/50 transition-all cursor-pointer"
+                    />
+                    {gdprConsent && (
+                      <motion.svg
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute top-0.5 left-0.5 w-4 h-4 text-white pointer-events-none"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </motion.svg>
+                    )}
+                  </motion.div>
+                  
+                  <label htmlFor="hero-gdpr" className="text-sm text-white/70 leading-relaxed cursor-pointer">
+                    {t('hero.gdpr')}
+                  </label>
+                </div>
+                
+                <GlassButton
+                  type="submit"
+                  variant="green-glass"
+                  className="w-full"
+                >
+                  {t('hero.email.button')}
+                </GlassButton>
+              </form>
             </div>
           </TexturedGlass>
         </div>

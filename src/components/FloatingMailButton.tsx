@@ -22,9 +22,9 @@ const FloatingMailButton: React.FC = () => {
 
   return (
     <>
-      {/* Floating Mail Button */}
+      {/* Floating Mail Button - Mobile Only */}
       <motion.button
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-xl flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+        className="md:hidden fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-xl flex items-center justify-center hover:bg-white/30 transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsModalOpen(true)}
