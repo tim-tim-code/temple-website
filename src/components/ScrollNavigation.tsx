@@ -9,6 +9,7 @@ const ScrollNavigation: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -85,18 +86,79 @@ const ScrollNavigation: React.FC = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <div className="fixed top-4 left-0 right-0 flex justify-center z-50">
-          <motion.div
+        <>
+          {/* Mobile Hamburger Button */}
+          <motion.button
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative"
+            className="md:hidden fixed top-4 right-4 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl p-3 shadow-lg"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {/* Main Navigation Pill */}
-            <div className="relative">
-            <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-4 py-2 shadow-lg">
-              <div className="flex items-center space-x-2">
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <motion.span 
+                className="block w-full h-0.5 bg-forest"
+                animate={{ rotate: isMobileMenuOpen ? 45 : 0, y: isMobileMenuOpen ? 9 : 0 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span 
+                className="block w-full h-0.5 bg-forest"
+                animate={{ opacity: isMobileMenuOpen ? 0 : 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span 
+                className="block w-full h-0.5 bg-forest"
+                animate={{ rotate: isMobileMenuOpen ? -45 : 0, y: isMobileMenuOpen ? -9 : 0 }}
+                transition={{ duration: 0.2 }}
+              />
+            </div>
+          </motion.button>
+
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="md:hidden fixed top-20 right-4 z-40 bg-white/30 backdrop-blur-lg border border-white/40 rounded-2xl p-4 shadow-xl min-w-[200px]"
+              >
+                <nav className="flex flex-col space-y-3">
+                  {sections.map((section) => (
+                    <button
+                      key={section.id}
+                      onClick={() => {
+                        scrollToSection(section.element);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={section.isSpecial ? 
+                        "text-left px-4 py-3 rounded-xl bg-gradient-to-r from-sage/40 to-leaf/30 border border-sage/50 text-forest font-medium" :
+                        "text-left px-4 py-3 rounded-xl text-forest/80 hover:bg-white/30 transition-colors duration-200"
+                      }
+                    >
+                      {section.label}
+                    </button>
+                  ))}
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Desktop Navigation Bar */}
+          <div className="hidden md:flex fixed top-4 left-0 right-0 justify-center z-50">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="relative"
+            >
+              {/* Main Navigation Pill */}
+              <div className="relative">
+              <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-4 py-2 shadow-lg">
+                <div className="flex items-center space-x-2">
                 {/* Logo */}
                 <button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -305,7 +367,8 @@ const ScrollNavigation: React.FC = () => {
             </div>
           </div>
           </motion.div>
-        </div>
+          </div>
+        </>
       )}
     </AnimatePresence>
   );
