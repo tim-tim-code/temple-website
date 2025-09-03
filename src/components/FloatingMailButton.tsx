@@ -2,26 +2,59 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import GlassButton from './GlassButton';
+import Notification from './Notification';
 
 const FloatingMailButton: React.FC = () => {
   const { t } = useLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [gdprConsent, setGdprConsent] = useState(false);
+  const [notification, setNotification] = useState<{message: string, type: 'error' | 'success' | 'info'} | null>(null);
+
+  // Custom email validation
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const showNotification = (message: string, type: 'error' | 'success' | 'info' = 'error') => {
+    setNotification({ message, type });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && gdprConsent) {
-      console.log('Newsletter signup:', email);
-      alert(t('newsletter.success') || 'Thank you for subscribing to our newsletter!');
-      setEmail('');
-      setGdprConsent(false);
-      setIsModalOpen(false);
+    
+    if (!email) {
+      showNotification('Bitte geben Sie eine E-Mail-Adresse ein');
+      return;
     }
+    
+    if (!isValidEmail(email)) {
+      showNotification('Bitte geben Sie eine gültige E-Mail-Adresse ein');
+      return;
+    }
+    
+    if (!gdprConsent) {
+      showNotification('Bitte akzeptieren Sie die Datenschutzbestimmungen');
+      return;
+    }
+    
+    console.log('Newsletter signup:', email);
+    showNotification('Vielen Dank! Sie werden über Neuigkeiten informiert.', 'success');
+    setEmail('');
+    setGdprConsent(false);
+    setIsModalOpen(false);
   };
 
   return (
     <>
+      {/* Notification */}
+      <Notification
+        message={notification?.message || ''}
+        type={notification?.type || 'error'}
+        isVisible={notification !== null}
+        onClose={() => setNotification(null)}
+      />
       {/* Floating Mail Button - Mobile Only */}
       <motion.button
         className="md:hidden fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-xl flex items-center justify-center hover:bg-white/30 transition-all duration-300"
@@ -111,7 +144,6 @@ const FloatingMailButton: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={t('hero.email.placeholder')}
-                      required
                       className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                     />
                   </div>
@@ -128,7 +160,6 @@ const FloatingMailButton: React.FC = () => {
                         id="modal-gdpr"
                         checked={gdprConsent}
                         onChange={(e) => setGdprConsent(e.target.checked)}
-                        required
                         className="appearance-none w-5 h-5 rounded border-2 border-white/30 bg-white/10 backdrop-blur-sm checked:bg-white/30 checked:border-white/50 transition-all cursor-pointer"
                       />
                       {gdprConsent && (

@@ -5,6 +5,7 @@ import TaoQuotes from './TaoQuotes';
 import heroBackground from '../assets/hero-background.jpg';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
+import Notification from './Notification';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
@@ -13,6 +14,7 @@ const Hero: React.FC = () => {
   const [showQuotes, setShowQuotes] = useState(true);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const [nudgeAnimation, setNudgeAnimation] = useState(false);
+  const [notification, setNotification] = useState<{message: string, type: 'error' | 'success' | 'info'} | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Show scroll indicator after 3 seconds
@@ -59,16 +61,51 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [showQuotes]);
 
+  // Custom email validation
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const showNotification = (message: string, type: 'error' | 'success' | 'info' = 'error') => {
+    setNotification({ message, type });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && gdprConsent) {
-      console.log('Email signup:', email);
-      alert('Thank you for your interest. We will keep you updated on our progress.');
+    
+    if (!email) {
+      showNotification('Bitte geben Sie eine E-Mail-Adresse ein');
+      return;
     }
+    
+    if (!isValidEmail(email)) {
+      showNotification('Bitte geben Sie eine gültige E-Mail-Adresse ein');
+      return;
+    }
+    
+    if (!gdprConsent) {
+      showNotification('Bitte akzeptieren Sie die Datenschutzbestimmungen');
+      return;
+    }
+    
+    console.log('Email signup:', email);
+    showNotification('Vielen Dank! Wir werden Sie über unsere Fortschritte informieren.', 'success');
+    setEmail('');
+    setGdprConsent(false);
   };
 
   return (
-    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <>
+      {/* Notification */}
+      <Notification
+        message={notification?.message || ''}
+        type={notification?.type || 'error'}
+        isVisible={notification !== null}
+        onClose={() => setNotification(null)}
+      />
+      
+      <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 z-0 bg-forest bg-cover bg-center bg-no-repeat"
@@ -100,7 +137,6 @@ const Hero: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t('hero.email.placeholder')}
-                  required
                   className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
                 />
                 
@@ -115,7 +151,6 @@ const Hero: React.FC = () => {
                       id="hero-gdpr"
                       checked={gdprConsent}
                       onChange={(e) => setGdprConsent(e.target.checked)}
-                      required
                       className="appearance-none w-5 h-5 rounded border-2 border-white/30 bg-white/10 backdrop-blur-sm checked:bg-white/30 checked:border-white/50 transition-all cursor-pointer"
                     />
                     {gdprConsent && (
@@ -182,7 +217,8 @@ const Hero: React.FC = () => {
         </div>
       </motion.div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
