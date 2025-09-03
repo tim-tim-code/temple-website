@@ -163,8 +163,10 @@ const Hero: React.FC = () => {
           </TexturedGlass>
         </div>
 
-      {/* Tao Quotes - Version 3: Apple-Music-style lyrics */}
-      <TaoQuotes version={3} showQuotes={showQuotes} />
+      {/* Tao Quotes - Version 3: Apple-Music-style lyrics - Hidden on mobile */}
+      <div className="hidden md:block">
+        <TaoQuotes version={3} showQuotes={showQuotes} />
+      </div>
       
       {/* Scroll indicator arrow */}
       <motion.div 
