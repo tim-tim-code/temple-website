@@ -100,6 +100,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'whatwillyoufind.offered.4': '6 hours of practice/day',
       'whatwillyoufind.instructors.title': 'Instructors',
       
+      // Instructors
+      'instructors.1.role': 'Grand Master',
+      'instructors.1.bio': 'Cool guy',
+      'instructors.2.role': 'Master',
+      'instructors.2.bio': 'Has a great French accent.',
+      'instructors.3.role': 'Amateur',
+      'instructors.3.bio': '21 years of annoying people.',
+      
       // Support Section
       'support.title': 'How to Support the Temple',
       'support.subtitle': 'Your contribution helps sustain this living sanctuary and the community that calls it home.',
@@ -203,6 +211,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'whatwillyoufind.offered.4': '6 Stunden Praxis/Tag',
       'whatwillyoufind.instructors.title': 'Lehrer',
       
+      // Instructors
+      'instructors.1.role': 'Großmeister',
+      'instructors.1.bio': 'Ein cooler Typ',
+      'instructors.2.role': 'Meister',
+      'instructors.2.bio': 'Hat einen großartigen französischen Akzent.',
+      'instructors.3.role': 'Amateur',
+      'instructors.3.bio': '21 Jahre lang Menschen auf die Nerven gehen.',
+      
       // Support Section
       'support.title': 'Wie Sie den Tempel unterstützen können',
       'support.subtitle': 'Ihr Beitrag hilft, dieses lebende Heiligtum und die Gemeinschaft, die es ihr Zuhause nennt, zu erhalten.',
@@ -305,6 +321,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'whatwillyoufind.offered.3': 'Un cadre humble avec un enseignement de qualité',
       'whatwillyoufind.offered.4': '6 heures de pratique/jour',
       'whatwillyoufind.instructors.title': 'Instructeurs',
+      
+      // Instructors
+      'instructors.1.role': 'Grand Maître',
+      'instructors.1.bio': 'Un type cool',
+      'instructors.2.role': 'Maître',
+      'instructors.2.bio': 'A un excellent accent français.',
+      'instructors.3.role': 'Amateur',
+      'instructors.3.bio': '21 ans à agacer les gens.',
       
       // Support Section
       'support.title': 'Comment soutenir le Temple',
