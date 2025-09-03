@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import AnimatedButton from './AnimatedButton';
 
 const Newsletter: React.FC = () => {
   const { t } = useLanguage();
@@ -118,19 +119,13 @@ const Newsletter: React.FC = () => {
                 </div>
 
                 {/* Button */}
-                <motion.button
+                <AnimatedButton
                   type="submit"
-                  className="inline-block"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
                   disabled={!email || !gdprConsent}
+                  className="px-8 py-3 text-base font-medium"
                 >
-                  <div className="relative overflow-hidden rounded-xl px-8 py-3 bg-forest/90 text-paper font-medium shadow-lg transition-all duration-300 hover:bg-forest hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
-                    {/* Button shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
-                    <span className="relative">{t('hero.email.button')}</span>
-                  </div>
-                </motion.button>
+                  {t('hero.email.button')}
+                </AnimatedButton>
               </form>
             </div>
 
