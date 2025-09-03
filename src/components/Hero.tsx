@@ -69,14 +69,15 @@ const Hero: React.FC = () => {
 
   return (
     <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* TEST: Full Screen Fish Image */}
       <div 
-        className="absolute inset-0 z-0 bg-forest bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${heroBackground}), linear-gradient(135deg, #002E19 0%, #4A2F1E 100%)`
+          backgroundImage: `url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
+        {/* Test overlay to show it's working */}
+        <div className="absolute inset-0 bg-blue-500/20"></div>
       </div>
 
       {/* Content */}
