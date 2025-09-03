@@ -84,7 +84,184 @@ const ScrollNavigation: React.FC = () => {
   };
 
   return (
-    <AnimatePresence>
+    <>
+      {/* Initial Language Selector - Shows on Hero page, fades when navbar appears */}
+      <AnimatePresence>
+        {!isVisible && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed top-4 right-4 z-50"
+          >
+            <div className="relative">
+              <motion.div
+                ref={containerRef}
+                className="relative overflow-hidden cursor-pointer"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                animate={{
+                  width: isLanguageOpen ? "200px" : "56px",
+                  height: "56px",
+                  borderRadius: "28px"
+                }}
+                transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+              >
+                {/* Base glass layer with texture */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-2xl" 
+                     style={{ borderRadius: "inherit" }}>
+                  {/* Subtle noise texture */}
+                  <div className="absolute inset-0 opacity-10"
+                       style={{
+                         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E")`,
+                         mixBlendMode: 'overlay'
+                       }}
+                  />
+                </div>
+                
+                {/* Glass border */}
+                <div className="absolute inset-0 border border-white/20 rounded-[inherit]"></div>
+                
+                {/* Dynamic bubble light that follows cursor */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ borderRadius: "inherit" }}
+                >
+                  <motion.div
+                    className="absolute w-32 h-32 -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      x: smoothMouseX,
+                      y: smoothMouseY,
+                      background: `radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 60%)`,
+                      filter: 'blur(10px)'
+                    }}
+                  />
+                </motion.div>
+                
+                {/* Secondary floating light */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none opacity-60"
+                  style={{ borderRadius: "inherit" }}
+                  animate={{
+                    background: [
+                      `radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15), transparent 40%)`,
+                      `radial-gradient(circle at 80% 70%, rgba(255,255,255,0.15), transparent 40%)`,
+                      `radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15), transparent 40%)`
+                    ]
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                />
+                
+                {/* Content */}
+                <div className="relative w-full h-full flex items-center justify-center">
+                  {!isLanguageOpen ? (
+                    // Single centered flag when closed
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center"
+                      initial={false}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <currentLang.flag className="w-6 h-4 rounded-sm border border-white/20" />
+                    </motion.div>
+                  ) : (
+                    // All flags when open
+                    <motion.div
+                      className="w-full flex items-center justify-between px-1"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2, delay: 0.1 }}
+                    >
+                      {languages.map((lang, index) => (
+                        <motion.button
+                          key={lang.code}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleLanguageChange(lang.code);
+                          }}
+                          className="relative w-12 h-12 rounded-full flex items-center justify-center transition-all"
+                          whileHover={{ scale: 1.15, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ 
+                            delay: index * 0.05 + 0.1,
+                            duration: 0.4,
+                            ease: [0.32, 0.72, 0, 1]
+                          }}
+                        >
+                          {/* Selected glass bubble - only show when expanded */}
+                          {lang.code === language && (
+                              <motion.div
+                                className="absolute inset-0 rounded-full overflow-hidden"
+                                layoutId="selectedBubbleInitial"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ 
+                                  duration: 0.4,
+                                  type: "spring",
+                                  stiffness: 200,
+                                  damping: 25,
+                                  delay: 0.2
+                                }}
+                              >
+                                {/* Multi-layer glass effect */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-md rounded-full"></div>
+                                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-full"></div>
+                                <div className="absolute inset-[2px] border border-white/40 rounded-full"></div>
+                                
+                                {/* Bubble highlight */}
+                                <div className="absolute top-1 left-2 right-2 h-3 bg-gradient-to-b from-white/40 to-transparent rounded-full blur-sm"></div>
+                                
+                                {/* Subtle shimmer animation */}
+                                <motion.div
+                                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
+                                  animate={{
+                                    x: [-100, 100],
+                                    opacity: [0, 1, 0]
+                                  }}
+                                  transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    repeatDelay: 3,
+                                    ease: "easeInOut"
+                                  }}
+                                />
+                              </motion.div>
+                            )}
+                            
+                            {/* Flag */}
+                            <lang.flag className="w-5 h-3 rounded-sm border border-white/20 relative z-10" />
+                          </motion.button>
+                        ))}
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Backdrop to close on outside click */}
+              <AnimatePresence>
+                {isLanguageOpen && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 -z-10"
+                    onClick={() => setIsLanguageOpen(false)}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
       {isVisible && (
         <>
           {/* Mobile Hamburger Button */}
