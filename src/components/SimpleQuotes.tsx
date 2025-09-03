@@ -70,13 +70,13 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="text-right"
         >
-          <div className="text-white/90 font-serif text-lg md:text-xl leading-relaxed drop-shadow-lg">
-            <div className="mb-2">{quotes[currentQuoteIndex].line1}</div>
+          <div className="text-white/90 font-serif text-2xl md:text-3xl leading-relaxed drop-shadow-lg max-w-lg">
+            <div className="mb-4">{quotes[currentQuoteIndex].line1}</div>
             {quotes[currentQuoteIndex].line2 && (
               <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
             )}
             {currentQuoteIndex === quotes.length - 1 && (
-              <div className="text-white/70 text-sm mt-4 font-light">– Lao Tzu, Tao Te Ching</div>
+              <div className="text-white/70 text-lg mt-6 font-light">– Lao Tzu, Tao Te Ching</div>
             )}
           </div>
         </motion.div>
