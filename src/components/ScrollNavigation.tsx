@@ -4,6 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import BritishFlag from './flags/BritishFlag';
 import GermanFlag from './flags/GermanFlag';
 import FrenchFlag from './flags/FrenchFlag';
+import AnimatedButton from './AnimatedButton';
 
 const ScrollNavigation: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
@@ -96,20 +97,22 @@ const ScrollNavigation: React.FC = () => {
             className="fixed top-4 right-4 z-50 flex items-center space-x-3"
           >
             {/* Support Us Button - Desktop Only */}
-            <motion.button
-              className="hidden md:flex items-center space-x-2 px-6 py-3 rounded-full bg-gradient-to-r from-sage/40 to-leaf/30 border border-sage/50 hover:from-sage/50 hover:to-leaf/40 backdrop-blur-md transition-all duration-300"
-              onClick={() => scrollToSection('support')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.div
+              className="hidden md:block"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
             >
-              <svg className="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-              </svg>
-              <span className="text-forest font-medium">{t('nav.support')}</span>
-            </motion.button>
+              <AnimatedButton
+                onClick={() => scrollToSection('support')}
+                className="flex items-center space-x-2 px-6 py-3 text-sm"
+              >
+                <svg className="w-4 h-4 text-forest" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                </svg>
+                <span>{t('nav.support')}</span>
+              </AnimatedButton>
+            </motion.div>
             <div className="relative">
               <motion.div
                 ref={containerRef}
@@ -368,17 +371,13 @@ const ScrollNavigation: React.FC = () => {
                   {sections.map((section) => (
                     <div key={section.id} className="relative">
                       {section.isSpecial ? (
-                        // Special "Help us" button with green glass effect
-                        <button
+                        // Special "Help us" button with animated gradient effect
+                        <AnimatedButton
                           onClick={() => scrollToSection(section.element)}
-                          className="relative overflow-hidden px-6 py-2.5 rounded-full bg-gradient-to-r from-sage/40 to-leaf/30 border border-sage/50 hover:from-sage/50 hover:to-leaf/40 transition-all duration-300"
+                          className="px-6 py-2.5 text-base"
                         >
-                          {/* Green glass shine effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                          <span className="relative text-base font-medium text-forest">
-                            {section.label}
-                          </span>
-                        </button>
+                          {section.label}
+                        </AnimatedButton>
                       ) : (
                         // Regular navigation links
                         <button
