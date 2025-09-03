@@ -9,6 +9,9 @@ interface SimpleQuotesProps {
 const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
   const { t } = useLanguage();
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [startTime, setStartTime] = useState<number>(Date.now());
+  const [pausedTime, setPausedTime] = useState<number>(0);
+  const [isPaused, setIsPaused] = useState(false);
   
   // Lao Tzu - Tao Te Ching quote pairs
   const quotes = [
@@ -46,16 +49,45 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
     }
   ];
 
-  // Cycle through quotes every 10 seconds
+  // Simplified pause/resume timer logic
   useEffect(() => {
-    if (!showQuotes) return;
-    
-    const interval = setInterval(() => {
-      setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
-    }, 10000);
-    
-    return () => clearInterval(interval);
-  }, [showQuotes, quotes.length]);
+    if (!showQuotes) {
+      // When hiding quotes, pause the timer and calculate elapsed time
+      if (!isPaused) {
+        const elapsed = Date.now() - startTime;
+        setPausedTime(elapsed % 10000); // Store time within current quote cycle
+        setIsPaused(true);
+      }
+      return;
+    }
+
+    // When showing quotes, set up the timer
+    if (isPaused) {
+      // Resuming - use remaining time for current quote
+      const remainingTime = 10000 - pausedTime;
+      const timeout = setTimeout(() => {
+        setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
+        setPausedTime(0);
+        setStartTime(Date.now());
+      }, remainingTime);
+
+      setIsPaused(false);
+      return () => clearTimeout(timeout);
+    } else {
+      // Normal cycling
+      const interval = setInterval(() => {
+        setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
+        setStartTime(Date.now());
+      }, 10000);
+
+      // Initialize start time if needed
+      if (startTime === 0) {
+        setStartTime(Date.now());
+      }
+
+      return () => clearInterval(interval);
+    }
+  }, [showQuotes, isPaused, pausedTime, quotes.length, startTime]);
 
   if (!showQuotes) return null;
 
