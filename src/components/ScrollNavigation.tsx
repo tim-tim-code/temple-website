@@ -93,7 +93,7 @@ const ScrollNavigation: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="md:hidden fixed top-4 right-4 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl p-3 shadow-lg"
+            className="md:hidden fixed top-4 right-4 z-50 bg-white/20 backdrop-blur-md border border-white/30 rounded-full p-3 shadow-lg w-12 h-12 flex items-center justify-center"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <div className="w-6 h-5 flex flex-col justify-between">
