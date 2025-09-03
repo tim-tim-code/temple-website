@@ -13,7 +13,7 @@ const About: React.FC = () => {
             {t('about.title')}
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-2xl font-serif text-forest mb-8 text-center">
                 {t('about.subtitle')}
@@ -23,16 +23,6 @@ const About: React.FC = () => {
                 <p>{t('about.p1')}</p>
                 <p>{t('about.p2')}</p>
                 <p className="font-medium">{t('about.p3')}</p>
-              </div>
-            </div>
-            
-            <div className="relative flex justify-center">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img 
-                  src="/images/Pony under tree.png" 
-                  alt="Pony under tree - representing the peaceful nature of temple life"
-                  className="w-full h-full object-cover"
-                />
               </div>
             </div>
 
