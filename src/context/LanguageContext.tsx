@@ -52,6 +52,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       // Navigation
       'nav.about': 'About',
       'nav.forwhom': 'For Whom',
+      'nav.instructors': 'Teachers',
       'nav.offerings': 'Offerings',
       'nav.support': 'Help us',
       
@@ -148,6 +149,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       // Navigation
       'nav.about': 'Über',
       'nav.forwhom': 'Für wen',
+      'nav.instructors': 'Lehrer',
       'nav.offerings': 'Angebote',
       'nav.support': 'Hilf uns',
       
@@ -244,6 +246,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       // Navigation
       'nav.about': 'À propos',
       'nav.forwhom': 'Pour qui',
+      'nav.instructors': 'Enseignants',
       'nav.offerings': 'Offres',
       'nav.support': 'Aidez-nous',
       
