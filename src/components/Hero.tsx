@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TexturedGlass from './TexturedGlass';
 import GlassButton from './GlassButton';
-import TaoQuotes from './TaoQuotes';
+import SimpleQuotes from './SimpleQuotes';
 import heroBackground from '../assets/hero-background.jpg';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
@@ -185,9 +185,9 @@ const Hero: React.FC = () => {
           </TexturedGlass>
         </div>
 
-      {/* Tao Quotes - Version 3: Apple-Music-style lyrics - Hidden on mobile */}
+      {/* Simple Quotes - Hidden on mobile */}
       <div className="hidden md:block">
-        <TaoQuotes version={3} showQuotes={showQuotes} />
+        <SimpleQuotes showQuotes={showQuotes} />
       </div>
       
       {/* Scroll indicator arrow */}
