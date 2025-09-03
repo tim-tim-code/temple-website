@@ -68,17 +68,14 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* TEST: Full Screen Fish Image */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`
-        }}
-      >
-        {/* Test overlay to show it's working */}
-        <div className="absolute inset-0 bg-blue-500/20"></div>
-      </div>
+    <div className="w-full h-screen bg-red-500 flex items-center justify-center">
+      {/* SUPER OBVIOUS TEST */}
+      <div className="text-6xl font-bold text-white">🐟 FISH TEST 🐟</div>
+      <img 
+        src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+        alt="Test Fish" 
+        className="absolute inset-0 w-full h-full object-cover"
+      />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between min-h-screen">
