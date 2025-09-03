@@ -193,9 +193,13 @@ code {
   transition-duration: 400ms;
 }
 
-/* Green gradient variants */
-.bg-gradient-green {
-  background: linear-gradient(90deg, #8fbc8f 0%, #228b22 49%, #006400 100%);
+/* Temple-inspired gradient variants */
+.bg-gradient-temple {
+  background: linear-gradient(90deg, #B5E288 0%, #2F5233 30%, #1B4332 70%, #8B7355 100%);
+}
+
+.bg-gradient-temple-alt {
+  background: linear-gradient(90deg, #9CAF88 0%, #2F5233 50%, #1B4332 100%);
 }
 
 .hover\:w-32:hover {
