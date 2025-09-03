@@ -205,6 +205,9 @@ code {
 .bg-gradient-temple-bright {
   background: linear-gradient(90deg, #B5E288 0%, #9CAF88 25%, #7B9A6B 50%, #6B8E5A 75%, #A8C090 100%);
 }
+.bg-gradient-temple-dark {
+  background: linear-gradient(90deg, #4A6B3A 0%, #3D5730 25%, #2F4423 50%, #243618 75%, #3A5A2A 100%);
+}
 
 .hover\:w-32:hover {
   width: 8rem;

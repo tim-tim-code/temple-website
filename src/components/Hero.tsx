@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TexturedGlass from './TexturedGlass';
 import GlassButton from './GlassButton';
+import AnimatedButton from './AnimatedButton';
 import SimpleQuotes from './SimpleQuotes';
 import heroBackground from '../assets/hero-background.jpg';
 import { useLanguage } from '../context/LanguageContext';
@@ -173,13 +174,14 @@ const Hero: React.FC = () => {
                   </label>
                 </div>
                 
-                <GlassButton
+                <AnimatedButton
                   type="submit"
-                  variant="green-glass"
-                  className="w-full"
+                  variant="dark"
+                  disabled={!email || !gdprConsent}
+                  className="w-full px-6 py-3 text-base font-medium"
                 >
                   {t('hero.email.button')}
-                </GlassButton>
+                </AnimatedButton>
               </form>
             </div>
           </TexturedGlass>

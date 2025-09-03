@@ -6,6 +6,7 @@ interface AnimatedButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  variant?: 'default' | 'dark';
 }
 
 const AnimatedButton: React.FC<AnimatedButtonProps> = ({ 
@@ -13,8 +14,10 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   onClick, 
   className = '',
   type = 'button',
-  disabled = false 
+  disabled = false,
+  variant = 'default'
 }) => {
+  const gradientClass = variant === 'dark' ? 'bg-gradient-temple-dark' : 'bg-gradient-temple';
   return (
     <button
       type={type}
@@ -39,17 +42,17 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
       {!disabled && (
         <>
           <div className="absolute inset-0 flex items-center justify-center z-0 rounded-full overflow-hidden">
-            <div className="
+            <div className={`
               w-48 h-48 rounded-full opacity-60
-              bg-gradient-temple
+              ${gradientClass}
               blur-md animate-spin-slow
               transition-all duration-500 ease-out
               group-hover:w-40 group-hover:h-40 group-hover:opacity-75
-            "></div>
+            `}></div>
           </div>
           
           {/* Additional full button background for complete coverage */}
-          <div className="absolute inset-0 rounded-full bg-gradient-temple opacity-15 group-hover:opacity-25 transition-opacity duration-500"></div>
+          <div className={`absolute inset-0 rounded-full ${gradientClass} opacity-15 group-hover:opacity-25 transition-opacity duration-500`}></div>
         </>
       )}
     </button>
