@@ -26,16 +26,12 @@ const About: React.FC = () => {
             </div>
             
             <div className="relative">
-              <div className="aspect-square bg-sage/20 rounded-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 bg-leaf/30 rounded-full flex items-center justify-center mb-4 mx-auto">
-                    <svg className="w-12 h-12 text-forest" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 10a7 7 0 0114 0 7 7 0 01-14 0zm7-4a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-serif text-forest mb-2">A Living Temple</h3>
-                  <p className="text-soil">Where practice meets daily life</p>
-                </div>
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/images/pony under tree.png" 
+                  alt="Pony under tree - representing the peaceful nature of temple life"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
