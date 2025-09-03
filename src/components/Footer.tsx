@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
               {t('footer.terms')}
             </a>
             <a
-              href="#contact"
+              href="mailto:info@dalinsi.org"
               className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
             >
               {t('footer.contact')}
