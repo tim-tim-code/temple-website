@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import AnimatedCardStack from './AnimatedCardStack';
 
 const About: React.FC = () => {
   const { t } = useLanguage();
@@ -25,9 +24,15 @@ const About: React.FC = () => {
                 <p className="font-medium">{t('about.p3')}</p>
               </div>
             </div>
-
-            <div className="flex justify-center">
-              <AnimatedCardStack />
+            
+            <div className="relative">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/images/Pony under tree.png" 
+                  alt="Pony under tree - representing the peaceful nature of temple life"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
