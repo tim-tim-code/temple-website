@@ -76,15 +76,8 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
               <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
             )}
             
-            {/* Continuity indicator */}
-            {currentQuoteIndex < quotes.length - 1 && (
-              <div className="text-white/50 text-sm mt-2">...</div>
-            )}
-            
-            {/* Attribution - show on last quote */}
-            {currentQuoteIndex === quotes.length - 1 && (
-              <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
-            )}
+            {/* Attribution - always visible */}
+            <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
             
             {/* Progress dots - always visible */}
             <div className="flex justify-end space-x-1 mt-4">
