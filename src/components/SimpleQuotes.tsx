@@ -55,29 +55,30 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = () => {
 
   // Always show quotes - remove showQuotes condition
   return (
-    <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-20 pointer-events-none">
-      <div className="flex items-center space-x-6">
+    <div className="fixed bottom-8 right-8 z-20 pointer-events-none">
+      <div className="flex items-end space-x-4">
         {/* Quote text on the left */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentQuoteIndex}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            className="text-right"
-          >
-            <div className="text-white/90 font-serif text-xl md:text-2xl leading-relaxed drop-shadow-lg max-w-lg">
-              <div className="mb-3">{quotes[currentQuoteIndex].line1}</div>
-              {quotes[currentQuoteIndex].line2 && (
-                <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
-              )}
-              
-              {/* Attribution - always visible */}
-              <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+        <div className="text-right">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentQuoteIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+            >
+              <div className="text-white/90 font-serif text-xl md:text-2xl leading-relaxed drop-shadow-lg max-w-lg">
+                <div className="mb-3">{quotes[currentQuoteIndex].line1}</div>
+                {quotes[currentQuoteIndex].line2 && (
+                  <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Attribution - always visible, outside animation */}
+          <div className="text-white/70 text-base mt-4 font-light">– Lao Tzu, Tao Te Ching</div>
+        </div>
 
         {/* Vertical progress line on the right */}
         <div className="flex flex-col items-center">
