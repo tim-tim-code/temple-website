@@ -1,7 +1,6 @@
 import React from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Header from './components/Header';
-import LanguageSelector from './components/LanguageSelector';
 import ScrollNavigation from './components/ScrollNavigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -18,10 +17,6 @@ function AppContent() {
   return (
     <div className="App w-full max-w-full overflow-x-hidden">
       <Header />
-      <LanguageSelector 
-        currentLanguage={language} 
-        onLanguageChange={setLanguage} 
-      />
       <ScrollNavigation />
       <Hero />
       <About />
