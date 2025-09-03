@@ -68,14 +68,16 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-red-500 flex items-center justify-center">
-      {/* SUPER OBVIOUS TEST */}
-      <div className="text-6xl font-bold text-white">🐟 FISH TEST 🐟</div>
-      <img 
-        src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-        alt="Test Fish" 
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-forest bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${heroBackground}), linear-gradient(135deg, #002E19 0%, #4A2F1E 100%)`
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between min-h-screen">
