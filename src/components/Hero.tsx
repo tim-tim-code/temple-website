@@ -11,6 +11,7 @@ const Hero: React.FC = () => {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [gdprConsent, setGdprConsent] = useState(false);
+  const [showQuotes, setShowQuotes] = useState(true);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const [nudgeAnimation, setNudgeAnimation] = useState(false);
   const [notification, setNotification] = useState<{message: string, type: 'error' | 'success' | 'info'} | null>(null);
@@ -37,12 +38,19 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show scroll indicator only when at top of page
-      if (window.scrollY === 0) {
-        // Reshow scroll indicator after 3 seconds when back at top
-        setTimeout(() => setShowScrollIndicator(true), 3000);
-      } else {
-        setShowScrollIndicator(false);
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        // Show quotes only when Hero section fills the entire viewport
+        const isVisible = rect.bottom >= window.innerHeight;
+        setShowQuotes(isVisible);
+        
+        // Show scroll indicator only when at top of page and quotes are visible
+        if (window.scrollY === 0 && isVisible) {
+          // Reshow scroll indicator after 3 seconds when back at top
+          setTimeout(() => setShowScrollIndicator(true), 3000);
+        } else {
+          setShowScrollIndicator(false);
+        }
       }
     };
 
@@ -51,7 +59,7 @@ const Hero: React.FC = () => {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [showQuotes]);
 
   // Custom email validation
   const isValidEmail = (email: string) => {
@@ -179,7 +187,7 @@ const Hero: React.FC = () => {
 
       {/* Simple Quotes - Hidden on mobile */}
       <div className="hidden md:block">
-        <SimpleQuotes />
+        <SimpleQuotes showQuotes={showQuotes} />
       </div>
       
       {/* Scroll indicator arrow */}

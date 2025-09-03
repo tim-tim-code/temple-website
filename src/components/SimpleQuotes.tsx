@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
-interface SimpleQuotesProps {}
+interface SimpleQuotesProps {
+  showQuotes: boolean;
+}
 
-const SimpleQuotes: React.FC<SimpleQuotesProps> = () => {
+const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
   const { t } = useLanguage();
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   
@@ -46,14 +48,17 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = () => {
 
   // Cycle through quotes every 10 seconds
   useEffect(() => {
+    if (!showQuotes) return;
+    
     const interval = setInterval(() => {
       setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
     }, 10000);
     
     return () => clearInterval(interval);
-  }, [quotes.length]);
+  }, [showQuotes, quotes.length]);
 
-  // Always show quotes - remove showQuotes condition
+  if (!showQuotes) return null;
+
   return (
     <div className="fixed bottom-8 right-8 z-20 pointer-events-none">
       <div className="flex items-end space-x-4">
