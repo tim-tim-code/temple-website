@@ -81,7 +81,12 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
               <div className="text-white/50 text-sm mt-2">...</div>
             )}
             
-            {/* Progress dots */}
+            {/* Attribution - show on last quote */}
+            {currentQuoteIndex === quotes.length - 1 && (
+              <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
+            )}
+            
+            {/* Progress dots - always visible */}
             <div className="flex justify-end space-x-1 mt-4">
               {quotes.map((_, index) => (
                 <div
@@ -94,10 +99,6 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
                 />
               ))}
             </div>
-            
-            {currentQuoteIndex === quotes.length - 1 && (
-              <div className="text-white/70 text-base mt-4 font-light">– Lao Tzu, Tao Te Ching</div>
-            )}
           </div>
         </motion.div>
       </AnimatePresence>
