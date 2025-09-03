@@ -79,18 +79,16 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
             {/* Attribution - always visible */}
             <div className="text-white/70 text-base mt-3 font-light">– Lao Tzu, Tao Te Ching</div>
             
-            {/* Progress dots - always visible */}
-            <div className="flex justify-end space-x-1 mt-4">
-              {quotes.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentQuoteIndex 
-                      ? 'bg-white/80 scale-110' 
-                      : 'bg-white/30'
-                  }`}
+            {/* Progress line - fills piece by piece */}
+            <div className="mt-4 flex justify-end">
+              <div className="w-32 h-0.5 bg-white/20 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-white/70 rounded-full transition-all duration-1000 ease-out"
+                  style={{ 
+                    width: `${((currentQuoteIndex + 1) / quotes.length) * 100}%` 
+                  }}
                 />
-              ))}
+              </div>
             </div>
           </div>
         </motion.div>
