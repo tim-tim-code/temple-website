@@ -15,7 +15,7 @@ function AppContent() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="App">
+    <div className="App w-full max-w-full overflow-x-hidden">
       <Header />
       <LanguageSelector 
         currentLanguage={language} 

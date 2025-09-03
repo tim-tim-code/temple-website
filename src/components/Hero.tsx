@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div ref={heroRef} className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center overflow-hidden">
+    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 z-0 bg-forest bg-cover bg-center bg-no-repeat"
@@ -80,9 +80,9 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between min-h-[70vh] md:min-h-screen">
+      <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between min-h-screen">
         {/* Main content in textured glass */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center lg:justify-start min-h-[70vh] md:min-h-screen">
+        <div className="w-full lg:w-1/2 flex items-center justify-center lg:justify-start min-h-screen">
           <TexturedGlass className="p-6 md:p-10 w-full max-w-md">
             <div className="text-center lg:text-left">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white/90 mb-6 leading-tight">
