@@ -85,7 +85,7 @@ const ScrollNavigation: React.FC = () => {
 
   return (
     <>
-      {/* Initial Language Selector - Shows on Hero page, fades when navbar appears */}
+      {/* Initial Language Selector and Support Button - Shows on Hero page, fades when navbar appears */}
       <AnimatePresence>
         {!isVisible && (
           <motion.div
@@ -93,8 +93,23 @@ const ScrollNavigation: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-4 right-4 z-50"
+            className="fixed top-4 right-4 z-50 flex items-center space-x-3"
           >
+            {/* Support Us Button - Desktop Only */}
+            <motion.button
+              className="hidden md:flex items-center space-x-2 px-6 py-3 rounded-full bg-gradient-to-r from-sage/40 to-leaf/30 border border-sage/50 hover:from-sage/50 hover:to-leaf/40 backdrop-blur-md transition-all duration-300"
+              onClick={() => scrollToSection('support')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+            >
+              <svg className="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+              </svg>
+              <span className="text-forest font-medium">{t('nav.support')}</span>
+            </motion.button>
             <div className="relative">
               <motion.div
                 ref={containerRef}
