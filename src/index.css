@@ -193,13 +193,17 @@ code {
   transition-duration: 400ms;
 }
 
-/* Temple-inspired gradient variants */
+/* Bright shiny green gradient variants */
 .bg-gradient-temple {
-  background: linear-gradient(90deg, #B5E288 0%, #2F5233 30%, #1B4332 70%, #8B7355 100%);
+  background: linear-gradient(90deg, #00FF7F 0%, #32CD32 25%, #00FA9A 50%, #7FFF00 75%, #00FF7F 100%);
 }
 
 .bg-gradient-temple-alt {
-  background: linear-gradient(90deg, #9CAF88 0%, #2F5233 50%, #1B4332 100%);
+  background: linear-gradient(90deg, #00FF9F 0%, #00E676 50%, #4CAF50 100%);
+}
+
+.bg-gradient-temple-bright {
+  background: linear-gradient(90deg, #39FF14 0%, #00FF7F 25%, #00FA9A 50%, #32CD32 75%, #7FFF00 100%);
 }
 
 .hover\:w-32:hover {

@@ -34,11 +34,11 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
       {/* Animated gradient background effect */}
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <div className="
-          w-40 h-40 rounded-full opacity-45
+          w-40 h-40 rounded-full opacity-70
           bg-gradient-temple
-          blur-xl animate-spin-slow
+          blur-lg animate-spin-slow
           transition-all duration-500 ease-out
-          group-hover:w-32 group-hover:h-32 group-hover:opacity-65
+          group-hover:w-32 group-hover:h-32 group-hover:opacity-90
         "></div>
       </div>
     </button>
