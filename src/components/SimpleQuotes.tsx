@@ -70,13 +70,33 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="text-right"
         >
-          <div className="text-white/90 font-serif text-2xl md:text-3xl leading-relaxed drop-shadow-lg max-w-lg">
-            <div className="mb-4">{quotes[currentQuoteIndex].line1}</div>
+          <div className="text-white/90 font-serif text-xl md:text-2xl leading-relaxed drop-shadow-lg max-w-lg">
+            <div className="mb-3">{quotes[currentQuoteIndex].line1}</div>
             {quotes[currentQuoteIndex].line2 && (
               <div className="font-medium">{quotes[currentQuoteIndex].line2}</div>
             )}
+            
+            {/* Continuity indicator */}
+            {currentQuoteIndex < quotes.length - 1 && (
+              <div className="text-white/50 text-sm mt-2">...</div>
+            )}
+            
+            {/* Progress dots */}
+            <div className="flex justify-end space-x-1 mt-4">
+              {quotes.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentQuoteIndex 
+                      ? 'bg-white/80 scale-110' 
+                      : 'bg-white/30'
+                  }`}
+                />
+              ))}
+            </div>
+            
             {currentQuoteIndex === quotes.length - 1 && (
-              <div className="text-white/70 text-lg mt-6 font-light">– Lao Tzu, Tao Te Ching</div>
+              <div className="text-white/70 text-base mt-4 font-light">– Lao Tzu, Tao Te Ching</div>
             )}
           </div>
         </motion.div>
