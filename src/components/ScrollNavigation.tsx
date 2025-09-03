@@ -563,6 +563,7 @@ const ScrollNavigation: React.FC = () => {
         </>
       )}
     </AnimatePresence>
+    </>
   );
 };
 
