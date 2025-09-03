@@ -267,7 +267,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'hero.subtitle': 'Un temple sans séparation où méditation et vie quotidienne respirent comme un.',
       'hero.email.placeholder': 'Votre adresse e-mail',
       'hero.email.button': 'Me tenir au courant',
-      'hero.gdpr': 'J'accepte de recevoir des mises à jour sur le Temple de la Grande Forêt et comprends que je peux me désinscrire à tout moment.',
+      'hero.gdpr': 'J\'accepte de recevoir des mises à jour sur le Temple de la Grande Forêt et comprends que je peux me désinscrire à tout moment.',
       
       // About Section
       'about.title': 'Qu’est-ce que le Temple ?',

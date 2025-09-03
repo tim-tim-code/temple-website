@@ -28,7 +28,7 @@ const About: React.FC = () => {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
                 <img 
-                  src="/images/pony under tree.png" 
+                  src="/images/Pony under tree.png" 
                   alt="Pony under tree - representing the peaceful nature of temple life"
                   className="w-full h-full object-cover"
                 />
