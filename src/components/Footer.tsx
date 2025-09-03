@@ -4,29 +4,6 @@ import { useLanguage } from '../context/LanguageContext';
 const Footer: React.FC = () => {
   const { t } = useLanguage();
 
-  const footerLinks = [
-    { 
-      key: 'impressum', 
-      label: t('footer.impressum') || 'Impressum',
-      href: '#impressum'
-    },
-    { 
-      key: 'privacy', 
-      label: t('footer.privacy') || 'Privacy Policy',
-      href: '#privacy'
-    },
-    { 
-      key: 'terms', 
-      label: t('footer.terms') || 'Terms of Service',
-      href: '#terms'
-    },
-    { 
-      key: 'contact', 
-      label: t('footer.contact') || 'Contact',
-      href: '#contact'
-    }
-  ];
-
   return (
     <footer className="bg-forest/95 backdrop-blur-sm border-t border-sage/20">
       <div className="container mx-auto px-6 py-4">
@@ -34,26 +11,41 @@ const Footer: React.FC = () => {
           
           {/* Left side - Copyright */}
           <div className="text-paper/80 text-sm">
-            © {new Date().getFullYear()} DaLinSi Temple. {t('footer.rights') || 'All rights reserved.'}
+            © {new Date().getFullYear()} DaLinSi Temple. {t('footer.rights')}
           </div>
 
           {/* Center - Links */}
           <div className="flex items-center space-x-6">
-            {footerLinks.map((link) => (
-              <a
-                key={link.key}
-                href={link.href}
-                className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
-              >
-                {link.label}
-              </a>
-            ))}
+            <a
+              href="#impressum"
+              className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
+            >
+              {t('footer.impressum')}
+            </a>
+            <a
+              href="#privacy"
+              className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
+            >
+              {t('footer.privacy')}
+            </a>
+            <a
+              href="#terms"
+              className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
+            >
+              {t('footer.terms')}
+            </a>
+            <a
+              href="#contact"
+              className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
+            >
+              {t('footer.contact')}
+            </a>
           </div>
 
           {/* Right side - Social Media */}
           <div className="flex items-center space-x-4">
             <span className="text-paper/80 text-sm hidden md:block">
-              {t('footer.followUs') || 'Follow us:'}
+              {t('footer.followUs')}
             </span>
             
             {/* Instagram */}

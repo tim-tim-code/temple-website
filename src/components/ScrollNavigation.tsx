@@ -18,12 +18,12 @@ const ScrollNavigation: React.FC = () => {
   const smoothMouseX = useSpring(mouseX, { stiffness: 100, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 100, damping: 20 });
 
-  // Navigation sections
+  // Navigation sections with translations
   const sections = [
-    { id: 'about', label: 'About', element: 'about' },
-    { id: 'forwhom', label: 'For Whom', element: 'forwhom' },
-    { id: 'instructors', label: 'Teachers', element: 'instructors' },
-    { id: 'help', label: 'Help us', element: 'support', isSpecial: true }
+    { id: 'about', label: t('nav.about'), element: 'about' },
+    { id: 'forwhom', label: t('nav.forwhom'), element: 'forwhom' },
+    { id: 'instructors', label: t('nav.instructors'), element: 'instructors' },
+    { id: 'help', label: t('nav.support'), element: 'support', isSpecial: true }
   ];
 
   const languages = [
