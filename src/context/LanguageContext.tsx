@@ -53,7 +53,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'nav.about': 'About',
       'nav.forwhom': 'For Whom',
       'nav.offerings': 'Offerings',
-      'nav.support': 'Support',
+      'nav.support': 'Help us',
       
       // Hero Section
       'hero.title': 'Let\u2019s find our way together',
@@ -149,7 +149,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'nav.about': 'Über',
       'nav.forwhom': 'Für wen',
       'nav.offerings': 'Angebote',
-      'nav.support': 'Unterstützung',
+      'nav.support': 'Hilf uns',
       
       // Hero Section
       'hero.title': 'Lass uns gemeinsam unseren Weg finden',
@@ -245,7 +245,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'nav.about': 'À propos',
       'nav.forwhom': 'Pour qui',
       'nav.offerings': 'Offres',
-      'nav.support': 'Soutien',
+      'nav.support': 'Aidez-nous',
       
       // Hero Section
       'hero.title': 'Trouvons notre chemin ensemble',
