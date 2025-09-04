@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import instructors from '../data/instructors.json';
 import { useLanguage } from '../context/LanguageContext';
+import { instructorImages } from './InstructorImages';
 
 const Instructors: React.FC = () => {
   const { t } = useLanguage();
@@ -28,7 +29,7 @@ const Instructors: React.FC = () => {
                 <div className="relative w-full h-80 overflow-hidden">
                   <div className="w-full h-full bg-gradient-to-br from-sage/20 to-forest/10">
                     <motion.img
-                      src={instructor.image}
+                      src={instructorImages[instructor.id as keyof typeof instructorImages]}
                       alt={instructor.name}
                       className="w-full h-full object-cover"
                       whileHover={{ scale: 1.05 }}

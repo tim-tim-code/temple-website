@@ -7,15 +7,15 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-forest/95 backdrop-blur-sm border-t border-sage/20">
       <div className="container mx-auto px-6 py-4">
-        <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
           
           {/* Left side - Copyright */}
-          <div className="text-paper/80 text-sm">
-            © {new Date().getFullYear()} DaLinSi Temple. {t('footer.rights')}
+          <div className="text-paper/80 text-sm text-center lg:text-left">
+            © {new Date().getFullYear()} DaLinSi. {t('footer.rights')}
           </div>
 
           {/* Center - Links */}
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-6">
             <a
               href="#impressum"
               className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
@@ -43,8 +43,8 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Right side - Social Media */}
-          <div className="flex items-center space-x-4">
-            <span className="text-paper/80 text-sm hidden md:block">
+          <div className="flex items-center justify-center lg:justify-end space-x-4">
+            <span className="text-paper/80 text-sm hidden lg:block">
               {t('footer.followUs')}
             </span>
             

@@ -87,7 +87,7 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
 
       return () => clearInterval(interval);
     }
-  }, [showQuotes, isPaused, pausedTime, quotes.length, startTime]);
+  }, [showQuotes, isPaused, pausedTime, quotes.length]);
 
   if (!showQuotes) return null;
 

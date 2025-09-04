@@ -5,6 +5,7 @@ import BritishFlag from './flags/BritishFlag';
 import GermanFlag from './flags/GermanFlag';
 import FrenchFlag from './flags/FrenchFlag';
 import AnimatedButton from './AnimatedButton';
+import logoImage from '../assets/DaLinSi logo white 4k Kopie.png';
 
 const ScrollNavigation: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
@@ -362,7 +363,7 @@ const ScrollNavigation: React.FC = () => {
                   className="flex items-center space-x-2 hover:scale-105 transition-transform duration-200"
                 >
                   <img 
-                    src="/images/DaLinSi logo white 4k Kopie.png" 
+                    src={logoImage} 
                     alt="DaLinSi" 
                     className="h-10 w-auto"
                   />

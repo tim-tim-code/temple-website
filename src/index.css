@@ -209,6 +209,22 @@ code {
   background: linear-gradient(90deg, #4A6B3A 0%, #3D5730 25%, #2F4423 50%, #243618 75%, #3A5A2A 100%);
 }
 
+.bg-gradient-temple-bright {
+  background: linear-gradient(90deg, #B5E288 0%, #9CAF88 25%, #7B9A6B 50%, #6B8E5A 75%, #A8C090 100%);
+}
+
+.bg-gradient-temple-shine {
+  background: linear-gradient(90deg, #E8FFD1 0%, #D4EDBB 20%, #C1E6A5 40%, #A8D68F 60%, #95C779 80%, #D4EDBB 100%);
+}
+
+.bg-gradient-temple-medium {
+  background: linear-gradient(90deg, #7B9A6B 0%, #6B8E5A 20%, #5A7C47 40%, #4A6B3A 60%, #5D8250 80%, #6B8E5A 100%);
+}
+
+.bg-gradient-temple-darker {
+  background: linear-gradient(90deg, #4A6B3A 0%, #3D5730 20%, #2F4423 40%, #243618 60%, #354A28 80%, #3D5730 100%);
+}
+
 .hover\:w-32:hover {
   width: 8rem;
 }

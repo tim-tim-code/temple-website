@@ -119,8 +119,8 @@ const Hero: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between min-h-screen">
-        {/* Main content in textured glass */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center lg:justify-start min-h-screen">
+        {/* Main content in textured glass - Hidden on mobile */}
+        <div className="hidden md:flex w-full lg:w-1/2 items-center justify-center lg:justify-start min-h-screen">
           <TexturedGlass className="p-6 md:p-10 w-full max-w-md">
             <div className="text-center lg:text-left">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif text-white/90 mb-6 leading-tight">
@@ -176,7 +176,7 @@ const Hero: React.FC = () => {
                 
                 <AnimatedButton
                   type="submit"
-                  variant="dark"
+                  variant="bright"
                   disabled={!email || !gdprConsent}
                   className="w-full px-6 py-3 text-base font-medium"
                 >
@@ -194,7 +194,7 @@ const Hero: React.FC = () => {
       
       {/* Scroll indicator arrow */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 -translate-x-8 md:translate-x-0 z-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: showScrollIndicator ? 1 : 0, y: showScrollIndicator ? 0 : 20 }}
         transition={{ duration: 0.8, ease: "easeOut" }}

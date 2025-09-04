@@ -4,20 +4,20 @@
     "name": "Grand Master Tim",
     "role": "Grand Master",
     "bio": "Cool guy",
-    "image": "/images/Master Tim.png"
+    "image": "/images/Master%20Tim.png"
   },
   {
     "id": 2,
     "name": "Master Elie",
     "role": "Master", 
     "bio": "Has a great French accent.",
-    "image": "/images/Master Elie.jpg"
+    "image": "/images/Master%20Elie.jpg"
   },
   {
     "id": 3,
     "name": "Amateur Luka",
     "role": "Amateur",
     "bio": "21 years of annoying people.",
-    "image": "/images/Master Luka.JPG"
+    "image": "/images/Master%20Luka.JPG"
   }
 ]

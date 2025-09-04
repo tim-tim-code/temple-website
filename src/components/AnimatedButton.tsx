@@ -6,7 +6,7 @@ interface AnimatedButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  variant?: 'default' | 'dark';
+  variant?: 'default' | 'dark' | 'bright' | 'medium' | 'darker';
 }
 
 const AnimatedButton: React.FC<AnimatedButtonProps> = ({ 
@@ -17,7 +17,15 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   disabled = false,
   variant = 'default'
 }) => {
-  const gradientClass = variant === 'dark' ? 'bg-gradient-temple-dark' : 'bg-gradient-temple';
+  const gradientClass = variant === 'dark' 
+    ? 'bg-gradient-temple-dark' 
+    : variant === 'bright' 
+    ? 'bg-gradient-temple-shine'
+    : variant === 'medium'
+    ? 'bg-gradient-temple-medium'
+    : variant === 'darker'
+    ? 'bg-gradient-temple-darker' 
+    : 'bg-gradient-temple';
   return (
     <button
       type={type}
@@ -53,6 +61,11 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
           
           {/* Additional full button background for complete coverage */}
           <div className={`absolute inset-0 rounded-full ${gradientClass} opacity-15 group-hover:opacity-25 transition-opacity duration-500`}></div>
+          
+          {/* Shine effect for bright variant */}
+          {variant === 'bright' && (
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-30 group-hover:opacity-50 transition-opacity duration-500 animate-pulse"></div>
+          )}
         </>
       )}
     </button>

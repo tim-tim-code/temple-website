@@ -8,19 +8,6 @@ const SupportTheTemple: React.FC = () => {
 
   const supportCards = [
     {
-      id: 'donation',
-      title: t('support.donation.title'),
-      description: t('support.donation.desc'),
-      buttonText: t('support.donation.button'),
-      href: '#donation',
-      gradient: 'from-sage/30 via-sage/20 to-leaf/20',
-      icon: (
-        <svg className="w-8 h-8 text-forest/70" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
-      )
-    },
-    {
       id: 'wishlist',
       title: t('support.wishlist.title'),
       description: t('support.wishlist.desc'),
@@ -30,6 +17,19 @@ const SupportTheTemple: React.FC = () => {
       icon: (
         <svg className="w-8 h-8 text-forest/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+        </svg>
+      )
+    },
+    {
+      id: 'donation',
+      title: t('support.donation.title'),
+      description: t('support.donation.desc'),
+      buttonText: t('support.donation.button'),
+      href: '#donation',
+      gradient: 'from-sage/30 via-sage/20 to-leaf/20',
+      icon: (
+        <svg className="w-8 h-8 text-forest/70" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
       )
     }
