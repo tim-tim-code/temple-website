@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import AnimatedButton from './AnimatedButton';
 
 const SupportTheTemple: React.FC = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const supportCards = [
     {
@@ -97,7 +99,14 @@ const SupportTheTemple: React.FC = () => {
                   {/* Animated Button */}
                   <div className="mt-auto">
                     <AnimatedButton
-                      onClick={() => window.location.href = card.href}
+                      onClick={() => {
+                        if (card.id === 'wishlist') {
+                          navigate('/wishlist');
+                        } else {
+                          window.location.href = card.href;
+                        }
+                      }}
+                      variant={card.id === 'wishlist' ? 'amber' : 'default'}
                       className="w-full text-base"
                     >
                       {card.buttonText}

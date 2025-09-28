@@ -55,8 +55,7 @@ const ForWhom: React.FC = () => {
           <div className="text-center mt-12">
             <div className="w-24 h-px bg-sage mx-auto mb-6"></div>
             <p className="text-lg text-soil/80 font-light italic max-w-2xl mx-auto">
-              "The temple calls to those who are ready to answer — 
-              not with their minds, but with their whole being."
+              {t('forwhom.quote')}
             </p>
           </div>
         </div>

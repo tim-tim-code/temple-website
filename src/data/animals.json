@@ -1,44 +1,84 @@
 [
   {
-    "id": 1,
-    "name": "Luna",
-    "type": "Pony",
-    "description": "Gentle companion who teaches patience",
-    "image": "/images/animals/luna-pony.jpg"
+    "id": "hermanek",
+    "name": "Heřmánek",
+    "type": "Horse",
+    "age": 31,
+    "birthDate": "29/03/1994",
+    "description": "Heřmánek is living proof that thoughts are never truly private. His story begins twenty-three years ago, when he was rescued from a dark and dirty horse dealer's yard, covered in excrement and marked by fresh wounds.",
+    "fullStory": "Time passed by, goats stopped laughing, and then… a miracle happened. Perhaps it was always there, unnoticed. Perhaps it was born of care, patience, and love. No one can say: a royal creature of impossible beauty, with the lines of an Arabian and gentle, sensitive nature, yet within him burned a speed fierce enough to challenge the universe itself. Heřmánek can read the intention of his rider and could outrun great horses. Now in his later years, time has shortened his teeth so that he can no longer graze as he once did. Instead, he is tended with careful devotion: soaked hay, given every two hours, the rhythm of his days. And in return, he remains astonishing. On daily walks he still runs free, tossing his head with the spirit of a foal, reminding the world that his legs are yet the fastest of them all.",
+    "image": "/images/Animals/Booth Horses.png"
   },
   {
-    "id": 2,
-    "name": "Sage",
+    "id": "banny",
+    "name": "Banny",
+    "type": "Horse",
+    "age": 27,
+    "birthDate": "30/05/1997",
+    "description": "In his early years, Banny didn't know what it meant to live a happy life. Despite his small size, he was paraded into many jumping competitions, but his value existed only in the amount of obstacles he could clear.",
+    "fullStory": "Even if his skills were great, soon he grew too small for the rider and was passed along to children who treated him less as a companion and more as a tool. The crack of the whip became the rhythm of his days. After a tragic accident that left a dog dead under Banny's hooves, the last drops of human kindness vanished. In time, Banny broke – not in body, but in spirit. He would not step forward anymore, no matter the punishment. And yet, someone could see his suffering and, one day, came for him. With his extremely smart and strong personality, Banny came to Shaolin Temple Europe where he spent 13 years of his life. He is probably living the best period of life, running freely side by side with his small herd. Uplifting, joyful, confident, connected, aligned.",
+    "likes": "to eat more or less everything",
+    "dislikes": "zucchinis but will still eat it",
+    "image": "/images/Animals/Booth Horses.png"
+  },
+  {
+    "id": "ramona",
+    "name": "Ramona",
+    "type": "Horse",
+    "age": 21,
+    "birthDate": "04/04/2004",
+    "description": "A very skinny elderly mare named 'Maike' (today Ramona) was bought by Shaolin Temple Europe in March 2023 to bring extra company for Banny and Heřmánek.",
+    "fullStory": "Her body condition was long time controversial and finally improved in the spring and summer 2025. Even if not everything about Ramona can be healed anymore, yet, as time goes on, her specific beauty comes to light and the character gets finer. It is a pleasure to observe her facial expression, changing 3 times in a minute while behind those scary faces is a loyal, tender, sensitive and lovely pony lady. However Ramona is carefully checking people around and as she likes to challenge the presence of the ignorant, she will 'gently' bite the one who forgot himself. Ramona is simply a remarkably reliable horse in countless ways.",
+    "image": "/images/Animals/Booth Horses.png"
+  },
+  {
+    "id": "loki",
+    "name": "Loki",
     "type": "Dog",
-    "description": "Guardian of the temple grounds",
-    "image": "/images/animals/sage-dog.jpg"
+    "age": 13,
+    "birthDate": "14/11/2011",
+    "description": "One of the dog brothers who brings loyalty and companionship to the temple.",
+    "image": "/images/Animals/Booth Dogs.png"
   },
   {
-    "id": 3,
-    "name": "Echo",
-    "type": "Parrot", 
-    "description": "Speaks ancient wisdom in three languages",
-    "image": "/images/animals/echo-parrot.jpg"
+    "id": "fenris",
+    "name": "Fenris",
+    "type": "Dog",
+    "age": 13,
+    "birthDate": "14/11/2011",
+    "description": "Brother to Loki, another loyal companion in the temple community.",
+    "image": "/images/Animals/Booth Dogs.png"
   },
   {
-    "id": 4,
-    "name": "Shell & Stone",
+    "id": "lora",
+    "name": "Lora",
+    "type": "Parrot",
+    "age": "5-6",
+    "birthDate": "Unknown",
+    "description": "In a small dirty pet shop, in the tiny cage was living for years a shy parrot lady, without much chance of getting a spaceful home.",
+    "fullStory": "Flying was unknown to her wings and the greeting 'Ahoj!' was the only treat she got from the customers passing by, day by day. Dear Lora found her refuge for a short time in Shaolin Temple Europe, making groups of people laugh. Until she had to move again… Lora is a gentle, sensitive being able to enjoy the smallest little something, whatever it is.",
+    "image": "/images/Animals/Fish.JPG"
+  },
+  {
+    "id": "turtles",
+    "name": "Turtles",
     "type": "Turtles",
-    "description": "Masters of slow living and deep time",
-    "image": "/images/animals/turtles.jpg"
+    "age": "Unknown",
+    "birthDate": "Unknown",
+    "description": "Chan, Wu and Yi - pillars of Shaolin tradition.",
+    "fullStory": "They take sun baths in Summer and don't like being disturbed during their sun bath.",
+    "likes": "take sun bath in Summer",
+    "dislikes": "being disturbed during their sun bath",
+    "image": "/images/Animals/Fish.JPG"
   },
   {
-    "id": 5,
-    "name": "The Collective",
-    "type": "Axolotls",
-    "description": "Aquatic teachers of regeneration",
-    "image": "/images/animals/axolotls.jpg"
-  },
-  {
-    "id": 6,
-    "name": "Koi Community",
-    "type": "Fish",
-    "description": "Swimming meditation in the temple pond",
-    "image": "/images/animals/koi.jpg"
+    "id": "aquarium",
+    "name": "Small Water World",
+    "type": "Aquarium",
+    "age": "Unknown",
+    "birthDate": "Unknown",
+    "description": "For several years, a small water world was hidden in the basement of Shaolin Temple Europe.",
+    "fullStory": "A sacred room offering a moment of solitude and calmness surrounded by the diversity of swimming beings. Sometimes in the night late visitors in need of a place to sleep were secretly invited to rest in the vrooming of the filters, to clear out the worries running in their head. In their subtle manners, these little creatures gave their part by providing a peaceful atmosphere to the temple. Some of them survived the move of winter 2025 and are now waiting for the chance to balance the daily hectic Yang with a calm Yin Qi.",
+    "image": "/images/Animals/Small water World.jpeg"
   }
 ]

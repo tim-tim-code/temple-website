@@ -14,7 +14,7 @@ const About: React.FC = () => {
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-2xl font-serif text-forest mb-8 text-center">
+              <p className="text-2xl font-serif text-forest mb-8 text-left">
                 {t('about.subtitle')}
               </p>
               
@@ -27,10 +27,11 @@ const About: React.FC = () => {
             
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img 
-                  src="/images/Pony%20under%20tree.png" 
+                <img
+                  src="/images/Animals/Pony under tree.jpg"
                   alt="Pony under tree - representing the peaceful nature of temple life"
                   className="w-full h-full object-cover"
+                  loading="lazy"
                   onError={(e) => {
                     // Fallback to hero background if pony image is missing
                     const target = e.target as HTMLImageElement;

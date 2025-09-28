@@ -72,8 +72,8 @@ const TexturedGlass: React.FC<TexturedGlassProps> = ({
         <motion.div
           className="absolute w-48 h-48 -translate-x-1/2 -translate-y-1/2"
           style={{
-            left: smoothMouseX,
-            top: smoothMouseY,
+            left: useTransform(smoothMouseX, (value) => `calc(50% + ${value}px)`),
+            top: useTransform(smoothMouseY, (value) => `calc(50% + ${value}px)`),
             background: `radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 60%)`,
             filter: 'blur(15px)'
           }}

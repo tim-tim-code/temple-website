@@ -1,31 +1,42 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import BritishFlag from './flags/BritishFlag';
 import GermanFlag from './flags/GermanFlag';
 import FrenchFlag from './flags/FrenchFlag';
 import AnimatedButton from './AnimatedButton';
-import logoImage from '../assets/DaLinSi logo white 4k Kopie.png';
 
 const ScrollNavigation: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [hoveredLanguage, setHoveredLanguage] = useState<string | null>(null);
+  const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('about');
   const containerRef = useRef<HTMLDivElement>(null);
+  const navContainerRef = useRef<HTMLDivElement>(null);
   
   // Spring animations for bubble effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothMouseX = useSpring(mouseX, { stiffness: 100, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+  
+  // Transform values for cursor bubble positioning
+  const cursorBubbleX = useTransform(smoothMouseX, (value: number) => `calc(${value}px)`);
+  const cursorBubbleY = useTransform(smoothMouseY, (value: number) => `calc(${value}px)`);
 
   // Navigation sections with translations
   const sections = [
     { id: 'about', label: t('nav.about'), element: 'about' },
     { id: 'forwhom', label: t('nav.forwhom'), element: 'forwhom' },
-    { id: 'instructors', label: t('nav.instructors'), element: 'instructors' },
+    { id: 'animals', label: t('nav.animals'), element: 'animals' },
+    { id: 'supporters', label: t('nav.supporters'), element: 'supporters' },
+    { id: 'faq', label: t('nav.faq'), element: 'faq-preview' },
     { id: 'help', label: t('nav.support'), element: 'support', isSpecial: true }
   ];
 
@@ -37,11 +48,26 @@ const ScrollNavigation: React.FC = () => {
 
   const currentLang = languages.find(lang => lang.code === language) || languages[0];
 
-  // Show/hide navigation on scroll
+  // Show/hide navigation on scroll and track active section
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 100;
       setIsVisible(scrolled);
+
+      // Check which section is currently in view
+      const sectionsToCheck = ['about', 'forwhom', 'animals', 'supporters', 'faq', 'support'];
+      const currentSection = sectionsToCheck.find(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -61,6 +87,14 @@ const ScrollNavigation: React.FC = () => {
     }
   };
 
+  const handleNavigation = (section: any) => {
+    if (section.isLink && section.href) {
+      navigate(section.href);
+    } else {
+      scrollToSection(section.element);
+    }
+  };
+
   // Handle mouse move for glass effect
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -75,6 +109,23 @@ const ScrollNavigation: React.FC = () => {
   const handleMouseLeave = () => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
+    mouseX.set(rect.width / 2);
+    mouseY.set(rect.height / 2);
+  };
+
+  // Handle mouse move for nav glass effect
+  const handleNavMouseMove = (e: React.MouseEvent) => {
+    if (!navContainerRef.current) return;
+    const rect = navContainerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleNavMouseLeave = () => {
+    if (!navContainerRef.current) return;
+    const rect = navContainerRef.current.getBoundingClientRect();
     mouseX.set(rect.width / 2);
     mouseY.set(rect.height / 2);
   };
@@ -126,7 +177,7 @@ const ScrollNavigation: React.FC = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 animate={{
-                  width: isLanguageOpen ? "200px" : "56px",
+                  width: isLanguageOpen ? "160px" : "56px",
                   height: "56px",
                   borderRadius: "28px"
                 }}
@@ -188,7 +239,7 @@ const ScrollNavigation: React.FC = () => {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <currentLang.flag className="w-6 h-4 rounded-sm border border-white/20" />
+                      <currentLang.flag className="w-5 h-3 rounded-sm border border-white/20" />
                     </motion.div>
                   ) : (
                     // All flags when open
@@ -205,36 +256,31 @@ const ScrollNavigation: React.FC = () => {
                             e.stopPropagation();
                             handleLanguageChange(lang.code);
                           }}
+                          onMouseEnter={() => setHoveredLanguage(lang.code)}
+                          onMouseLeave={() => setHoveredLanguage(null)}
                           className="relative w-12 h-12 rounded-full flex items-center justify-center transition-all"
-                          whileHover={{ scale: 1.15, y: -2 }}
                           whileTap={{ scale: 0.95 }}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
                           transition={{ 
                             delay: index * 0.05 + 0.1,
-                            duration: 0.4,
-                            ease: [0.32, 0.72, 0, 1]
+                            duration: 0.2
                           }}
                         >
-                          {/* Selected glass bubble - only show when expanded */}
-                          {lang.code === language && (
+                          {/* Glass bubble - smoothly moves between flags */}
+                          {(lang.code === (hoveredLanguage || language)) && (
                               <motion.div
                                 className="absolute inset-0 rounded-full overflow-hidden"
-                                layoutId="selectedBubbleInitial"
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
+                                layoutId="languageBubbleTop"
                                 transition={{ 
-                                  duration: 0.4,
                                   type: "spring",
-                                  stiffness: 200,
-                                  damping: 25,
-                                  delay: 0.2
+                                  stiffness: 400,
+                                  damping: 30
                                 }}
                               >
                                 {/* Multi-layer glass effect */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-md rounded-full"></div>
                                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-full"></div>
-                                <div className="absolute inset-[2px] border border-white/40 rounded-full"></div>
                                 
                                 {/* Bubble highlight */}
                                 <div className="absolute top-1 left-2 right-2 h-3 bg-gradient-to-b from-white/40 to-transparent rounded-full blur-sm"></div>
@@ -328,7 +374,7 @@ const ScrollNavigation: React.FC = () => {
                     <button
                       key={section.id}
                       onClick={() => {
-                        scrollToSection(section.element);
+                        handleNavigation(section);
                         setIsMobileMenuOpen(false);
                       }}
                       className={section.isSpecial ? 
@@ -362,37 +408,77 @@ const ScrollNavigation: React.FC = () => {
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className="flex items-center space-x-2 hover:scale-105 transition-transform duration-200"
                 >
-                  <img 
-                    src={logoImage} 
-                    alt="DaLinSi" 
+                  <img
+                    src="/images/Logos/DaLinSi logo white no signs.png"
+                    alt="DaLinSi"
                     className="h-10 w-auto"
                   />
                 </button>
 
                 {/* Navigation Links */}
-                <nav className="flex items-center space-x-2">
+                <nav className="flex items-center space-x-2 ml-6">
                   {sections.map((section) => (
                     <div key={section.id} className="relative">
                       {section.isSpecial ? (
                         // Special "Help us" button with animated gradient effect
                         <AnimatedButton
-                          onClick={() => scrollToSection(section.element)}
+                          onClick={() => handleNavigation(section)}
                           className="px-6 py-2.5 text-base"
                         >
                           {section.label}
                         </AnimatedButton>
                       ) : (
-                        // Regular navigation links
-                        <button
-                          onClick={() => scrollToSection(section.element)}
-                          className="text-base font-medium text-forest/80 hover:text-forest transition-colors duration-200 px-5 py-2.5 rounded-full hover:bg-white/20"
+                        // Regular navigation links with glass bubble effect like language selector
+                        <motion.button
+                          onClick={() => handleNavigation(section)}
+                          className="relative text-base font-medium text-forest/80 hover:text-forest transition-colors duration-200 px-5 py-2.5 rounded-full"
+                          onMouseEnter={() => setHoveredNavItem(section.id)}
+                          onMouseLeave={() => setHoveredNavItem(null)}
+                          whileTap={{ scale: 0.95 }}
+                          whileHover={{ scale: 1.05 }}
                         >
-                          {section.label}
-                        </button>
+                          {/* Glass bubble - smoothly moves between nav items and follows active section */}
+                          {(hoveredNavItem === section.id || (activeSection === section.id && !hoveredNavItem)) && (
+                            <motion.div
+                              className="absolute inset-0 rounded-full overflow-hidden"
+                              layoutId="navGlassBubble"
+                              transition={{ 
+                                type: "spring",
+                                stiffness: 400,
+                                damping: 30
+                              }}
+                            >
+                              {/* Multi-layer glass effect */}
+                              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-md rounded-full"></div>
+                              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-full"></div>
+                              
+                              {/* Bubble highlight */}
+                              <div className="absolute top-1 left-2 right-2 h-3 bg-gradient-to-b from-white/40 to-transparent rounded-full blur-sm"></div>
+                              
+                              {/* Subtle shimmer animation */}
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
+                                animate={{
+                                  x: [-100, 100],
+                                  opacity: [0, 1, 0]
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  repeatDelay: 3,
+                                  ease: "easeInOut"
+                                }}
+                              />
+                            </motion.div>
+                          )}
+                          
+                          <span className="relative z-10">{section.label}</span>
+                        </motion.button>
                       )}
                     </div>
                   ))}
                 </nav>
+
 
                 {/* Language Selector - Exact copy of original design */}
                 <div className="relative">
@@ -405,7 +491,7 @@ const ScrollNavigation: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     animate={{
-                      width: isLanguageOpen ? "200px" : "56px",
+                      width: isLanguageOpen ? "160px" : "56px",
                       height: "56px",
                       borderRadius: "28px"
                     }}
@@ -467,7 +553,7 @@ const ScrollNavigation: React.FC = () => {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <currentLang.flag className="w-6 h-4 rounded-sm border border-white/20" />
+                          <currentLang.flag className="w-5 h-3 rounded-sm border border-white/20" />
                         </motion.div>
                       ) : (
                         // All flags when open
@@ -484,37 +570,32 @@ const ScrollNavigation: React.FC = () => {
                                 e.stopPropagation();
                                 handleLanguageChange(lang.code);
                               }}
+                              onMouseEnter={() => setHoveredLanguage(lang.code)}
+                              onMouseLeave={() => setHoveredLanguage(null)}
                               className="relative w-12 h-12 rounded-full flex items-center justify-center transition-all"
-                              whileHover={{ scale: 1.15, y: -2 }}
-                              whileTap={{ scale: 0.95 }}
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
+                                  whileTap={{ scale: 0.95 }}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
                               transition={{ 
                                 delay: index * 0.05 + 0.1,
-                                duration: 0.4,
-                                ease: [0.32, 0.72, 0, 1]
+                                duration: 0.2
                               }}
                             >
-                              {/* Selected glass bubble - only show when expanded */}
-                              {lang.code === language && (
+                              {/* Glass bubble - smoothly moves between flags */}
+                              {(lang.code === (hoveredLanguage || language)) && (
                                   <motion.div
                                     className="absolute inset-0 rounded-full overflow-hidden"
-                                    layoutId="selectedBubble"
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
+                                    layoutId="languageBubbleNavbar"
                                     transition={{ 
-                                      duration: 0.4,
                                       type: "spring",
-                                      stiffness: 200,
-                                      damping: 25,
-                                      delay: 0.2
+                                      stiffness: 400,
+                                      damping: 30
                                     }}
                                   >
                                     {/* Multi-layer glass effect */}
                                     <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-md rounded-full"></div>
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-full"></div>
-                                    <div className="absolute inset-[2px] border border-white/40 rounded-full"></div>
-                                    
+                                        
                                     {/* Bubble highlight */}
                                     <div className="absolute top-1 left-2 right-2 h-3 bg-gradient-to-b from-white/40 to-transparent rounded-full blur-sm"></div>
                                     

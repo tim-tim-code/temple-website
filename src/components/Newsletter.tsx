@@ -19,7 +19,7 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-sage/10 via-leaf/5 to-paper">
+    <section id="newsletter" className="py-20 bg-gradient-to-br from-sage/10 via-leaf/5 to-paper">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto">
           <motion.div

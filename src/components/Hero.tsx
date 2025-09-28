@@ -8,13 +8,46 @@ import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import Notification from './Notification';
 
+const MorphingText: React.FC = () => {
+  const [currentText, setCurrentText] = useState('Temple of the Great Forest');
+  const [isChanging, setIsChanging] = useState(false);
+
+  const texts = ['Temple of the Great Forest', 'Dalin Si'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsChanging(true);
+
+      // After fade out completes, change the text and fade in
+      setTimeout(() => {
+        setCurrentText(prev => prev === texts[0] ? texts[1] : texts[0]);
+        setIsChanging(false);
+      }, 500); // 0.5 seconds for fade out
+
+    }, 7000); // Change every 7 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div
+      animate={{ opacity: isChanging ? 0 : 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
+      {currentText}
+    </motion.div>
+  );
+};
+
 const Hero: React.FC = () => {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [gdprConsent, setGdprConsent] = useState(false);
   const [showQuotes, setShowQuotes] = useState(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const [nudgeAnimation, setNudgeAnimation] = useState(false);
+  const [showLogo, setShowLogo] = useState(true);
   const [notification, setNotification] = useState<{message: string, type: 'error' | 'success' | 'info'} | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -41,12 +74,22 @@ const Hero: React.FC = () => {
     const handleScroll = () => {
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
-        // Show quotes only when Hero section fills the entire viewport
-        const isVisible = rect.bottom >= window.innerHeight;
-        setShowQuotes(isVisible);
-        
+        const scrollY = window.scrollY;
+
+        // Hide quotes immediately when user scrolls
+        if (scrollY > 10 && !hasScrolled) {
+          setHasScrolled(true);
+          setShowQuotes(false);
+        } else if (scrollY <= 10 && hasScrolled) {
+          setHasScrolled(false);
+          setShowQuotes(true);
+        }
+
+        // Logo is always visible with the hero section
+        setShowLogo(true);
+
         // Show scroll indicator only when at top of page and quotes are visible
-        if (window.scrollY === 0 && isVisible) {
+        if (scrollY === 0 && showQuotes) {
           // Reshow scroll indicator after 3 seconds when back at top
           setTimeout(() => setShowScrollIndicator(true), 3000);
         } else {
@@ -106,9 +149,9 @@ const Hero: React.FC = () => {
         onClose={() => setNotification(null)}
       />
       
-      <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div ref={heroRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-forest bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${heroBackground}), linear-gradient(135deg, #002E19 0%, #4A2F1E 100%)`
@@ -116,6 +159,28 @@ const Hero: React.FC = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40"></div>
       </div>
+
+      {/* Logo in top left corner */}
+      <motion.div
+        className="absolute top-4 left-6 z-20"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{
+          opacity: showLogo ? 1 : 0,
+          scale: showLogo ? 1 : 0.8
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
+        <div className="flex items-center space-x-3">
+          <img
+            src="/images/Logos/Full Wheel White Logo.png"
+            alt="DaLinSi Temple Logo"
+            className="w-14 h-14 object-contain"
+          />
+          <h1 className="text-white/90 font-serif text-lg font-medium hidden sm:block">
+            <MorphingText />
+          </h1>
+        </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-between min-h-screen">
@@ -187,11 +252,6 @@ const Hero: React.FC = () => {
           </TexturedGlass>
         </div>
 
-      {/* Simple Quotes - Hidden on mobile */}
-      <div className="hidden md:block">
-        <SimpleQuotes showQuotes={showQuotes} />
-      </div>
-      
       {/* Scroll indicator arrow */}
       <motion.div 
         className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 -translate-x-8 md:translate-x-0 z-20"
@@ -218,6 +278,12 @@ const Hero: React.FC = () => {
           <span className="text-white/60 text-sm font-light tracking-wide">Learn more</span>
         </div>
       </motion.div>
+
+      </div>
+
+      {/* Simple Quotes - Hidden on mobile */}
+      <div className="hidden md:block">
+        <SimpleQuotes showQuotes={showQuotes} />
       </div>
       </div>
     </>

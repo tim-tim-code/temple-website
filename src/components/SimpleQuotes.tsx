@@ -12,7 +12,6 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
   const [startTime, setStartTime] = useState<number>(Date.now());
   const [pausedTime, setPausedTime] = useState<number>(0);
   const [isPaused, setIsPaused] = useState(false);
-  
   // Lao Tzu - Tao Te Ching quote pairs
   const quotes = [
     {
@@ -33,7 +32,7 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
     },
     {
       line1: "true clarity seems obscure,",
-      line2: "the greatest are seems"
+      line2: "the greatest art seems"
     },
     {
       line1: "unsophisticated,",
@@ -48,6 +47,7 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
       line2: "Yet it nourishes and completes all things."
     }
   ];
+
 
   // Simplified pause/resume timer logic
   useEffect(() => {
@@ -89,10 +89,22 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
     }
   }, [showQuotes, isPaused, pausedTime, quotes.length]);
 
-  if (!showQuotes) return null;
+  // Always render but control visibility with animation
 
   return (
-    <div className="fixed bottom-8 right-8 z-20 pointer-events-none">
+    <motion.div
+      className="fixed bottom-8 right-8 z-20 pointer-events-none"
+      initial={{ opacity: 1, scale: 1, y: 0 }}
+      animate={{
+        opacity: showQuotes ? 1 : 0,
+        scale: showQuotes ? 1 : 0.8,
+        y: showQuotes ? 0 : 20
+      }}
+      transition={{
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] // Custom easing for smooth animation
+      }}
+    >
       <div className="flex items-end space-x-4">
         {/* Quote text on the left */}
         <div className="text-right">
@@ -129,7 +141,7 @@ const SimpleQuotes: React.FC<SimpleQuotesProps> = ({ showQuotes }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

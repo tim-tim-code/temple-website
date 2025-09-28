@@ -6,7 +6,7 @@ const MorphingText: React.FC = () => {
   const [currentText, setCurrentText] = useState('Temple of the Great Forest');
   const [isChanging, setIsChanging] = useState(false);
   
-  const texts = ['Temple of the Great Forest', 'DaLinSi'];
+  const texts = ['Temple of the Great Forest', 'Dalin Si'];
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,17 +35,11 @@ const MorphingText: React.FC = () => {
 
 const Header: React.FC = () => {
   const { t } = useLanguage();
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Hide header on scroll
+  // Hide header completely since we have hero logo
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY <= 100;
-      setIsVisible(scrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setIsVisible(false);
   }, []);
 
   return (
@@ -60,7 +54,7 @@ const Header: React.FC = () => {
         >
       <div className="flex items-center space-x-3">
         {/* Logo */}
-        <img src="/images/DaLinSi logo white 4k Kopie.png" alt="DaLinSi Temple Logo" className="w-16 h-16 object-contain" />
+        <img src="/images/Logos/DaLinSi logo white no signs.png" alt="DaLinSi Temple Logo" className="w-16 h-16 object-contain" />
         
         {/* Morphing Temple name */}
         <h1 className="text-white/90 font-serif text-lg sm:text-xl font-medium">

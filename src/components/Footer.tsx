@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           
           {/* Left side - Copyright */}
           <div className="text-paper/80 text-sm text-center lg:text-left">
-            © {new Date().getFullYear()} DaLinSi. {t('footer.rights')}
+            © {new Date().getFullYear()} Dalin Si. {t('footer.rights')}
           </div>
 
           {/* Center - Links */}
@@ -39,6 +39,12 @@ const Footer: React.FC = () => {
               className="text-paper/70 hover:text-paper text-sm transition-colors duration-200 hover:underline"
             >
               {t('footer.contact')}
+            </a>
+            <a
+              href="/admin/login"
+              className="text-paper/50 hover:text-paper/70 text-xs transition-colors duration-200 hover:underline opacity-50"
+            >
+              Admin
             </a>
           </div>
 

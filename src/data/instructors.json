@@ -1,23 +1,37 @@
 [
   {
     "id": 1,
-    "name": "Grand Master Tim",
-    "role": "Grand Master",
-    "bio": "Cool guy",
-    "image": "/images/Master%20Tim.png"
+    "name": "Master Nim",
+    "role": "Zen Teacher",
+    "bio": "Zen Dharmatalks",
+    "image": "/images/Supporters/Master Nim_Photo.png"
   },
   {
     "id": 2,
-    "name": "Master Elie",
-    "role": "Master", 
-    "bio": "Has a great French accent.",
-    "image": "/images/Master%20Elie.jpg"
+    "name": "Randall Birnberg",
+    "role": "Psychology Teacher",
+    "bio": "Positive psychology",
+    "image": "/images/Supporters/Randall Birnberg_Photo.jpg"
   },
   {
     "id": 3,
-    "name": "Amateur Luka",
-    "role": "Amateur",
-    "bio": "21 years of annoying people.",
-    "image": "/images/Master%20Luka.JPG"
+    "name": "Sofian Sanini",
+    "role": "Tea Master",
+    "bio": "Tea ceremony",
+    "image": "/images/Supporters/ChaJin Sofian_Photo.png"
+  },
+  {
+    "id": 4,
+    "name": "Janine Jutima",
+    "role": "Meditation Teacher",
+    "bio": "Vipassana Meditation",
+    "image": "/images/Supporters/Janine Jutima_Photo.png"
+  },
+  {
+    "id": 5,
+    "name": "Laoshi Miao Hai",
+    "role": "Shaolin Teacher",
+    "bio": "Teacher from Shaolin Temple Europe",
+    "image": "/images/Supporters/Laoshi Miao Hai_Photo.jpg"
   }
 ]
