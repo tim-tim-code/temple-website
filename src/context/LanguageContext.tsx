@@ -835,6 +835,108 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
           }
         }
       }
+    },
+    cs: {
+      // Navigation
+      'nav.about': 'O nás',
+      'nav.forwhom': 'Pro koho',
+      'nav.animals': 'Naše Zvířata',
+      'nav.supporters': 'Podporovatelé',
+      'nav.faq': 'FAQ',
+      'nav.offerings': 'Nabídky',
+      'nav.support': 'Podpořte nás',
+
+      // Hero Section
+      'hero.title': 'Najděme společně svou cestu',
+      'hero.subtitle': 'Chrám jednoty kultivující podstatu v harmonii s přírodou.',
+      'hero.email.placeholder': 'Vaše e-mailová adresa',
+      'hero.email.button': 'Držte mě v obraze',
+      'hero.gdpr': 'Souhlasím s příjímáním aktualizací o Chrámu Velkého Lesa a rozumím, že se mohu kdykoli odhlásit.',
+
+      // FAQ
+      faq: {
+        title: 'Často kladené otázky',
+        introduction: 'Vítejte v naší FAQ sekci. Zde najdete odpovědi na nejčastější otázky o Chrámu Velkého Lesa, našich praktikách a jak se můžete zapojit. Pokud nenajdete to, co hledáte, neváhejte nás kontaktovat.',
+        general: {
+          title: 'Obecné',
+          q1: {
+            question: 'Co je Chrám Velkého Lesa?',
+            answer: 'Chrám Velkého Lesa (Dalin Si 大林寺) je živý projekt. V současnosti existuje jako útočiště pro zvířata a místo pro menší kurzy. V budoucnu si přejeme, s podporou mnoha mistrů a učitelů, kteří do tohoto projektu vložili svou důvěru, založit specializované retreatové centrum ve Francii.'
+          },
+          q2: {
+            question: 'Je Dalin Si náboženská instituce?',
+            answer: 'Ne, Dalin Si není náboženská instituce. Chrám je veden laiky, není vázán na žádné dogma nebo náboženské závazky. Jeho cílem je nabídnout prostor pro praxi, reflexi a komunitní život, inspirovaný taoistickou a Chan moudrostí.'
+          },
+          q3: {
+            question: 'Kde se Dalin Si nachází?',
+            answer: 'Administrativní sídlo Dalin Si je ve Francii jako nezisková organizace registrovaná podle francouzského práva (Loi 1901).\nDočasné místo činnosti je v České republice, kde bývalá zvířata z Shaolin Temple Europe našla časově omezenou útočiště.\nKonečné usídlení Dalin Si bude pravděpodobně ve Francii.'
+          }
+        },
+        animals: {
+          title: 'Otázky o zvířatech',
+          q1: {
+            question: 'Přijímá Dalin Si nová zvířata?',
+            answer: 'Prozatím se můžeme starat pouze o zvířata, která už u nás jsou, poskytovat jim nejlepší péči a připravovat udržitelnou budoucnost.'
+          },
+          q2: {
+            question: 'Jaká zvířata žijí v chrámu?',
+            answer: 'Zjistěte více o zvířatech na specializované stránce'
+          },
+          q3: {
+            question: 'Mohou návštěvníci interagovat se zvířaty?',
+            answer: 'Současné místo činnosti není veřejně přístupné, ale během specifických kurzů nebo akcí může docházet k interakci respektujícím, vedeným způsobem. Pro návštěvy nás můžete kdykoli kontaktovat na info@dalinsi.org.'
+          }
+        },
+        practice: {
+          title: 'Praxe & Retreaty',
+          q1: {
+            question: 'Co je QiGong?',
+            answer: 'QiGong je starověké čínské umění kultivace životní energie (Qi) prostřednictvím pohybu, dýchání a vědomí.'
+          },
+          q2: {
+            question: 'Organizujete retreaty?',
+            answer: 'Díky našim dlouholetým zkušenostem s pořádáním retreatů v Shaolin Temple Europe bude Dalin Si nabízet retreaty, jakmile bude správné místo v souladu s jednotnými principy a poskytne návštěvníkům možnost zažít chrámový život v jeho základní jednoduchosti.'
+          }
+        },
+        membership: {
+          title: 'Členství & Podpora',
+          q1: {
+            question: 'Jak mohu podpořit chrám?',
+            answer: 'Tím, že nám pomůžete najít naše konečné sídlo, šířit zprávu nebo podporovat naši péči o zvířata. Dary času, dovedností nebo zdrojů jsou vždy vítány.'
+          },
+          q2: {
+            question: 'Existuje členský poplatek?',
+            answer: 'Ne. Členství je zdarma. Ekonomika chrámu v současnosti závisí na darech a po ustanovení trvalého místa bude udržována prostřednictvím retreatů.'
+          },
+          q3: {
+            question: 'Jaký je rozdíl mezi účastníkem a členem?',
+            answer: 'Účastníci se účastní kurzů nebo budoucích retreatů. Členové jsou přátelé chrámu, kteří si přejí zůstat v kontaktu a pravidelně podporovat jeho život.'
+          },
+          q4: {
+            question: 'Mohu se stát dobrovolníkem?',
+            answer: 'Ano, občas. Příležitosti dobrovolnictví jsou oznámeny, když je potřeba pomoc.'
+          }
+        },
+        visiting: {
+          title: 'Návštěvy',
+          q1: {
+            question: 'Mohu přijít jen na den?',
+            answer: 'Naší prioritou je péče o zvířata a udržování jednoduchého rytmu života. Z tohoto důvodu farma v Černé Hoře není otevřena jako veřejný chrám. Návštěvy jsou možné pouze během plánovaných kurzů, aktivit nebo schůzek.'
+          },
+          q2: {
+            question: 'Nabízíte ubytování?',
+            answer: 'Zatím ne. Ubytování bude k dispozici, jakmile založíme retreatové centrum.'
+          },
+          q3: {
+            question: 'Jsou vítány rodiny s dětmi?',
+            answer: 'Ano. Rodiny jsou vítány k účasti na kurzech a aktivitách.'
+          },
+          q4: {
+            question: 'Jakými jazyky mluvíte?',
+            answer: 'Mluvíme anglicky, francouzsky, česky a německy.'
+          }
+        }
+      }
     }
   };
 
