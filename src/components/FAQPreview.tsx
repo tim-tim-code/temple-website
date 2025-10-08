@@ -2,11 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { faqData } from '../data/faq';
 import AnimatedButton from './AnimatedButton';
 
 const FAQPreview: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
+
+  const currentFAQ = faqData[language as keyof typeof faqData] || faqData.en;
 
   return (
     <section id="faq-preview" className="py-20 bg-sage/15">
@@ -19,7 +22,7 @@ const FAQPreview: React.FC = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-serif text-forest mb-6">
-              {t('faq.preview.title')}
+              {currentFAQ.title}
             </h2>
 
             <p className="text-xl text-soil leading-relaxed mb-8 max-w-2xl mx-auto">

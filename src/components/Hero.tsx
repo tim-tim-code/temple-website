@@ -8,35 +8,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import Notification from './Notification';
 
-const MorphingText: React.FC = () => {
-  const [currentText, setCurrentText] = useState('Temple of the Great Forest');
-  const [isChanging, setIsChanging] = useState(false);
-
-  const texts = ['Temple of the Great Forest', 'Dalin Si'];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsChanging(true);
-
-      // After fade out completes, change the text and fade in
-      setTimeout(() => {
-        setCurrentText(prev => prev === texts[0] ? texts[1] : texts[0]);
-        setIsChanging(false);
-      }, 500); // 0.5 seconds for fade out
-
-    }, 7000); // Change every 7 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <motion.div
-      animate={{ opacity: isChanging ? 0 : 1 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
-      {currentText}
-    </motion.div>
-  );
+const StaticText: React.FC = () => {
+  return <span>Dalin Si</span>;
 };
 
 const Hero: React.FC = () => {
@@ -174,10 +147,10 @@ const Hero: React.FC = () => {
           <img
             src="/images/Logos/Full Wheel White Logo.png"
             alt="DaLinSi Temple Logo"
-            className="w-14 h-14 object-contain"
+            className="w-20 h-20 object-contain"
           />
           <h1 className="text-white/90 font-serif text-lg font-medium hidden sm:block">
-            <MorphingText />
+            <StaticText />
           </h1>
         </div>
       </motion.div>
@@ -275,7 +248,7 @@ const Hero: React.FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-white/60 text-sm font-light tracking-wide">Learn more</span>
+          <span className="text-white/60 text-sm font-light tracking-wide">{t('hero.learnMore')}</span>
         </div>
       </motion.div>
 

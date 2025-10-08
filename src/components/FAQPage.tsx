@@ -1,50 +1,19 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { faqData } from '../data/faq';
 import Header from './Header';
 import Footer from './Footer';
 
 const FAQPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
 
   const toggleQuestion = (questionKey: string) => {
     setOpenQuestion(openQuestion === questionKey ? null : questionKey);
   };
 
-  const faqSections = [
-    {
-      key: 'general',
-      title: t('faq.general.title'),
-      questions: [
-        { key: 'q1', question: t('faq.general.q1.question'), answer: t('faq.general.q1.answer') },
-        { key: 'q2', question: t('faq.general.q2.question'), answer: t('faq.general.q2.answer') },
-        { key: 'q3', question: t('faq.general.q3.question'), answer: t('faq.general.q3.answer') },
-        { key: 'q4', question: t('faq.general.q4.question'), answer: t('faq.general.q4.answer') },
-        { key: 'q5', question: t('faq.general.q5.question'), answer: t('faq.general.q5.answer') }
-      ]
-    },
-    {
-      key: 'practical',
-      title: t('faq.practical.title'),
-      questions: [
-        { key: 'q1', question: t('faq.practical.q1.question'), answer: t('faq.practical.q1.answer') },
-        { key: 'q2', question: t('faq.practical.q2.question'), answer: t('faq.practical.q2.answer') },
-        { key: 'q3', question: t('faq.practical.q3.question'), answer: t('faq.practical.q3.answer') },
-        { key: 'q4', question: t('faq.practical.q4.question'), answer: t('faq.practical.q4.answer') },
-        { key: 'q5', question: t('faq.practical.q5.question'), answer: t('faq.practical.q5.answer') }
-      ]
-    },
-    {
-      key: 'philosophy',
-      title: t('faq.philosophy.title'),
-      questions: [
-        { key: 'q1', question: t('faq.philosophy.q1.question'), answer: t('faq.philosophy.q1.answer') },
-        { key: 'q2', question: t('faq.philosophy.q2.question'), answer: t('faq.philosophy.q2.answer') },
-        { key: 'q3', question: t('faq.philosophy.q3.question'), answer: t('faq.philosophy.q3.answer') }
-      ]
-    }
-  ];
+  const currentFAQ = faqData[language as keyof typeof faqData] || faqData.en;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage/10 via-leaf/5 to-paper">
@@ -60,7 +29,7 @@ const FAQPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              {t('faq.title')}
+              {currentFAQ.title}
             </motion.h1>
 
             <motion.p
@@ -69,7 +38,7 @@ const FAQPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              {t('faq.introduction')}
+              {currentFAQ.introduction}
             </motion.p>
           </div>
         </div>
@@ -79,9 +48,9 @@ const FAQPage: React.FC = () => {
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            {faqSections.map((section, sectionIndex) => (
+            {currentFAQ.sections.map((section, sectionIndex) => (
               <motion.div
-                key={section.key}
+                key={`section-${sectionIndex}`}
                 className="mb-12"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -93,7 +62,7 @@ const FAQPage: React.FC = () => {
 
                 <div className="space-y-4">
                   {section.questions.map((faq, questionIndex) => {
-                    const questionKey = `${section.key}-${faq.key}`;
+                    const questionKey = `section-${sectionIndex}-q-${questionIndex}`;
                     const isOpen = openQuestion === questionKey;
 
                     return (
@@ -133,7 +102,7 @@ const FAQPage: React.FC = () => {
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden"
                             >
-                              <div className="px-6 pb-6 text-soil leading-relaxed">
+                              <div className="px-6 pb-6 text-soil leading-relaxed whitespace-pre-line">
                                 {faq.answer}
                               </div>
                             </motion.div>

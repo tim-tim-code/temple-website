@@ -30,7 +30,6 @@ const detectBrowserLanguage = (): string => {
   // Map to supported languages
   if (primaryLang === 'de') return 'de';
   if (primaryLang === 'fr') return 'fr';
-  if (primaryLang === 'cs') return 'cs';
 
   // Default to English for all other languages
   return 'en';
@@ -40,7 +39,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [language, setLanguage] = useState<string>(() => {
     // Check if there's a saved language preference in localStorage
     const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang && ['en', 'de', 'fr', 'cs'].includes(savedLang)) {
+    if (savedLang && ['en', 'de', 'fr'].includes(savedLang)) {
       return savedLang;
     }
     
@@ -64,11 +63,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'hero.subtitle': 'A temple of unity cultivating essence in harmony with Nature.',
       'hero.email.placeholder': 'Your email address',
       'hero.email.button': 'Keep me updated',
-      'hero.gdpr': 'I agree to receive updates about the Temple of the Great Forest and understand I can unsubscribe at any time.',
+      'hero.gdpr': 'I agree to receive updates about Dalin Si and understand I can unsubscribe at any time.',
       
       // About Section
       'about.title': 'What is Dalin Si?',
-      'about.subtitle': 'Born from the wish to preserve the spirit that has guided our lives in many years at Shaolin Temple Europe, the Temple of the Great Forest is a lay temple devoted to keeping traditional spiritual arts alive and applying their wisdom in daily life.',
+      'about.subtitle': 'Born from the wish to preserve the spirit that has guided our lives in many years at Shaolin Temple Europe, Dalin Si is a lay temple devoted to keeping traditional spiritual arts alive and applying their wisdom in daily life.',
       'about.p1': 'Rooted in Chan and Taoist traditions, this spirit is still wandering, awaiting a home where it can finally settle, offering space for group retreats and welcoming individuals seeking hermitage.',
       'about.p2': 'While caring for the former animals of Shaolin Temple Europe who have come under our protection, we strive to live as closely as possible to the values of Zen community by respecting Buddhist principles.',
       'about.p3': 'Unconditional benevolence toward all forms of life, discipline through giving, and profound honesty are the core of our spirit.',
@@ -88,7 +87,21 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'forwhom.card4.subtitle': 'Navigating change',
       'forwhom.card4.desc': 'For those facing change who need to stop, drop their illusions, and see things as they are. A place to cut through confusion and meet the next step directly.',
       'forwhom.quote': '"It is said that practice is supported by companionship, guidance, abundance and environment"',
-      
+
+      // FAQ Preview
+      'faq.preview.title': 'Questions & Answers',
+      'faq.preview.description': 'Find answers to common questions about Dalin Si, our practices, and how to get involved.',
+      'faq.preview.general.title': 'General',
+      'faq.preview.general.desc': 'Learn about Dalin Si and our philosophy',
+      'faq.preview.practice.title': 'Practice & Visits',
+      'faq.preview.practice.desc': 'Information about practices and visiting',
+      'faq.preview.visiting.title': 'Animals',
+      'faq.preview.visiting.desc': 'Questions about our animal companions',
+      'faq.preview.button': 'View All Questions',
+
+      // Other
+      'hero.learnMore': 'Learn more',
+
       // What Will You Find Section
       'whatwillyoufind.title': 'What Will You Find?',
       'whatwillyoufind.shortterm.title': 'Short-term retreat',
@@ -160,12 +173,207 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // Footer
       'footer.impressum': 'Impressum',
-      'footer.privacy': 'Privacy Policy', 
+      'footer.privacy': 'Privacy Policy',
       'footer.terms': 'Terms of Service',
       'footer.contact': 'Contact',
       'footer.rights': 'All rights reserved.',
       'footer.followUs': 'Follow us:',
-      
+      'footer.website': 'Website created by',
+
+      // Legal Pages
+      legal: {
+        back: 'Back',
+        impressum: {
+          title: 'Impressum',
+          subtitle: 'Legal information about our association according to EU regulations',
+          association: {
+            title: 'Association Information',
+            name: 'Association Name',
+            fullName: 'Dalin Si',
+            legalForm: 'Legal Form',
+            legalStatus: 'Association (Loi 1901)',
+            registration: 'Registration',
+            registrationDetails: 'Registered as non-profit association under French law'
+          },
+          address: {
+            title: 'Administrative Headquarters',
+            line1: 'Dalin Si',
+            line2: '[Address to be provided]',
+            country: 'France'
+          },
+          contact: {
+            title: 'Contact Information',
+            email: 'Email',
+            phone: 'Phone',
+            phoneNumber: '[Phone number to be provided]'
+          },
+          responsible: {
+            title: 'Responsible Person',
+            role: 'Director of Publication',
+            name: '[Association President name]',
+            description: 'As required by Article 6 of the Law for Confidence in the Digital Economy'
+          },
+          hosting: {
+            title: 'Hosting Provider',
+            provider: 'Provider',
+            address: 'Address'
+          },
+          disclaimer: {
+            title: 'Disclaimer',
+            content: 'The information on this website is provided in good faith and for general information purposes only. We make no representations or warranties about the completeness, reliability, or accuracy of this information.',
+            liability: 'This association shall not be liable for any loss or damage arising from the use of this website or reliance on the information contained herein.'
+          }
+        },
+        privacy: {
+          title: 'Privacy Policy',
+          subtitle: 'How we collect, use, and protect your personal data in compliance with GDPR',
+          controller: {
+            title: 'Data Controller',
+            description: 'The data controller responsible for your personal data is:',
+            name: 'Organization',
+            orgName: 'Dalin Si',
+            contact: 'Contact'
+          },
+          collection: {
+            title: 'Data We Collect',
+            intro: 'We collect and process the following types of personal data:',
+            newsletter: {
+              title: 'Newsletter Subscription',
+              description: 'When you subscribe to our newsletter, we collect your email address and consent information.'
+            },
+            website: {
+              title: 'Website Usage',
+              description: 'We may collect technical information such as IP address, browser type, and pages visited for security and analytics purposes.'
+            },
+            contact: {
+              title: 'Contact Forms',
+              description: 'When you contact us, we collect the information you provide including name, email, and message content.'
+            }
+          },
+          basis: {
+            title: 'Legal Basis for Processing',
+            description: 'We process your personal data based on the following legal grounds:',
+            consent: 'Your explicit consent (e.g., newsletter subscription)',
+            legitimate: 'Our legitimate interests (e.g., website security and improvement)',
+            legal: 'Legal obligations (e.g., record keeping requirements)'
+          },
+          retention: {
+            title: 'Data Retention',
+            description: 'We retain your personal data only as long as necessary for the purposes for which it was collected.',
+            period: 'Newsletter subscriptions are retained until you unsubscribe. Contact form data is retained for up to 3 years for correspondence purposes.'
+          },
+          rights: {
+            title: 'Your Rights',
+            intro: 'Under GDPR, you have the following rights regarding your personal data:',
+            access: {
+              title: 'Right of Access',
+              description: 'You can request information about what personal data we hold about you'
+            },
+            rectification: {
+              title: 'Right to Rectification',
+              description: 'You can request correction of inaccurate personal data'
+            },
+            erasure: {
+              title: 'Right to Erasure',
+              description: 'You can request deletion of your personal data in certain circumstances'
+            },
+            portability: {
+              title: 'Right to Data Portability',
+              description: 'You can request to receive your data in a structured, machine-readable format'
+            },
+            objection: {
+              title: 'Right to Object',
+              description: 'You can object to processing of your personal data in certain circumstances'
+            },
+            withdraw: {
+              title: 'Right to Withdraw Consent',
+              description: 'You can withdraw your consent at any time where processing is based on consent'
+            },
+            contact: 'To exercise any of these rights, please contact us at info@dalinsi.org'
+          },
+          cookies: {
+            title: 'Cookies and Tracking',
+            description: 'Our website uses essential cookies necessary for basic functionality. We do not use tracking cookies or analytics that would compromise your privacy.',
+            essential: 'Essential cookies include those for language preferences and basic site functionality.',
+            control: 'You can control cookie settings in your browser preferences.'
+          },
+          thirdParties: {
+            title: 'Third-Party Services',
+            description: 'We use the following trusted third-party services:',
+            vercel: 'Web hosting and content delivery (Privacy Policy: https://vercel.com/legal/privacy-policy)',
+            supabase: 'Database and authentication services (Privacy Policy: https://supabase.com/privacy)'
+          },
+          updates: {
+            title: 'Policy Updates',
+            description: 'We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.',
+            lastUpdated: 'Last Updated'
+          }
+        },
+        terms: {
+          title: 'Terms of Service',
+          subtitle: 'Terms and conditions for using our website and services',
+          scope: {
+            title: 'Scope of Application',
+            description: 'These terms of service govern your use of the Dalin Si website and any services we provide.',
+            agreement: 'By using our website, you agree to be bound by these terms.'
+          },
+          services: {
+            title: 'Our Services',
+            description: 'We provide the following services through our website:',
+            information: 'Information about our temple, practices, and activities',
+            newsletter: 'Newsletter subscription for updates and announcements',
+            contact: 'Contact forms for inquiries and communication',
+            events: 'Information about classes, workshops, and events'
+          },
+          responsibilities: {
+            title: 'User Responsibilities',
+            intro: 'When using our website, you agree to:',
+            accurate: 'Provide accurate and truthful information',
+            respectful: 'Use the website in a respectful and appropriate manner',
+            lawful: 'Comply with all applicable laws and regulations',
+            noHarm: 'Not engage in any activities that could harm the website or other users'
+          },
+          intellectual: {
+            title: 'Intellectual Property',
+            description: 'All content on this website, including text, images, logos, and design elements, is the property of Dalin Si or its licensors.',
+            rights: 'All rights are reserved and protected by copyright and intellectual property laws.',
+            restrictions: 'You may not reproduce, distribute, or create derivative works without written permission.'
+          },
+          liability: {
+            title: 'Limitation of Liability',
+            description: 'Our association provides this website and information on an "as is" basis.',
+            noWarranty: 'We make no warranties about the accuracy, completeness, or reliability of the information provided.',
+            limitation: 'Our liability is limited to the maximum extent permitted by applicable law.'
+          },
+          externalLinks: {
+            title: 'External Links',
+            description: 'Our website may contain links to external websites for your convenience.',
+            disclaimer: 'We are not responsible for the content, privacy practices, or terms of service of external websites.'
+          },
+          termination: {
+            title: 'Termination',
+            description: 'We reserve the right to terminate or restrict access to our website at any time without notice.',
+            effect: 'Upon termination, your right to use the website ceases immediately.'
+          },
+          governingLaw: {
+            title: 'Governing Law',
+            description: 'These terms are governed by French law, as our association is registered in France.',
+            jurisdiction: 'Any disputes will be subject to the jurisdiction of French courts.'
+          },
+          changes: {
+            title: 'Changes to Terms',
+            description: 'We may modify these terms of service at any time.',
+            notification: 'Changes will be posted on this page with an updated date.',
+            lastUpdated: 'Last Updated'
+          },
+          contact: {
+            title: 'Contact Information',
+            description: 'If you have questions about these terms of service, please contact us:',
+            email: 'Email'
+          }
+        }
+      },
+
       // Newsletter Modal
       'newsletter.title': 'Keep me up to date',
       'newsletter.description': 'Stay informed about the Temple progress and upcoming activities.',
@@ -231,8 +439,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         general: {
           title: 'General',
           q1: {
-            question: 'What is the Temple of the Great Forest?',
-            answer: 'The Temple of the Great Forest (Dalin Si 大林寺) is a living project. At present, it exists as a sanctuary for animals and a place for small-scale classes. In the future, with the support of many masters and teachers who have placed their trust in this project, our wish is to establish a dedicated retreat center in France.'
+            question: 'What is Dalin Si?',
+            answer: 'Dalin Si (大林寺) is a living project. At present, it exists as a sanctuary for animals and a place for small-scale classes. In the future, with the support of many masters and teachers who have placed their trust in this project, our wish is to establish a dedicated retreat center in France.'
           },
           q2: {
             question: 'Is Dalin Si a religious institution?',
@@ -339,7 +547,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // About Section
       'about.title': 'Was ist der Tempel?',
-      'about.subtitle': 'Dies ist ein Tempel ohne Trennung.',
+      'about.subtitle': 'Geboren aus dem Wunsch, den Geist zu bewahren, der unser Leben viele Jahre lang im Shaolin Temple Europe geleitet hat, ist Dalin Si ein Laientempel, der sich der Erhaltung traditioneller spiritueller Künste und der Anwendung ihrer Weisheit im täglichen Leben widmet.',
       'about.p1': 'Kein buddhistischer Tempel, kein säkulares Zentrum. Ein Tempel, wo das Heilige und Gewöhnliche als eins atmen.',
       'about.p2': 'Wo Meditationskissen neben Gartenwerkzeugen ruhen, wo stilles Sitzen in gemeinsame Mahlzeiten fließt, wo alte Weisheit auf die einfache Arbeit des täglichen Lebens trifft.',
       'about.p3': 'Hier ist Praxis nicht vom Leben getrennt — sie ist Leben, vollständig und ohne Vorwand.',
@@ -358,7 +566,21 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'forwhom.card4.title': 'Lebenswandler',
       'forwhom.card4.subtitle': 'Veränderungen navigieren',
       'forwhom.card4.desc': 'Diejenigen in Lebensübergängen, die einen erdenden Raum brauchen zum Reflektieren, Zurücksetzen und Entdecken ihres nächsten authentischen Schritts.',
-      
+
+      // FAQ Preview
+      'faq.preview.title': 'Fragen & Antworten',
+      'faq.preview.description': 'Finden Sie Antworten auf häufige Fragen über Dalin Si, unsere Praktiken und wie Sie sich beteiligen können.',
+      'faq.preview.general.title': 'Allgemein',
+      'faq.preview.general.desc': 'Erfahren Sie mehr über Dalin Si und unsere Philosophie',
+      'faq.preview.practice.title': 'Praxis & Besuche',
+      'faq.preview.practice.desc': 'Informationen über Praktiken und Besuche',
+      'faq.preview.visiting.title': 'Tiere',
+      'faq.preview.visiting.desc': 'Fragen über unsere Tiergefährten',
+      'faq.preview.button': 'Alle Fragen ansehen',
+
+      // Other
+      'hero.learnMore': 'Erfahre mehr',
+
       // What Will You Find Section
       'whatwillyoufind.title': 'Was wirst du finden?',
       'whatwillyoufind.shortterm.title': 'Kurzzeit-Retreat',
@@ -429,12 +651,207 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // Footer
       'footer.impressum': 'Impressum',
-      'footer.privacy': 'Datenschutzerklärung', 
+      'footer.privacy': 'Datenschutzerklärung',
       'footer.terms': 'Nutzungsbedingungen',
       'footer.contact': 'Kontakt',
       'footer.rights': 'Alle Rechte vorbehalten.',
       'footer.followUs': 'Folge uns:',
-      
+      'footer.website': 'Website erstellt von',
+
+      // Legal Pages
+      legal: {
+        back: 'Zurück',
+        impressum: {
+          title: 'Impressum',
+          subtitle: 'Rechtliche Informationen über unseren Verein gemäß EU-Verordnungen',
+          association: {
+            title: 'Vereinsinformationen',
+            name: 'Vereinsname',
+            fullName: 'Dalin Si - Tempel des Großen Waldes',
+            legalForm: 'Rechtsform',
+            legalStatus: 'Verein (Loi 1901)',
+            registration: 'Registrierung',
+            registrationDetails: 'Registriert als gemeinnütziger Verein nach französischem Recht'
+          },
+          address: {
+            title: 'Verwaltungssitz',
+            line1: 'Dalin Si',
+            line2: '[Adresse wird bereitgestellt]',
+            country: 'Frankreich'
+          },
+          contact: {
+            title: 'Kontaktinformationen',
+            email: 'E-Mail',
+            phone: 'Telefon',
+            phoneNumber: '[Telefonnummer wird bereitgestellt]'
+          },
+          responsible: {
+            title: 'Verantwortliche Person',
+            role: 'Publikationsleiter',
+            name: '[Name des Vereinspräsidenten]',
+            description: 'Wie nach Artikel 6 des Gesetzes für Vertrauen in die digitale Wirtschaft erforderlich'
+          },
+          hosting: {
+            title: 'Hosting-Anbieter',
+            provider: 'Anbieter',
+            address: 'Adresse'
+          },
+          disclaimer: {
+            title: 'Haftungsausschluss',
+            content: 'Die Informationen auf dieser Website werden in gutem Glauben und nur zu allgemeinen Informationszwecken bereitgestellt. Wir geben keine Zusicherungen oder Gewährleistungen bezüglich der Vollständigkeit, Zuverlässigkeit oder Genauigkeit dieser Informationen.',
+            liability: 'Dieser Verein haftet nicht für Verluste oder Schäden, die durch die Nutzung dieser Website oder das Vertrauen auf die hierin enthaltenen Informationen entstehen.'
+          }
+        },
+        privacy: {
+          title: 'Datenschutzerklärung',
+          subtitle: 'Wie wir Ihre personenbezogenen Daten sammeln, verwenden und schützen in Übereinstimmung mit der DSGVO',
+          controller: {
+            title: 'Datenverantwortlicher',
+            description: 'Der für Ihre personenbezogenen Daten verantwortliche Datenverantwortliche ist:',
+            name: 'Organisation',
+            orgName: 'Dalin Si - Tempel des Großen Waldes',
+            contact: 'Kontakt'
+          },
+          collection: {
+            title: 'Daten, die wir sammeln',
+            intro: 'Wir sammeln und verarbeiten die folgenden Arten von personenbezogenen Daten:',
+            newsletter: {
+              title: 'Newsletter-Abonnement',
+              description: 'Wenn Sie unseren Newsletter abonnieren, sammeln wir Ihre E-Mail-Adresse und Einverständnisinformationen.'
+            },
+            website: {
+              title: 'Website-Nutzung',
+              description: 'Wir können technische Informationen wie IP-Adresse, Browsertyp und besuchte Seiten für Sicherheits- und Analysezwecke sammeln.'
+            },
+            contact: {
+              title: 'Kontaktformulare',
+              description: 'Wenn Sie uns kontaktieren, sammeln wir die von Ihnen bereitgestellten Informationen einschließlich Name, E-Mail und Nachrichteninhalt.'
+            }
+          },
+          basis: {
+            title: 'Rechtsgrundlage für die Verarbeitung',
+            description: 'Wir verarbeiten Ihre personenbezogenen Daten auf Grundlage folgender Rechtsgrundlagen:',
+            consent: 'Ihre ausdrückliche Einwilligung (z.B. Newsletter-Abonnement)',
+            legitimate: 'Unsere berechtigten Interessen (z.B. Website-Sicherheit und -Verbesserung)',
+            legal: 'Rechtliche Verpflichtungen (z.B. Aufbewahrungspflichten)'
+          },
+          retention: {
+            title: 'Datenspeicherung',
+            description: 'Wir bewahren Ihre personenbezogenen Daten nur so lange auf, wie es für die Zwecke, für die sie erhoben wurden, erforderlich ist.',
+            period: 'Newsletter-Abonnements werden bis zur Abmeldung gespeichert. Kontaktformulardaten werden bis zu 3 Jahre für Korrespondenzzwecke aufbewahrt.'
+          },
+          rights: {
+            title: 'Ihre Rechte',
+            intro: 'Unter der DSGVO haben Sie folgende Rechte bezüglich Ihrer personenbezogenen Daten:',
+            access: {
+              title: 'Recht auf Auskunft',
+              description: 'Sie können Informationen darüber anfordern, welche personenbezogenen Daten wir über Sie speichern'
+            },
+            rectification: {
+              title: 'Recht auf Berichtigung',
+              description: 'Sie können die Korrektur unrichtiger personenbezogener Daten verlangen'
+            },
+            erasure: {
+              title: 'Recht auf Löschung',
+              description: 'Sie können unter bestimmten Umständen die Löschung Ihrer personenbezogenen Daten verlangen'
+            },
+            portability: {
+              title: 'Recht auf Datenübertragbarkeit',
+              description: 'Sie können verlangen, Ihre Daten in einem strukturierten, maschinenlesbaren Format zu erhalten'
+            },
+            objection: {
+              title: 'Recht auf Widerspruch',
+              description: 'Sie können unter bestimmten Umständen der Verarbeitung Ihrer personenbezogenen Daten widersprechen'
+            },
+            withdraw: {
+              title: 'Recht auf Widerruf der Einwilligung',
+              description: 'Sie können Ihre Einwilligung jederzeit widerrufen, wenn die Verarbeitung auf Einwilligung basiert'
+            },
+            contact: 'Zur Ausübung dieser Rechte kontaktieren Sie uns bitte unter info@dalinsi.org'
+          },
+          cookies: {
+            title: 'Cookies und Tracking',
+            description: 'Unsere Website verwendet wesentliche Cookies, die für die Grundfunktionalität erforderlich sind. Wir verwenden keine Tracking-Cookies oder Analysen, die Ihre Privatsphäre beeinträchtigen würden.',
+            essential: 'Wesentliche Cookies umfassen solche für Spracheinstellungen und grundlegende Website-Funktionalität.',
+            control: 'Sie können Cookie-Einstellungen in Ihren Browser-Einstellungen kontrollieren.'
+          },
+          thirdParties: {
+            title: 'Drittanbieter-Dienste',
+            description: 'Wir verwenden folgende vertrauenswürdige Drittanbieter-Dienste:',
+            vercel: 'Web-Hosting und Content-Delivery (Datenschutzerklärung: https://vercel.com/legal/privacy-policy)',
+            supabase: 'Datenbank- und Authentifizierungsdienste (Datenschutzerklärung: https://supabase.com/privacy)'
+          },
+          updates: {
+            title: 'Richtlinien-Updates',
+            description: 'Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite mit einem aktualisierten Datum veröffentlicht.',
+            lastUpdated: 'Zuletzt aktualisiert'
+          }
+        },
+        terms: {
+          title: 'Nutzungsbedingungen',
+          subtitle: 'Geschäftsbedingungen für die Nutzung unserer Website und Dienste',
+          scope: {
+            title: 'Anwendungsbereich',
+            description: 'Diese Nutzungsbedingungen regeln Ihre Nutzung der Dalin Si Website und aller von uns bereitgestellten Dienste.',
+            agreement: 'Durch die Nutzung unserer Website stimmen Sie diesen Bedingungen zu.'
+          },
+          services: {
+            title: 'Unsere Dienste',
+            description: 'Wir bieten folgende Dienste über unsere Website an:',
+            information: 'Informationen über unseren Tempel, Praktiken und Aktivitäten',
+            newsletter: 'Newsletter-Abonnement für Updates und Ankündigungen',
+            contact: 'Kontaktformulare für Anfragen und Kommunikation',
+            events: 'Informationen über Kurse, Workshops und Veranstaltungen'
+          },
+          responsibilities: {
+            title: 'Nutzerverantwortlichkeiten',
+            intro: 'Bei der Nutzung unserer Website verpflichten Sie sich:',
+            accurate: 'Genaue und wahrheitsgemäße Informationen bereitzustellen',
+            respectful: 'Die Website respektvoll und angemessen zu nutzen',
+            lawful: 'Alle geltenden Gesetze und Vorschriften einzuhalten',
+            noHarm: 'Keine Aktivitäten durchzuführen, die der Website oder anderen Nutzern schaden könnten'
+          },
+          intellectual: {
+            title: 'Geistiges Eigentum',
+            description: 'Alle Inhalte dieser Website, einschließlich Text, Bilder, Logos und Designelemente, sind Eigentum von Dalin Si oder seinen Lizenzgebern.',
+            rights: 'Alle Rechte sind vorbehalten und durch Urheberrechts- und Eigentumsgesetze geschützt.',
+            restrictions: 'Sie dürfen ohne schriftliche Genehmigung keine Kopien erstellen, verteilen oder abgeleitete Werke schaffen.'
+          },
+          liability: {
+            title: 'Haftungsbeschränkung',
+            description: 'Unser Verein stellt diese Website und Informationen "wie besehen" zur Verfügung.',
+            noWarranty: 'Wir geben keine Gewährleistungen bezüglich der Genauigkeit, Vollständigkeit oder Zuverlässigkeit der bereitgestellten Informationen.',
+            limitation: 'Unsere Haftung ist im nach geltendem Recht maximal zulässigen Umfang beschränkt.'
+          },
+          externalLinks: {
+            title: 'Externe Links',
+            description: 'Unsere Website kann zur Ihrer Bequemlichkeit Links zu externen Websites enthalten.',
+            disclaimer: 'Wir sind nicht verantwortlich für den Inhalt, die Datenschutzpraktiken oder die Nutzungsbedingungen externer Websites.'
+          },
+          termination: {
+            title: 'Kündigung',
+            description: 'Wir behalten uns das Recht vor, den Zugang zu unserer Website jederzeit ohne Vorankündigung zu beenden oder einzuschränken.',
+            effect: 'Bei Kündigung erlischt Ihr Recht zur Nutzung der Website sofort.'
+          },
+          governingLaw: {
+            title: 'Geltendes Recht',
+            description: 'Diese Bedingungen unterliegen französischem Recht, da unser Verein in Frankreich registriert ist.',
+            jurisdiction: 'Alle Streitigkeiten unterliegen der Gerichtsbarkeit französischer Gerichte.'
+          },
+          changes: {
+            title: 'Änderungen der Bedingungen',
+            description: 'Wir können diese Nutzungsbedingungen jederzeit ändern.',
+            notification: 'Änderungen werden auf dieser Seite mit einem aktualisierten Datum veröffentlicht.',
+            lastUpdated: 'Zuletzt aktualisiert'
+          },
+          contact: {
+            title: 'Kontaktinformationen',
+            description: 'Wenn Sie Fragen zu diesen Nutzungsbedingungen haben, kontaktieren Sie uns bitte:',
+            email: 'E-Mail'
+          }
+        }
+      },
+
       // Newsletter Modal
       'newsletter.title': 'Bleib verbunden',
       'newsletter.description': 'Abonniere unseren Newsletter und bleibe über den Tempel auf dem Laufenden.',
@@ -593,11 +1010,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'hero.subtitle': 'Un temple sans séparation où méditation et vie quotidienne respirent comme un.',
       'hero.email.placeholder': 'Votre adresse e-mail',
       'hero.email.button': 'Me tenir au courant',
-      'hero.gdpr': 'J\'accepte de recevoir des mises à jour sur le Temple de la Grande Forêt et comprends que je peux me désinscrire à tout moment.',
+      'hero.gdpr': 'J\'accepte de recevoir des mises à jour sur Dalin Si et comprends que je peux me désinscrire à tout moment.',
       
       // About Section
       'about.title': 'Qu’est-ce que le Temple ?',
-      'about.subtitle': 'C’est un temple sans séparation.',
+      'about.subtitle': 'Né du souhait de préserver l\'esprit qui a guidé nos vies pendant de nombreuses années au Shaolin Temple Europe, Dalin Si est un temple laïc consacré à maintenir vivants les arts spirituels traditionnels et à appliquer leur sagesse dans la vie quotidienne.',
       'about.p1': 'Ni un temple bouddhiste, ni un centre séculier. Un temple où le sacré et l’ordinaire respirent comme un.',
       'about.p2': 'Où les coussins de méditation reposent aux côtés des outils de jardinage, où la séance silencieuse se fond dans les repas partagés, où la sagesse ancienne rencontre le travail simple de la vie quotidienne.',
       'about.p3': 'Ici, la pratique n’est pas séparée de la vie — elle est la vie, pleinement et sans prétention.',
@@ -615,8 +1032,22 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'forwhom.card3.desc': 'Personnes attirées à créer et participer à une communauté intentionnelle enracinée dans la sagesse et le soutien mutuel.',
       'forwhom.card4.title': 'Transitionnaires de vie',
       'forwhom.card4.subtitle': 'Navigant le changement',
-      'forwhom.card4.desc': 'Ceux en transitions de vie qui ont besoin d’un espace d’ancrage pour réfléchir, se réinitialiser et découvrir leur prochaine étape authentique.',
-      
+      'forwhom.card4.desc': 'Ceux en transitions de vie qui ont besoin d'un espace d'ancrage pour réfléchir, se réinitialiser et découvrir leur prochaine étape authentique.',
+
+      // FAQ Preview
+      'faq.preview.title': 'Questions & Réponses',
+      'faq.preview.description': 'Trouvez des réponses aux questions courantes sur Dalin Si, nos pratiques et comment vous impliquer.',
+      'faq.preview.general.title': 'Général',
+      'faq.preview.general.desc': 'Apprenez à connaître Dalin Si et notre philosophie',
+      'faq.preview.practice.title': 'Pratique & Visites',
+      'faq.preview.practice.desc': 'Informations sur les pratiques et les visites',
+      'faq.preview.visiting.title': 'Animaux',
+      'faq.preview.visiting.desc': 'Questions sur nos compagnons animaux',
+      'faq.preview.button': 'Voir toutes les questions',
+
+      // Other
+      'hero.learnMore': 'En savoir plus',
+
       // What Will You Find Section
       'whatwillyoufind.title': 'Que trouverez-vous ?',
       'whatwillyoufind.shortterm.title': 'Retraite à court terme',
@@ -687,12 +1118,207 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // Footer
       'footer.impressum': 'Mentions légales',
-      'footer.privacy': 'Politique de confidentialité', 
+      'footer.privacy': 'Politique de confidentialité',
       'footer.terms': 'Conditions d\'utilisation',
       'footer.contact': 'Contact',
       'footer.rights': 'Tous droits réservés.',
       'footer.followUs': 'Suivez-nous :',
-      
+      'footer.website': 'Site web créé par',
+
+      // Legal Pages
+      legal: {
+        back: 'Retour',
+        impressum: {
+          title: 'Mentions légales',
+          subtitle: 'Informations légales sur notre association selon les réglementations européennes',
+          association: {
+            title: 'Informations sur l\'association',
+            name: 'Nom de l\'association',
+            fullName: 'Dalin Si',
+            legalForm: 'Forme juridique',
+            legalStatus: 'Association (Loi 1901)',
+            registration: 'Enregistrement',
+            registrationDetails: 'Enregistrée comme association à but non lucratif sous la loi française'
+          },
+          address: {
+            title: 'Siège social administratif',
+            line1: 'Dalin Si',
+            line2: '[Adresse à fournir]',
+            country: 'France'
+          },
+          contact: {
+            title: 'Informations de contact',
+            email: 'Email',
+            phone: 'Téléphone',
+            phoneNumber: '[Numéro de téléphone à fournir]'
+          },
+          responsible: {
+            title: 'Personne responsable',
+            role: 'Directeur de la publication',
+            name: '[Nom du président de l\'association]',
+            description: 'Comme exigé par l\'article 6 de la Loi pour la confiance dans l\'économie numérique'
+          },
+          hosting: {
+            title: 'Fournisseur d\'hébergement',
+            provider: 'Fournisseur',
+            address: 'Adresse'
+          },
+          disclaimer: {
+            title: 'Avertissement',
+            content: 'Les informations sur ce site web sont fournies de bonne foi et à des fins d\'information générale uniquement. Nous ne donnons aucune représentation ou garantie concernant l\'exhaustivité, la fiabilité ou l\'exactitude de ces informations.',
+            liability: 'Cette association ne peut être tenue responsable de toute perte ou dommage résultant de l\'utilisation de ce site web ou de la confiance accordée aux informations qui y sont contenues.'
+          }
+        },
+        privacy: {
+          title: 'Politique de confidentialité',
+          subtitle: 'Comment nous collectons, utilisons et protégeons vos données personnelles en conformité avec le RGPD',
+          controller: {
+            title: 'Responsable du traitement',
+            description: 'Le responsable du traitement de vos données personnelles est :',
+            name: 'Organisation',
+            orgName: 'Dalin Si',
+            contact: 'Contact'
+          },
+          collection: {
+            title: 'Données que nous collectons',
+            intro: 'Nous collectons et traitons les types suivants de données personnelles :',
+            newsletter: {
+              title: 'Abonnement à la newsletter',
+              description: 'Lorsque vous vous abonnez à notre newsletter, nous collectons votre adresse email et les informations de consentement.'
+            },
+            website: {
+              title: 'Utilisation du site web',
+              description: 'Nous pouvons collecter des informations techniques telles que l\'adresse IP, le type de navigateur et les pages visitées à des fins de sécurité et d\'analyse.'
+            },
+            contact: {
+              title: 'Formulaires de contact',
+              description: 'Lorsque vous nous contactez, nous collectons les informations que vous fournissez incluant le nom, l\'email et le contenu du message.'
+            }
+          },
+          basis: {
+            title: 'Base légale pour le traitement',
+            description: 'Nous traitons vos données personnelles sur la base des fondements juridiques suivants :',
+            consent: 'Votre consentement explicite (ex: abonnement newsletter)',
+            legitimate: 'Nos intérêts légitimes (ex: sécurité et amélioration du site web)',
+            legal: 'Obligations légales (ex: exigences de conservation des données)'
+          },
+          retention: {
+            title: 'Conservation des données',
+            description: 'Nous conservons vos données personnelles seulement aussi longtemps que nécessaire pour les fins pour lesquelles elles ont été collectées.',
+            period: 'Les abonnements newsletter sont conservés jusqu\'à désinscription. Les données de formulaire de contact sont conservées jusqu\'à 3 ans à des fins de correspondance.'
+          },
+          rights: {
+            title: 'Vos droits',
+            intro: 'Sous le RGPD, vous avez les droits suivants concernant vos données personnelles :',
+            access: {
+              title: 'Droit d\'accès',
+              description: 'Vous pouvez demander des informations sur les données personnelles que nous détenons sur vous'
+            },
+            rectification: {
+              title: 'Droit de rectification',
+              description: 'Vous pouvez demander la correction de données personnelles inexactes'
+            },
+            erasure: {
+              title: 'Droit à l\'effacement',
+              description: 'Vous pouvez demander la suppression de vos données personnelles dans certaines circonstances'
+            },
+            portability: {
+              title: 'Droit à la portabilité des données',
+              description: 'Vous pouvez demander à recevoir vos données dans un format structuré et lisible par machine'
+            },
+            objection: {
+              title: 'Droit d\'opposition',
+              description: 'Vous pouvez vous opposer au traitement de vos données personnelles dans certaines circonstances'
+            },
+            withdraw: {
+              title: 'Droit de retrait du consentement',
+              description: 'Vous pouvez retirer votre consentement à tout moment lorsque le traitement est basé sur le consentement'
+            },
+            contact: 'Pour exercer ces droits, veuillez nous contacter à info@dalinsi.org'
+          },
+          cookies: {
+            title: 'Cookies et suivi',
+            description: 'Notre site web utilise des cookies essentiels nécessaires au fonctionnement de base. Nous n\'utilisons pas de cookies de suivi ou d\'analyse qui compromettraient votre vie privée.',
+            essential: 'Les cookies essentiels incluent ceux pour les préférences linguistiques et la fonctionnalité de base du site.',
+            control: 'Vous pouvez contrôler les paramètres des cookies dans les préférences de votre navigateur.'
+          },
+          thirdParties: {
+            title: 'Services tiers',
+            description: 'Nous utilisons les services tiers de confiance suivants :',
+            vercel: 'Hébergement web et livraison de contenu (Politique de confidentialité : https://vercel.com/legal/privacy-policy)',
+            supabase: 'Services de base de données et d\'authentification (Politique de confidentialité : https://supabase.com/privacy)'
+          },
+          updates: {
+            title: 'Mises à jour de la politique',
+            description: 'Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Tout changement sera publié sur cette page avec une date mise à jour.',
+            lastUpdated: 'Dernière mise à jour'
+          }
+        },
+        terms: {
+          title: 'Conditions d\'utilisation',
+          subtitle: 'Termes et conditions pour l\'utilisation de notre site web et services',
+          scope: {
+            title: 'Champ d\'application',
+            description: 'Ces conditions d\'utilisation régissent votre utilisation du site web Dalin Si et de tous les services que nous fournissons.',
+            agreement: 'En utilisant notre site web, vous acceptez d\'être lié par ces conditions.'
+          },
+          services: {
+            title: 'Nos services',
+            description: 'Nous fournissons les services suivants via notre site web :',
+            information: 'Informations sur notre temple, pratiques et activités',
+            newsletter: 'Abonnement newsletter pour les mises à jour et annonces',
+            contact: 'Formulaires de contact pour les demandes et la communication',
+            events: 'Informations sur les cours, ateliers et événements'
+          },
+          responsibilities: {
+            title: 'Responsabilités de l\'utilisateur',
+            intro: 'En utilisant notre site web, vous acceptez de :',
+            accurate: 'Fournir des informations exactes et véridiques',
+            respectful: 'Utiliser le site web de manière respectueuse et appropriée',
+            lawful: 'Respecter toutes les lois et réglementations applicables',
+            noHarm: 'Ne pas s\'engager dans des activités qui pourraient nuire au site web ou à d\'autres utilisateurs'
+          },
+          intellectual: {
+            title: 'Propriété intellectuelle',
+            description: 'Tout le contenu de ce site web, incluant le texte, les images, logos et éléments de design, est la propriété de Dalin Si ou de ses concédants de licence.',
+            rights: 'Tous les droits sont réservés et protégés par les lois sur le droit d\'auteur et la propriété intellectuelle.',
+            restrictions: 'Vous ne pouvez pas reproduire, distribuer ou créer des œuvres dérivées sans autorisation écrite.'
+          },
+          liability: {
+            title: 'Limitation de responsabilité',
+            description: 'Notre association fournit ce site web et ces informations "en l\'état".',
+            noWarranty: 'Nous ne donnons aucune garantie concernant l\'exactitude, l\'exhaustivité ou la fiabilité des informations fournies.',
+            limitation: 'Notre responsabilité est limitée dans la mesure maximale autorisée par la loi applicable.'
+          },
+          externalLinks: {
+            title: 'Liens externes',
+            description: 'Notre site web peut contenir des liens vers des sites web externes pour votre commodité.',
+            disclaimer: 'Nous ne sommes pas responsables du contenu, des pratiques de confidentialité ou des conditions d\'utilisation des sites web externes.'
+          },
+          termination: {
+            title: 'Résiliation',
+            description: 'Nous nous réservons le droit de résilier ou de restreindre l\'accès à notre site web à tout moment sans préavis.',
+            effect: 'Lors de la résiliation, votre droit d\'utiliser le site web cesse immédiatement.'
+          },
+          governingLaw: {
+            title: 'Droit applicable',
+            description: 'Ces conditions sont régies par le droit français, car notre association est enregistrée en France.',
+            jurisdiction: 'Tout litige sera soumis à la juridiction des tribunaux français.'
+          },
+          changes: {
+            title: 'Modifications des conditions',
+            description: 'Nous pouvons modifier ces conditions d\'utilisation à tout moment.',
+            notification: 'Les changements seront publiés sur cette page avec une date mise à jour.',
+            lastUpdated: 'Dernière mise à jour'
+          },
+          contact: {
+            title: 'Informations de contact',
+            description: 'Si vous avez des questions sur ces conditions d\'utilisation, veuillez nous contacter :',
+            email: 'Email'
+          }
+        }
+      },
+
       // Newsletter Modal
       'newsletter.title': 'Restez connecté',
       'newsletter.description': 'Abonnez-vous à notre newsletter et restez informé sur le Temple.',
@@ -758,8 +1384,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         general: {
           title: 'Général',
           q1: {
-            question: 'Qu\'est-ce que le Temple de la Grande Forêt ?',
-            answer: 'Le Temple de la Grande Forêt (Dalin Si 大林寺) est un projet vivant. Actuellement, il existe comme sanctuaire pour les animaux et lieu de petites classes. À l\'avenir, avec le soutien de nombreux maîtres et enseignants qui ont placé leur confiance dans ce projet, notre souhait est d\'établir un centre de retraite dédié en France.'
+            question: 'Qu\'est-ce que Dalin Si ?',
+            answer: 'Dalin Si (大林寺) est un projet vivant. Actuellement, il existe comme sanctuaire pour les animaux et lieu de petites classes. À l\'avenir, avec le soutien de nombreux maîtres et enseignants qui ont placé leur confiance dans ce projet, notre souhait est d\'établir un centre de retraite dédié en France.'
           },
           q2: {
             question: 'Dalin Si est-il une institution religieuse ?',

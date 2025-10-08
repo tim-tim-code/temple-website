@@ -21,6 +21,9 @@ import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import CheckoutPage from './components/CheckoutPage';
 import Cart from './components/Cart';
+import Impressum from './components/legal/Impressum';
+import Datenschutz from './components/legal/Datenschutz';
+import Nutzungsbedingungen from './components/legal/Nutzungsbedingungen';
 
 function HomePage() {
   return (
@@ -51,6 +54,9 @@ function AppContent() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/impressum" element={<Impressum />} />
+        <Route path="/datenschutz" element={<Datenschutz />} />
+        <Route path="/nutzungsbedingungen" element={<Nutzungsbedingungen />} />
       </Routes>
       <Cart />
     </>
