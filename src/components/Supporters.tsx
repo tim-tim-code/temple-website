@@ -1,17 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import supporters from '../data/instructors.json';
+import supportersData from '../data/instructors.json';
 import { useLanguage } from '../context/LanguageContext';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
+
+interface Supporter {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  image_url: string;
+}
 
 const Supporters: React.FC = () => {
   const { t } = useLanguage();
+  const [supporters, setSupporters] = useState<Supporter[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoRotationKey, setAutoRotationKey] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Load supporters from Supabase or JSON
+  useEffect(() => {
+    const loadSupporters = async () => {
+      try {
+        if (!isSupabaseConfigured) {
+          setSupporters(supportersData as Supporter[]);
+          return;
+        }
+
+        const { data, error } = await supabase
+          .from('instructors')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order', { ascending: true })
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          setSupporters(data);
+        } else {
+          // Fallback to JSON if no data in Supabase
+          setSupporters(supportersData as Supporter[]);
+        }
+      } catch (error) {
+        console.error('Error loading supporters:', error);
+        setSupporters(supportersData as Supporter[]);
+      }
+    };
+
+    loadSupporters();
+  }, []);
+
   // Auto-rotation every 5 seconds (paused when hovered)
   useEffect(() => {
-    if (isHovered) return; // Don't auto-rotate when hovered
+    if (isHovered || supporters.length === 0) return; // Don't auto-rotate when hovered or no supporters
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % supporters.length);

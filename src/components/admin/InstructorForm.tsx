@@ -77,7 +77,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
         <div className="bg-gradient-to-r from-sage/20 to-forest/20 border-b border-white/30 px-6 py-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-serif text-forest">
-              {instructor ? 'Edit Instructor' : 'Add New Instructor'}
+              {instructor ? 'Edit Supporter' : 'Add New Supporter'}
             </h2>
             <button
               onClick={onClose}
@@ -96,7 +96,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
             {/* Image Upload Section */}
             <div className="space-y-4">
               <label className="block text-sm font-medium text-forest mb-2">
-                Instructor Photo
+                Supporter Photo
               </label>
 
               {/* Image Preview */}
@@ -133,7 +133,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
                     Choose Photo
                   </button>
                   <p className="text-xs text-forest/60 mt-2">
-                    Upload a photo for the instructor (JPG, PNG)
+                    Upload a photo for the supporter (JPG, PNG)
                   </p>
                 </div>
               </div>
@@ -166,7 +166,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                placeholder="Enter instructor's full name"
+                placeholder="Enter supporter's full name"
                 className="w-full px-4 py-3 bg-white/50 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:border-sage/50 focus:ring-2 focus:ring-sage/20 transition-all duration-200"
               />
             </div>
@@ -200,7 +200,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
                 onChange={handleInputChange}
                 required
                 rows={4}
-                placeholder="Write a brief description of the instructor's background, experience, and specialties..."
+                placeholder="Write a brief description of the supporter's background, experience, and specialties..."
                 className="w-full px-4 py-3 bg-white/50 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:border-sage/50 focus:ring-2 focus:ring-sage/20 transition-all duration-200 resize-vertical"
               />
             </div>
@@ -222,7 +222,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {instructor ? 'Update Instructor' : 'Add Instructor'}
+                {instructor ? 'Update Supporter' : 'Add Supporter'}
               </motion.button>
             </div>
           </form>

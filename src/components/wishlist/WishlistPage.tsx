@@ -259,6 +259,22 @@ const WishlistPage: React.FC = () => {
                 <p className="text-soil/70 leading-relaxed mb-6">
                   No wishlist items have been added at the moment. Check back soon!
                 </p>
+                <div className="pt-4 border-t border-sage/20">
+                  <p className="text-forest/80 mb-4">
+                    Want to support the temple anyway?
+                  </p>
+                  <motion.a
+                    href="/#support"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-br from-sage/40 to-forest/30 text-forest font-medium rounded-xl border border-sage/40 hover:from-sage/50 hover:to-forest/40 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    Make a Donation
+                  </motion.a>
+                </div>
               </div>
             </motion.div>
           ) : (
