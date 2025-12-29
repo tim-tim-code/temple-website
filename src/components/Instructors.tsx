@@ -82,7 +82,7 @@ const Instructors: React.FC = () => {
                     <div className="relative w-full overflow-hidden h-64">
                       <div className="w-full h-full bg-gradient-to-br from-sage/20 to-forest/10">
                         <motion.img
-                          src={instructorImages[instructor.id as keyof typeof instructorImages]}
+                          src={instructorImages[instructor.id]}
                           alt={instructor.name}
                           className="w-full h-full object-cover"
                           whileHover={{ scale: 1.05 }}

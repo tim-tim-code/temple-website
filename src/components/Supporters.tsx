@@ -7,15 +7,18 @@ const Supporters: React.FC = () => {
   const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoRotationKey, setAutoRotationKey] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Auto-rotation every 5 seconds
+  // Auto-rotation every 5 seconds (paused when hovered)
   useEffect(() => {
+    if (isHovered) return; // Don't auto-rotate when hovered
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % supporters.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [supporters.length, autoRotationKey]);
+  }, [supporters.length, autoRotationKey, isHovered]);
 
   // Navigation functions
   const goToNext = () => {
@@ -62,7 +65,11 @@ const Supporters: React.FC = () => {
       </div>
 
       {/* Carousel Container */}
-      <div className="relative w-full max-w-7xl mx-auto px-6">
+      <div
+        className="relative w-full max-w-7xl mx-auto px-6"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {/* Navigation Buttons */}
         {supporters.length > 1 && (
           <>
@@ -127,7 +134,7 @@ const Supporters: React.FC = () => {
                 <div className="relative w-full overflow-hidden h-64">
                   <div className="w-full h-full bg-gradient-to-br from-sage/20 to-forest/10">
                     <motion.img
-                      src={supporter.image}
+                      src={supporter.image_url}
                       alt={supporter.name}
                       className={`w-full h-full object-cover ${
                         supporter.name === 'Janine Jutima' ? 'object-[center_top]' : 'object-center'
