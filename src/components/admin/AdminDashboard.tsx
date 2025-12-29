@@ -26,7 +26,7 @@ const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'wishlist' | 'instructors'>('wishlist');
   const [items, setItems] = useState<WishlistItem[]>([]);
-  const [instructors, setInstructors] = useState<Instructor[]>(instructorsData);
+  const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [dashboardLoading, setDashboardLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');

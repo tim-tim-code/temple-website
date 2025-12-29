@@ -1,37 +1,37 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "name": "Master Nim",
     "role": "Zen Teacher",
     "bio": "Zen Dharmatalks",
-    "image": "/images/Supporters/Master Nim_Photo.png"
+    "image_url": "/images/Supporters/Master Nim_Photo.png"
   },
   {
-    "id": 2,
+    "id": "2",
     "name": "Randall Birnberg",
     "role": "Psychology Teacher",
     "bio": "Positive psychology",
-    "image": "/images/Supporters/Randall Birnberg_Photo.jpg"
+    "image_url": "/images/Supporters/Randall Birnberg_Photo.jpg"
   },
   {
-    "id": 3,
+    "id": "3",
     "name": "Sofian Sanini",
     "role": "Tea Master",
     "bio": "Tea ceremony",
-    "image": "/images/Supporters/ChaJin Sofian_Photo.png"
+    "image_url": "/images/Supporters/ChaJin Sofian_Photo.png"
   },
   {
-    "id": 4,
+    "id": "4",
     "name": "Janine Jutima",
     "role": "Meditation Teacher",
     "bio": "Vipassana Meditation",
-    "image": "/images/Supporters/Janine Jutima_Photo.png"
+    "image_url": "/images/Supporters/Janine Jutima_Photo.png"
   },
   {
-    "id": 5,
+    "id": "5",
     "name": "Laoshi Miao Hai",
     "role": "Shaolin Teacher",
     "bio": "Teacher from Shaolin Temple Europe",
-    "image": "/images/Supporters/Laoshi Miao Hai_Photo.jpg"
+    "image_url": "/images/Supporters/Laoshi Miao Hai_Photo.jpg"
   }
 ]
