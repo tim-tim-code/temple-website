@@ -254,10 +254,10 @@ const WishlistPage: React.FC = () => {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-serif text-forest mb-3">
-                  {t('wishlist.emptyState.title') || 'No Items Yet'}
+                  No Items Yet
                 </h3>
                 <p className="text-soil/70 leading-relaxed mb-6">
-                  {t('wishlist.emptyState.description') || 'No wishlist items have been added at the moment. Check back soon!'}
+                  No wishlist items have been added at the moment. Check back soon!
                 </p>
               </div>
             </motion.div>
