@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { faqData } from '../data/faq';
-import Header from './Header';
+import SubpageNavbar from './SubpageNavbar';
 import Footer from './Footer';
 
 const FAQPage: React.FC = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const toggleQuestion = (questionKey: string) => {
     setOpenQuestion(openQuestion === questionKey ? null : questionKey);
@@ -17,7 +22,7 @@ const FAQPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sage/10 via-leaf/5 to-paper">
-      <Header />
+      <SubpageNavbar backTo="/" backLabel={t('wishlist.back')} title="FAQ" />
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-gradient-to-br from-forest/5 via-sage/10 to-leaf/5">
@@ -102,7 +107,7 @@ const FAQPage: React.FC = () => {
                               transition={{ duration: 0.3 }}
                               className="overflow-hidden"
                             >
-                              <div className="px-6 pb-6 text-soil leading-relaxed whitespace-pre-line">
+                              <div className="px-6 pb-6 pt-2 text-soil leading-relaxed whitespace-pre-line border-t border-sage/10 mx-4">
                                 {faq.answer}
                               </div>
                             </motion.div>

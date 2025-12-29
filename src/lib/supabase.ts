@@ -1,15 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://placeholder.supabase.co';
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'placeholder_key';
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || '';
 
-// Check if using placeholder values
-const isUsingPlaceholders = supabaseUrl === 'https://placeholder.supabase.co' || supabaseAnonKey === 'placeholder_key_replace_with_real_key';
+// Check if Supabase is properly configured
+export const isSupabaseConfigured = !!(supabaseUrl && supabaseAnonKey && !supabaseUrl.includes('placeholder'));
 
-if (isUsingPlaceholders) {
-  console.warn('⚠️  Using placeholder Supabase credentials. Please update .env.local with your real Supabase URL and API key for full functionality.');
+if (!isSupabaseConfigured) {
+  console.warn('⚠️  Supabase not configured. Please add REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY to .env');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-// Temporarily force mock data to show for demonstration
-export const isSupabaseConfigured = false; // Changed to false to show mock data
+export const supabase = createClient(supabaseUrl || 'https://placeholder.supabase.co', supabaseAnonKey || 'placeholder');

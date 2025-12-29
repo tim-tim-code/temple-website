@@ -7,17 +7,17 @@ interface LiquidGlassProps {
 }
 
 const LiquidGlass: React.FC<LiquidGlassProps> = ({ children, className = '' }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 100, y: 100 });
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
-    
+
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     setMousePosition({ x, y });
   };
 
@@ -31,47 +31,47 @@ const LiquidGlass: React.FC<LiquidGlassProps> = ({ children, className = '' }) =
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      {/* Liquid light effect */}
+      {/* Liquid light effect - always visible, enhanced on hover */}
       <motion.div
-        className="absolute inset-0 opacity-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         animate={{
-          opacity: isHovered ? 1 : 0,
+          opacity: isHovered ? 1 : 0.6,
         }}
         transition={{ duration: 0.3 }}
         style={{
-          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, 
-            rgba(181, 226, 136, 0.15), 
-            rgba(181, 226, 136, 0.08) 40%, 
-            transparent 70%)`,
-        }}
-      />
-      
-      {/* Subtle shimmer effect */}
-      <motion.div
-        className="absolute inset-0 opacity-0 pointer-events-none"
-        animate={{
-          opacity: isHovered ? 1 : 0,
-        }}
-        transition={{ duration: 0.5 }}
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, 
-            rgba(242, 234, 206, 0.1), 
-            rgba(242, 234, 206, 0.05) 30%, 
+          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px,
+            rgba(181, 226, 136, 0.15),
+            rgba(181, 226, 136, 0.08) 40%,
             transparent 70%)`,
         }}
       />
 
-      {/* Enhanced border glow */}
+      {/* Subtle shimmer effect - always visible, enhanced on hover */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{
+          opacity: isHovered ? 1 : 0.5,
+        }}
+        transition={{ duration: 0.5 }}
+        style={{
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px,
+            rgba(242, 234, 206, 0.1),
+            rgba(242, 234, 206, 0.05) 30%,
+            transparent 70%)`,
+        }}
+      />
+
+      {/* Enhanced border glow - always visible, enhanced on hover */}
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         animate={{
-          opacity: isHovered ? 1 : 0,
+          opacity: isHovered ? 1 : 0.5,
         }}
         transition={{ duration: 0.3 }}
         style={{
-          background: `linear-gradient(135deg, 
-            rgba(181, 226, 136, 0.2) 0%, 
-            transparent 50%, 
+          background: `linear-gradient(135deg,
+            rgba(181, 226, 136, 0.2) 0%,
+            transparent 50%,
             rgba(242, 234, 206, 0.2) 100%)`,
           mask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
           maskComposite: 'xor',

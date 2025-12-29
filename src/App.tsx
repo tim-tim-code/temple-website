@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -24,8 +24,23 @@ import Cart from './components/Cart';
 import Impressum from './components/legal/Impressum';
 import Datenschutz from './components/legal/Datenschutz';
 import Nutzungsbedingungen from './components/legal/Nutzungsbedingungen';
+import PaymentSuccess from './components/PaymentSuccess';
+import PaymentCancel from './components/PaymentCancel';
 
 function HomePage() {
+  const location = useLocation();
+
+  // Jump to hash element instantly when navigating back
+  useEffect(() => {
+    if (location.hash) {
+      const elementId = location.hash.replace('#', '');
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView();
+      }
+    }
+  }, [location]);
+
   return (
     <div className="App w-full max-w-full overflow-x-hidden">
       <Header />
@@ -57,6 +72,8 @@ function AppContent() {
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/datenschutz" element={<Datenschutz />} />
         <Route path="/nutzungsbedingungen" element={<Nutzungsbedingungen />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/cancel" element={<PaymentCancel />} />
       </Routes>
       <Cart />
     </>

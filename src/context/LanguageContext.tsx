@@ -56,7 +56,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'nav.supporters': 'Supporters',
       'nav.faq': 'FAQ',
       'nav.offerings': 'Offerings',
-      'nav.support': 'Help us',
+      'nav.support': 'Support us',
       
       // Hero Section
       'hero.title': 'Let\u2019s find our way together',
@@ -67,8 +67,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // About Section
       'about.title': 'What is Dalin Si?',
-      'about.subtitle': 'Born from the wish to preserve the spirit that has guided our lives in many years at Shaolin Temple Europe, Dalin Si is a lay temple devoted to keeping traditional spiritual arts alive and applying their wisdom in daily life.',
-      'about.p1': 'Rooted in Chan and Taoist traditions, this spirit is still wandering, awaiting a home where it can finally settle, offering space for group retreats and welcoming individuals seeking hermitage.',
+      'about.subtitle': 'The Temple of the Great Forest is an association devoted to keeping traditional spiritual arts alive and applying their wisdom in daily life.',
+      'about.p1': 'As a lay temple rooted in Chan and Taoist traditions, its spirit is still wandering, awaiting a location where it can finally settle, offering space for group retreats and welcoming individuals seeking hermitage.',
       'about.p2': 'While caring for the former animals of Shaolin Temple Europe who have come under our protection, we strive to live as closely as possible to the values of Zen community by respecting Buddhist principles.',
       'about.p3': 'Unconditional benevolence toward all forms of life, discipline through giving, and profound honesty are the core of our spirit.',
       
@@ -515,18 +515,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
             answer: 'We speak English, French, Czech, and German.'
           }
         }
-      },
-
-      // FAQ Preview Section
-      'faq.preview.title': 'Questions & Answers',
-      'faq.preview.description': 'Find answers to common questions about the temple, our practices, and how to get involved.',
-      'faq.preview.general.title': 'General',
-      'faq.preview.general.desc': 'Learn about our temple and philosophy',
-      'faq.preview.practice.title': 'Practice',
-      'faq.preview.practice.desc': 'Understanding our daily routines and meditation',
-      'faq.preview.visiting.title': 'Visiting',
-      'faq.preview.visiting.desc': 'Information about visits and accommodations',
-      'faq.preview.button': 'View All Questions'
+      }
     },
     de: {
       // Navigation
@@ -536,7 +525,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'nav.supporters': 'Unterstützer',
       'nav.faq': 'FAQ',
       'nav.offerings': 'Angebote',
-      'nav.support': 'Hilf uns',
+      'nav.support': 'Unterstütze uns',
       
       // Hero Section
       'hero.title': 'Lass uns gemeinsam unseren Weg finden',
@@ -547,10 +536,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // About Section
       'about.title': 'Was ist der Tempel?',
-      'about.subtitle': 'Geboren aus dem Wunsch, den Geist zu bewahren, der unser Leben viele Jahre lang im Shaolin Temple Europe geleitet hat, ist Dalin Si ein Laientempel, der sich der Erhaltung traditioneller spiritueller Künste und der Anwendung ihrer Weisheit im täglichen Leben widmet.',
-      'about.p1': 'Kein buddhistischer Tempel, kein säkulares Zentrum. Ein Tempel, wo das Heilige und Gewöhnliche als eins atmen.',
-      'about.p2': 'Wo Meditationskissen neben Gartenwerkzeugen ruhen, wo stilles Sitzen in gemeinsame Mahlzeiten fließt, wo alte Weisheit auf die einfache Arbeit des täglichen Lebens trifft.',
-      'about.p3': 'Hier ist Praxis nicht vom Leben getrennt — sie ist Leben, vollständig und ohne Vorwand.',
+      'about.subtitle': 'Der Tempel des Großen Waldes ist ein Verein, der sich der Erhaltung traditioneller spiritueller Künste und der Anwendung ihrer Weisheit im täglichen Leben widmet.',
+      'about.p1': 'Als Laientempel, verwurzelt in Chan- und taoistischen Traditionen, wandert sein Geist noch immer und wartet auf einen Ort, an dem er sich endlich niederlassen kann, um Raum für Gruppenretreats zu bieten und Einzelpersonen auf der Suche nach Eremitage willkommen zu heißen.',
+      'about.p2': 'Während wir uns um die ehemaligen Tiere des Shaolin Temple Europe kümmern, die unter unseren Schutz gekommen sind, streben wir danach, so nah wie möglich an den Werten einer Zen-Gemeinschaft zu leben, indem wir buddhistische Prinzipien respektieren.',
+      'about.p3': 'Bedingungsloses Wohlwollen gegenüber allen Lebensformen, Disziplin durch Geben und tiefe Ehrlichkeit sind der Kern unseres Geistes.',
       
       // For Whom Section
       'forwhom.title': 'Für wen?',
@@ -1003,7 +992,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'nav.supporters': 'Soutiens',
       'nav.faq': 'FAQ',
       'nav.offerings': 'Offres',
-      'nav.support': 'Aidez-nous',
+      'nav.support': 'Soutenez-nous',
       
       // Hero Section
       'hero.title': 'Trouvons notre chemin ensemble',
@@ -1014,10 +1003,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       
       // About Section
       'about.title': 'Qu’est-ce que le Temple ?',
-      'about.subtitle': 'Né du souhait de préserver l\'esprit qui a guidé nos vies pendant de nombreuses années au Shaolin Temple Europe, Dalin Si est un temple laïc consacré à maintenir vivants les arts spirituels traditionnels et à appliquer leur sagesse dans la vie quotidienne.',
-      'about.p1': 'Ni un temple bouddhiste, ni un centre séculier. Un temple où le sacré et l’ordinaire respirent comme un.',
-      'about.p2': 'Où les coussins de méditation reposent aux côtés des outils de jardinage, où la séance silencieuse se fond dans les repas partagés, où la sagesse ancienne rencontre le travail simple de la vie quotidienne.',
-      'about.p3': 'Ici, la pratique n’est pas séparée de la vie — elle est la vie, pleinement et sans prétention.',
+      'about.subtitle': 'Le Temple de la Grande Forêt est une association consacrée à maintenir vivants les arts spirituels traditionnels et à appliquer leur sagesse dans la vie quotidienne.',
+      'about.p1': 'En tant que temple laïc enraciné dans les traditions Chan et taoïstes, son esprit erre encore, attendant un lieu où il pourra enfin s\'établir, offrant un espace pour des retraites de groupe et accueillant les personnes en quête d\'ermitage.',
+      'about.p2': 'Tout en prenant soin des anciens animaux du Shaolin Temple Europe qui sont venus sous notre protection, nous nous efforçons de vivre aussi près que possible des valeurs d\'une communauté Zen en respectant les principes bouddhistes.',
+      'about.p3': 'La bienveillance inconditionnelle envers toutes les formes de vie, la discipline par le don et l\'honnêteté profonde sont au cœur de notre esprit.',
       
       // For Whom Section
       'forwhom.title': 'Pour qui ?',
@@ -1032,7 +1021,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       'forwhom.card3.desc': 'Personnes attirées à créer et participer à une communauté intentionnelle enracinée dans la sagesse et le soutien mutuel.',
       'forwhom.card4.title': 'Transitionnaires de vie',
       'forwhom.card4.subtitle': 'Navigant le changement',
-      'forwhom.card4.desc': 'Ceux en transitions de vie qui ont besoin d'un espace d'ancrage pour réfléchir, se réinitialiser et découvrir leur prochaine étape authentique.',
+      'forwhom.card4.desc': 'Ceux en transitions de vie qui ont besoin d\'un espace d\'ancrage pour réfléchir, se réinitialiser et découvrir leur prochaine étape authentique.',
 
       // FAQ Preview
       'faq.preview.title': 'Questions & Réponses',

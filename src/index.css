@@ -274,64 +274,64 @@ code {
   height: 8rem;
 }
 
-/* Neumorphism button style with lighter temple colors */
+/* Flat button style with temple colors */
 .neu-button {
-  background: linear-gradient(145deg, #B5E288, #A8C090);
+  background: #A7C4A0;
   border-radius: 50px;
-  box-shadow: inset 4px 4px 10px #9CAF88, inset -4px -4px 10px #C1E6A5;
-  color: #3A5A2A;
+  box-shadow: none;
+  color: #2F4423;
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
   padding: 15px 40px;
   transition: all 0.2s ease-in-out;
-  border: 2px solid #A8C090;
+  border: none;
 }
 
 .neu-button:hover {
-  background: linear-gradient(145deg, #C1E6A5, #B5E288);
-  box-shadow: inset 2px 2px 5px #9CAF88, inset -2px -2px 5px #D4EDBB, 2px 2px 5px #8FAB7A, -2px -2px 5px #D4EDBB;
-  color: #2F4423;
+  background: #96B38E;
+  box-shadow: 0 4px 12px rgba(167, 196, 160, 0.4);
+  color: #1A2A14;
 }
 
 .neu-button:active {
-  background: linear-gradient(145deg, #A8C090, #9CAF88);
-  box-shadow: inset 6px 6px 12px #8FAB7A, inset -6px -6px 12px #B5E288;
+  background: #87A47F;
+  box-shadow: none;
   transform: scale(0.98);
 }
 
 .neu-button:focus {
   outline: none;
-  box-shadow: inset 2px 2px 5px #9CAF88, inset -2px -2px 5px #D4EDBB, 2px 2px 5px #8FAB7A, -2px -2px 5px #D4EDBB;
+  box-shadow: 0 0 0 3px rgba(167, 196, 160, 0.5);
 }
 
 /* Amber variant for wishlist button */
 .neu-button-amber {
-  background: linear-gradient(145deg, #F4E4BC, #E8D5B7);
+  background: #F4E4BC;
   border-radius: 50px;
-  box-shadow: inset 4px 4px 10px #DCC5A2, inset -4px -4px 10px #F9EFC6;
+  box-shadow: none;
   color: #8B6914;
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
   padding: 15px 40px;
   transition: all 0.2s ease-in-out;
-  border: 2px solid #E0CDA3;
+  border: none;
 }
 
 .neu-button-amber:hover {
-  background: linear-gradient(145deg, #F9EFC6, #E8D5B7);
-  box-shadow: inset 2px 2px 5px #DCC5A2, inset -2px -2px 5px #FFFADC, 2px 2px 5px #D4B896, -2px -2px 5px #FFFADC;
+  background: #E8D5B7;
+  box-shadow: 0 4px 12px rgba(244, 228, 188, 0.4);
   color: #6B5010;
 }
 
 .neu-button-amber:active {
-  background: linear-gradient(145deg, #E8D5B7, #DCC5A2);
-  box-shadow: inset 6px 6px 12px #D4B896, inset -6px -6px 12px #F4E4BC;
+  background: #DCC5A2;
+  box-shadow: none;
   transform: scale(0.98);
 }
 
 .neu-button-amber:focus {
   outline: none;
-  box-shadow: inset 2px 2px 5px #DCC5A2, inset -2px -2px 5px #FFFADC, 2px 2px 5px #D4B896, -2px -2px 5px #FFFADC;
+  box-shadow: 0 0 0 3px rgba(244, 228, 188, 0.5);
 }

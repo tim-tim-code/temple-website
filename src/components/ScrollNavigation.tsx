@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useCart } from '../context/CartContext';
 import BritishFlag from './flags/BritishFlag';
 import GermanFlag from './flags/GermanFlag';
 import FrenchFlag from './flags/FrenchFlag';
@@ -10,6 +11,7 @@ import AnimatedButton from './AnimatedButton';
 const ScrollNavigation: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
   const navigate = useNavigate();
+  const { cart, openCart } = useCart();
   const [isVisible, setIsVisible] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -167,6 +169,47 @@ const ScrollNavigation: React.FC = () => {
                 </div>
               </AnimatedButton>
             </motion.div>
+
+            {/* Cart Button - Only shows when cart has items */}
+            <AnimatePresence>
+              {cart.items.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative"
+                >
+                  <motion.button
+                    onClick={openCart}
+                    className="relative w-14 h-14 cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {/* Glass background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-2xl rounded-full overflow-hidden">
+                      <div className="absolute inset-0 opacity-10"
+                           style={{
+                             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E")`,
+                             mixBlendMode: 'overlay'
+                           }}
+                      />
+                    </div>
+                    <div className="absolute inset-0 border border-white/20 rounded-full"></div>
+
+                    {/* Cart Icon */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-forest/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                      {/* Small dot indicator */}
+                      <div className="absolute top-3 right-3 w-2 h-2 bg-sage rounded-full"></div>
+                    </div>
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             <div className="relative">
               <motion.div
                 ref={containerRef}
@@ -479,6 +522,46 @@ const ScrollNavigation: React.FC = () => {
                   ))}
                 </nav>
 
+
+                {/* Cart Button in Navbar - Only shows when cart has items */}
+                <AnimatePresence>
+                  {cart.items.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, width: 0 }}
+                      animate={{ opacity: 1, scale: 1, width: 'auto' }}
+                      exit={{ opacity: 0, scale: 0.8, width: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="relative"
+                    >
+                      <motion.button
+                        onClick={openCart}
+                        className="relative w-14 h-14 cursor-pointer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {/* Glass background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-2xl rounded-full overflow-hidden">
+                          <div className="absolute inset-0 opacity-10"
+                               style={{
+                                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E")`,
+                                 mixBlendMode: 'overlay'
+                               }}
+                          />
+                        </div>
+                        <div className="absolute inset-0 border border-white/20 rounded-full"></div>
+
+                        {/* Cart Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <svg className="w-5 h-5 text-forest/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                          {/* Small dot indicator */}
+                          <div className="absolute top-3 right-3 w-2 h-2 bg-sage rounded-full"></div>
+                        </div>
+                      </motion.button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Language Selector - Exact copy of original design */}
                 <div className="relative">

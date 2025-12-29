@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import AnimatedButton from './AnimatedButton';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 interface DonorInfo {
   name: string;
@@ -11,9 +12,14 @@ interface DonorInfo {
   message: string;
 }
 
+interface FieldErrors {
+  name?: string;
+  email?: string;
+}
+
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
-  const { cart, formatPrice, getTotalPrice, clearCart } = useCart();
+  const { cart, formatPrice, getTotalPrice } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
   const [donorInfo, setDonorInfo] = useState<DonorInfo>({
     name: '',
@@ -22,6 +28,8 @@ const CheckoutPage: React.FC = () => {
     message: '',
   });
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -29,26 +37,91 @@ const CheckoutPage: React.FC = () => {
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }));
+    // Clear error when user starts typing
+    if (fieldErrors[name as keyof FieldErrors]) {
+      setFieldErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validateStep2 = (): boolean => {
+    const errors: FieldErrors = {};
+
+    if (!donorInfo.isAnonymous && !donorInfo.name.trim()) {
+      errors.name = 'Please enter your name';
+    }
+
+    if (!donorInfo.email.trim()) {
+      errors.email = 'Please enter your email address';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(donorInfo.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleContinueToPayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateStep2()) {
+      setCurrentStep(3);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
+    setError(null);
 
-    // Simulate processing
-    setTimeout(() => {
-      // Here you would integrate with your payment processor
-      console.log('Processing donation:', {
-        donorInfo,
-        cart,
-        total: getTotalPrice(),
+    try {
+      if (!isSupabaseConfigured) {
+        throw new Error('Payment system is not configured');
+      }
+
+      // Generate a session ID for tracking
+      const sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+
+      // Get the base URL for redirects
+      const baseUrl = window.location.origin;
+
+      // Create payment via Supabase Edge Function
+      const { data, error: fnError } = await supabase.functions.invoke('create-payment', {
+        body: {
+          amount: getTotalPrice(),
+          description: `Donation to Dalin Si Temple - ${cart.total_items} item(s)`,
+          redirectUrl: `${baseUrl}/payment/success`,
+          webhookUrl: `${process.env.REACT_APP_SUPABASE_URL}/functions/v1/mollie-webhook`,
+          metadata: {
+            session_id: sessionId,
+            donor_name: donorInfo.isAnonymous ? null : donorInfo.name,
+            donor_email: donorInfo.email,
+            is_anonymous: donorInfo.isAnonymous,
+            message: donorInfo.message || null,
+            items: cart.items.map(item => ({
+              id: item.item.id,
+              title: item.item.title,
+              quantity: item.quantity,
+              price: item.price_at_time,
+            })),
+          },
+        },
       });
-      
-      // Clear cart and show success
-      clearCart();
-      setCurrentStep(4);
+
+      if (fnError) {
+        throw new Error(fnError.message || 'Failed to create payment');
+      }
+
+      if (!data?.checkoutUrl) {
+        throw new Error('No checkout URL received');
+      }
+
+      // Redirect to Mollie checkout
+      window.location.href = data.checkoutUrl;
+
+    } catch (err: any) {
+      console.error('Payment error:', err);
+      setError(err.message || 'An error occurred while processing your payment. Please try again.');
       setIsProcessing(false);
-    }, 2000);
+    }
   };
 
   if (cart.items.length === 0 && currentStep !== 4) {
@@ -74,33 +147,37 @@ const CheckoutPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-paper via-sage/5 to-sun/5">
-      {/* Header */}
-      <div className="bg-forest/95 backdrop-blur-sm border-b border-sage/20">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <motion.button
-              onClick={() => navigate('/wishlist')}
-              className="flex items-center space-x-2 text-paper hover:text-paper/80 transition-colors duration-200"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              <span>Back to Wishlist</span>
-            </motion.button>
+      {/* Glass Header */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <div className="bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-lg shadow-forest/5">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <motion.button
+                onClick={() => navigate('/wishlist')}
+                className="flex items-center space-x-2 text-forest hover:text-forest/70 transition-colors duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span className="font-medium">Wishlist</span>
+              </motion.button>
 
-            <h1 className="text-2xl md:text-3xl font-serif text-paper">
-              Checkout
-            </h1>
+              <h1 className="text-xl md:text-2xl font-serif text-forest">
+                Checkout
+              </h1>
 
-            <div className="w-32"></div> {/* Spacer for center alignment */}
+              <div className="w-24 text-right">
+                <span className="text-forest font-semibold">{formatPrice(getTotalPrice())}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Progress Steps */}
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 pt-24 pb-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between mb-12">
             {steps.map((step, index) => (
@@ -198,7 +275,7 @@ const CheckoutPage: React.FC = () => {
             {currentStep === 2 && (
               <div>
                 <h2 className="text-2xl font-serif text-forest mb-6">Donor Information</h2>
-                <form onSubmit={(e) => { e.preventDefault(); setCurrentStep(3); }} className="space-y-6">
+                <form onSubmit={handleContinueToPayment} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-forest mb-2">
@@ -207,13 +284,32 @@ const CheckoutPage: React.FC = () => {
                       <input
                         type="text"
                         name="name"
+                        autoComplete="name"
                         value={donorInfo.name}
                         onChange={handleInputChange}
                         disabled={donorInfo.isAnonymous}
-                        required={!donorInfo.isAnonymous}
-                        className="w-full px-4 py-3 rounded-xl border border-sage/30 bg-white/70 focus:border-sage focus:outline-none disabled:bg-gray-100"
+                        className={`w-full px-4 py-3 rounded-xl border bg-white/70 focus:outline-none transition-all duration-300 disabled:bg-gray-100 ${
+                          fieldErrors.name
+                            ? 'border-red-400 bg-red-50/50 focus:border-red-500'
+                            : 'border-sage/30 focus:border-sage'
+                        }`}
                         placeholder={donorInfo.isAnonymous ? "Anonymous" : "Enter your name"}
                       />
+                      <AnimatePresence>
+                        {fieldErrors.name && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="mt-2 text-sm text-red-500 flex items-center gap-1"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                            {fieldErrors.name}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
 
                     <div>
@@ -223,12 +319,31 @@ const CheckoutPage: React.FC = () => {
                       <input
                         type="email"
                         name="email"
+                        autoComplete="email"
                         value={donorInfo.email}
                         onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-sage/30 bg-white/70 focus:border-sage focus:outline-none"
+                        className={`w-full px-4 py-3 rounded-xl border bg-white/70 focus:outline-none transition-all duration-300 ${
+                          fieldErrors.email
+                            ? 'border-red-400 bg-red-50/50 focus:border-red-500'
+                            : 'border-sage/30 focus:border-sage'
+                        }`}
                         placeholder="Enter your email"
                       />
+                      <AnimatePresence>
+                        {fieldErrors.email && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="mt-2 text-sm text-red-500 flex items-center gap-1"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                            {fieldErrors.email}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
 
@@ -307,32 +422,44 @@ const CheckoutPage: React.FC = () => {
                   )}
                 </div>
 
-                {/* Payment Integration Placeholder */}
-                <div className="bg-white/50 rounded-xl p-8 mb-8 text-center border-2 border-dashed border-sage/30">
+                {/* Mollie Payment */}
+                <div className="bg-white/50 rounded-xl p-8 mb-8 text-center">
                   <div className="mb-4">
                     <svg className="w-16 h-16 text-sage mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-serif text-forest mb-2">Payment Integration</h3>
-                  <p className="text-soil/70 mb-6">
-                    This is where your payment processor integration will be implemented.
-                    <br />
-                    (Shopify Buy Button, Stripe, PayPal, etc.)
+                  <h3 className="text-lg font-serif text-forest mb-2">Secure Payment</h3>
+                  <p className="text-soil/70 mb-4">
+                    You will be redirected to our secure payment provider to complete your donation.
                   </p>
+                  <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-soil/60">
+                    <span className="bg-sage/10 px-3 py-1 rounded-full">iDEAL</span>
+                    <span className="bg-sage/10 px-3 py-1 rounded-full">Credit Card</span>
+                    <span className="bg-sage/10 px-3 py-1 rounded-full">PayPal</span>
+                    <span className="bg-sage/10 px-3 py-1 rounded-full">Bancontact</span>
+                    <span className="bg-sage/10 px-3 py-1 rounded-full">SOFORT</span>
+                  </div>
+
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6">
+                      <p>{error}</p>
+                    </div>
+                  )}
+
                   <form onSubmit={handleSubmit}>
-                    <AnimatedButton 
-                      type="submit" 
+                    <AnimatedButton
+                      type="submit"
                       disabled={isProcessing}
                       className="px-8 py-4"
                     >
                       {isProcessing ? (
                         <div className="flex items-center space-x-2">
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          <span>Processing...</span>
+                          <span>Redirecting to payment...</span>
                         </div>
                       ) : (
-                        `Complete Donation - ${formatPrice(getTotalPrice())}`
+                        `Donate ${formatPrice(getTotalPrice())}`
                       )}
                     </AnimatedButton>
                   </form>

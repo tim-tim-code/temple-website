@@ -141,6 +141,8 @@ const FloatingMailButton: React.FC = () => {
                   <div className="relative">
                     <input
                       type="email"
+                      name="email"
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={t('hero.email.placeholder')}

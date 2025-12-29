@@ -147,7 +147,7 @@ const Hero: React.FC = () => {
           <img
             src="/images/Logos/Full Wheel White Logo.png"
             alt="DaLinSi Temple Logo"
-            className="w-20 h-20 object-contain"
+            className="w-24 h-24 object-contain"
           />
           <h1 className="text-white/90 font-serif text-lg font-medium hidden sm:block">
             <StaticText />
@@ -173,6 +173,8 @@ const Hero: React.FC = () => {
               <form onSubmit={handleSubmit} className="hidden md:block space-y-4">
                 <input
                   type="email"
+                  name="email"
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t('hero.email.placeholder')}

@@ -4,6 +4,104 @@ import animals from '../data/animals.json';
 import { useLanguage } from '../context/LanguageContext';
 import { animalImages } from './AnimalImages';
 
+// In Memory Section Component
+const InMemorySection: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const memories = [
+    { name: 'Wotan', description: 'Lovey lover loving boy. No heart was as big as Wotan\'s.' },
+    { name: 'Mogli', description: 'First zen master of Shaolin Temple Europe. At ease in all time, purring for existence. No situation could make him scared. Even at an advanced age, he used to train chasing pinecone on the training place. And when he hunted it was always to kill quickly and eat. No playing, no suffering.' },
+    { name: 'Mietzi', description: 'Elder beyond the eldest cats of this world, she was the mistress of Shaolin Temple Europe.' },
+    { name: 'Rats', description: 'Saved from various situations on the SLTE ground. Intelligent and clean they still suffer from the image of contagious spreaders even if many studies prove the opposite.' },
+    { name: 'Lizi', description: 'A beloved companion who will always be remembered.' },
+    { name: 'Blesk', description: 'A beloved companion who will always be remembered.' }
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="mt-16"
+    >
+      {/* Toggle Button */}
+      <motion.button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-center gap-3 py-4 text-soil/70 hover:text-soil transition-colors duration-300"
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+      >
+        <span className="text-xl">🕯️</span>
+        <span className="font-serif text-lg">In Memory</span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.span>
+      </motion.button>
+
+      {/* Collapsible Content */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="bg-white/40 backdrop-blur-sm rounded-2xl border border-sage/10 p-8 mt-4">
+              <p className="text-soil/80 text-center mb-8 max-w-2xl mx-auto italic">
+                To our beloved companions who passed away
+              </p>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {memories.map((memory, index) => (
+                  <motion.div
+                    key={memory.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    className="bg-white/50 rounded-xl p-5 border border-sage/10"
+                  >
+                    <h4 className="text-lg font-serif text-forest/80 mb-2">{memory.name}</h4>
+                    <p className="text-soil/70 text-sm leading-relaxed">{memory.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// Calculate age from birthDate (format: DD/MM/YYYY)
+const calculateAge = (birthDate: string | undefined): number | null => {
+  if (!birthDate || birthDate === 'Unknown') return null;
+
+  const parts = birthDate.split('/');
+  if (parts.length !== 3) return null;
+
+  const [day, month, year] = parts.map(Number);
+  const birth = new Date(year, month - 1, day);
+  const today = new Date();
+
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+
+  return age;
+};
+
 const Animals: React.FC = () => {
   const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -147,6 +245,9 @@ const Animals: React.FC = () => {
             ))}
           </div>
 
+          {/* In Memory Section - Collapsible */}
+          <InMemorySection />
+
           {/* Animal Category Modal */}
           <AnimatePresence>
             {selectedCategory && (
@@ -226,11 +327,14 @@ const Animals: React.FC = () => {
                                 <h3 className="text-2xl font-serif text-forest mb-2">
                                   {animal.name}
                                 </h3>
-                                {animal.age && (
-                                  <p className="text-sage font-medium text-sm mb-1">
-                                    {animal.age} years old {animal.birthDate && `(Born: ${animal.birthDate})`}
-                                  </p>
-                                )}
+                                {(() => {
+                                  const age = calculateAge(animal.birthDate);
+                                  return age !== null ? (
+                                    <p className="text-sage font-medium text-sm mb-1">
+                                      {age} years old
+                                    </p>
+                                  ) : null;
+                                })()}
                                 <p className="text-leaf font-medium uppercase tracking-wide text-sm mb-3">
                                   {animal.type}
                                 </p>
