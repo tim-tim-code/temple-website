@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Instructor {
-  id: number;
+  id: string;
   name: string;
   role: string;
   bio: string;
-  image: string;
+  image_url: string;
 }
 
 interface InstructorFormProps {
@@ -20,9 +20,9 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
     name: instructor?.name || '',
     role: instructor?.role || '',
     bio: instructor?.bio || '',
-    image: instructor?.image || ''
+    image_url: instructor?.image_url || ''
   });
-  const [imagePreview, setImagePreview] = useState<string | null>(instructor?.image || null);
+  const [imagePreview, setImagePreview] = useState<string | null>(instructor?.image_url || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -42,7 +42,7 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
         setImagePreview(result);
         setFormData(prev => ({
           ...prev,
-          image: `/images/instructors/${file.name}`
+          image_url: `/images/instructors/${file.name}`
         }));
       };
       reader.readAsDataURL(file);
@@ -145,8 +145,8 @@ const InstructorForm: React.FC<InstructorFormProps> = ({ instructor, onClose, on
                 </label>
                 <input
                   type="text"
-                  name="image"
-                  value={formData.image}
+                  name="image_url"
+                  value={formData.image_url}
                   onChange={handleInputChange}
                   placeholder="/images/instructor-name.jpg"
                   className="w-full px-4 py-3 bg-white/50 backdrop-blur-sm border border-white/30 rounded-xl focus:outline-none focus:border-sage/50 focus:ring-2 focus:ring-sage/20 transition-all duration-200"

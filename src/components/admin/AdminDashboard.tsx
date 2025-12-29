@@ -10,11 +10,15 @@ import InstructorForm from './InstructorForm';
 import instructorsData from '../../data/instructors.json';
 
 interface Instructor {
-  id: number;
+  id: string;
   name: string;
   role: string;
   bio: string;
-  image: string;
+  image_url: string;
+  display_order?: number;
+  is_active?: boolean;
+  created_at?: string;
+  updated_at?: string;
 }
 
 const AdminDashboard: React.FC = () => {
@@ -41,19 +45,24 @@ const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     if (loading) return;
-    
+
     if (!user || !isAdmin) {
       navigate('/admin/login');
       return;
     }
-    
+
     loadItems();
+    loadInstructors();
   }, [user, isAdmin, loading, navigate]);
+
+  // Check if we're using mock auth (Quick Login)
+  const isMockAuth = user?.id === 'mock-admin-id';
 
   const loadItems = async () => {
     setDashboardLoading(true);
     try {
-      if (!isSupabaseConfigured) {
+      // Use mock data if Supabase is not configured OR if using mock auth
+      if (!isSupabaseConfigured || isMockAuth) {
         // Initialize mock data if empty
         if (mockItems.length === 0) {
           const initialMockItems: WishlistItem[] = [
@@ -234,6 +243,31 @@ const AdminDashboard: React.FC = () => {
     setStats(stats);
   };
 
+  const loadInstructors = async () => {
+    try {
+      // Use JSON data if Supabase is not configured OR if using mock auth
+      if (!isSupabaseConfigured || isMockAuth) {
+        setInstructors(instructorsData as any);
+        return;
+      }
+
+      // Load from Supabase
+      const { data, error } = await supabase
+        .from('instructors')
+        .select('*')
+        .eq('is_active', true)
+        .order('display_order', { ascending: true })
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setInstructors(data || []);
+    } catch (error) {
+      console.error('Error loading instructors:', error);
+      // Fallback to JSON data on error
+      setInstructors(instructorsData as any);
+    }
+  };
+
   const handleSignOut = async () => {
     await signOut();
     navigate('/');
@@ -286,25 +320,109 @@ const AdminDashboard: React.FC = () => {
     setShowInstructorForm(true);
   };
 
-  const handleInstructorSave = (instructorData: Omit<Instructor, 'id'>) => {
-    if (editingInstructor) {
-      // Update existing instructor
-      setInstructors(prev => prev.map(instructor =>
-        instructor.id === editingInstructor.id
-          ? { ...instructorData, id: editingInstructor.id }
-          : instructor
-      ));
-    } else {
-      // Add new instructor
-      const newId = Math.max(...instructors.map(i => i.id), 0) + 1;
-      setInstructors(prev => [...prev, { ...instructorData, id: newId }]);
+  const handleInstructorSave = async (instructorData: Omit<Instructor, 'id'>) => {
+    try {
+      // If using mock data (demo mode), update local state
+      if (!isSupabaseConfigured || isMockAuth) {
+        if (editingInstructor) {
+          setInstructors(prev => prev.map(instructor =>
+            instructor.id === editingInstructor.id
+              ? { ...instructorData, id: editingInstructor.id }
+              : instructor
+          ));
+        } else {
+          const newId = (Math.max(...instructors.map(i => parseInt(i.id) || 0), 0) + 1).toString();
+          setInstructors(prev => [...prev, { ...instructorData, id: newId }]);
+        }
+        handleInstructorFormClose();
+        return;
+      }
+
+      if (editingInstructor) {
+        // Update existing instructor in Supabase
+        const { error } = await supabase
+          .from('instructors')
+          .update({
+            ...instructorData,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', editingInstructor.id);
+
+        if (error) throw error;
+      } else {
+        // Insert new instructor into Supabase
+        const { error } = await supabase
+          .from('instructors')
+          .insert([instructorData]);
+
+        if (error) throw error;
+      }
+
+      // Refresh instructors list
+      await loadInstructors();
+      handleInstructorFormClose();
+    } catch (error) {
+      console.error('Error saving instructor:', error);
+      alert('Failed to save instructor. Please try again.');
     }
-    handleInstructorFormClose();
   };
 
-  const handleDeleteInstructor = (instructorId: number) => {
-    if (window.confirm('Are you sure you want to delete this instructor?')) {
-      setInstructors(prev => prev.filter(instructor => instructor.id !== instructorId));
+  const handleDeleteItem = async (itemId: string, itemTitle: string) => {
+    if (!window.confirm(`Are you sure you want to delete "${itemTitle}"?`)) {
+      return;
+    }
+
+    try {
+      // If using mock data (demo mode), delete from mockItems
+      if (!isSupabaseConfigured || isMockAuth) {
+        const updatedMockItems = mockItems.filter(item => item.id !== itemId);
+        setMockItems(updatedMockItems);
+        setItems(updatedMockItems);
+        calculateStats(updatedMockItems);
+        return;
+      }
+
+      // Delete from Supabase
+      const { error } = await supabase
+        .from('wishlist_items')
+        .delete()
+        .eq('id', itemId);
+
+      if (error) throw error;
+
+      // Refresh the items list
+      await loadItems();
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      alert('Failed to delete item. Please try again.');
+    }
+  };
+
+  const handleDeleteInstructor = async (instructorId: string, instructorName: string) => {
+    if (!window.confirm(`Are you sure you want to delete "${instructorName}"?`)) {
+      return;
+    }
+
+    try {
+      // If using mock data (demo mode), delete from local state
+      if (!isSupabaseConfigured || isMockAuth) {
+        setInstructors(prev => prev.filter(instructor => instructor.id !== instructorId));
+        return;
+      }
+
+      // Delete from Supabase (soft delete by setting is_active to false)
+      const { error } = await supabase
+        .from('instructors')
+        .update({ is_active: false })
+        .eq('id', instructorId);
+
+      if (error) throw error;
+
+      // Refresh instructors list
+      await loadInstructors();
+    } catch (error) {
+      console.error('Error deleting instructor:', error);
+      alert('Failed to delete instructor. Please try again.');
     }
   };
 
@@ -372,7 +490,7 @@ const AdminDashboard: React.FC = () => {
               </motion.button>
 
               {/* Center Title */}
-              <h1 className="text-xl font-serif font-medium text-forest/90 px-4">
+              <h1 className="text-xl font-serif font-medium text-white px-4">
                 Admin Dashboard
               </h1>
 
@@ -599,13 +717,13 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Demo Mode Warning */}
-        {!isSupabaseConfigured && (
+        {(!isSupabaseConfigured || isMockAuth) && (
           <motion.div
             className="mb-8 bg-gradient-to-br from-amber/60 via-amber/40 to-sun/50 backdrop-blur-sm rounded-2xl p-6 border border-amber/60 shadow-lg"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h3 className="text-amber-800 font-semibold">🔧 Demo mode is activated</h3>
+            <h3 className="text-amber-800 font-semibold">🔧 Demo mode is activated {isMockAuth && '(Quick Login)'}</h3>
           </motion.div>
         )}
 
@@ -687,11 +805,7 @@ const AdminDashboard: React.FC = () => {
                       Edit
                     </motion.button>
                     <motion.button
-                      onClick={() => {
-                        if (window.confirm(`Delete "${item.title}"?`)) {
-                          alert('Delete feature coming soon!');
-                        }
-                      }}
+                      onClick={() => handleDeleteItem(item.id, item.title)}
                       className="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-800 text-sm rounded-lg transition-colors duration-200"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -722,9 +836,9 @@ const AdminDashboard: React.FC = () => {
               >
                 {/* Instructor Image */}
                 <div className="w-full h-32 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-200 to-gray-300">
-                  {instructor.image ? (
+                  {instructor.image_url ? (
                     <img
-                      src={instructor.image}
+                      src={instructor.image_url}
                       alt={instructor.name}
                       className="w-full h-full object-cover"
                     />
@@ -758,7 +872,7 @@ const AdminDashboard: React.FC = () => {
                       Edit
                     </motion.button>
                     <motion.button
-                      onClick={() => handleDeleteInstructor(instructor.id)}
+                      onClick={() => handleDeleteInstructor(instructor.id, instructor.name)}
                       className="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-800 text-sm rounded-lg transition-colors duration-200"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
