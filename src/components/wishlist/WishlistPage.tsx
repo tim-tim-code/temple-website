@@ -5,11 +5,10 @@ import { WishlistItem } from '../../types/wishlist';
 import { supabase, isSupabaseConfigured } from '../../lib/supabase';
 import WishlistCard from './WishlistCard';
 import WishlistItemModal from './WishlistItemModal';
-import WishlistHeader from '../WishlistHeader';
-import LanguageSelector from '../LanguageSelector';
+import SubpageNavbar from '../SubpageNavbar';
 
 const WishlistPage: React.FC = () => {
-  const { t, language, setLanguage } = useLanguage();
+  const { t } = useLanguage();
   const [items, setItems] = useState<WishlistItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<WishlistItem | null>(null);
   const [loading, setLoading] = useState(true);
@@ -196,11 +195,11 @@ const WishlistPage: React.FC = () => {
 
   return (
     <>
-      {/* Glass Header */}
-      <WishlistHeader />
+      {/* Subpage Navbar with Back Button */}
+      <SubpageNavbar backTo="/#support" backLabel="Home" title={t('wishlist.title')} />
 
       {/* Main Page */}
-      <div className="min-h-screen bg-gradient-to-br from-paper via-sage/5 to-sun/5 pt-24">{/* Added pt-24 for glass navbar spacing */}
+      <div className="min-h-screen bg-gradient-to-br from-paper via-sage/5 to-sun/5 pt-24">
 
         {/* Content */}
         <div className="container mx-auto px-6 py-12">
@@ -240,6 +239,28 @@ const WishlistPage: React.FC = () => {
                 </div>
               ))}
             </div>
+          ) : items.length === 0 ? (
+            /* Empty State */
+            <motion.div
+              className="text-center py-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="max-w-md mx-auto">
+                <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-sage/20 to-forest/10 rounded-full flex items-center justify-center">
+                  <svg className="w-12 h-12 text-forest/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-serif text-forest mb-3">
+                  {t('wishlist.emptyState.title') || 'No Items Yet'}
+                </h3>
+                <p className="text-soil/70 leading-relaxed mb-6">
+                  {t('wishlist.emptyState.description') || 'No wishlist items have been added at the moment. Check back soon!'}
+                </p>
+              </div>
+            </motion.div>
           ) : (
             /* Items Grid */
             <motion.div
@@ -260,12 +281,6 @@ const WishlistPage: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Language Selector */}
-      <LanguageSelector
-        currentLanguage={language}
-        onLanguageChange={setLanguage}
-      />
 
       {/* Modal */}
       <AnimatePresence>
