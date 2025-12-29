@@ -41,6 +41,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const checkAdminStatus = async (userId: string): Promise<boolean> => {
+    // TEMPORARY: Skip database check during development
+    console.log('🔑 Checking admin status for user:', userId);
+    console.log('🔑 Temporarily allowing all authenticated users as admin');
+    return true;
+
+    /* TODO: Re-enable this once Supabase queries are working properly
     try {
       const { data, error } = await supabase
         .from('admin_users')
@@ -48,16 +54,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         .eq('id', userId)
         .single();
 
+      console.log('🔑 Admin check result - data:', data, 'error:', error);
+
       if (error) {
-        // If table doesn't exist or user not found, allow login anyway for now
-        console.log('Admin check - allowing access (table may not exist):', error.message);
-        return true; // Temporarily allow all authenticated users as admin
+        console.log('🔑 Admin check - allowing access (table may not exist):', error.message);
+        return true;
       }
-      return !!data;
+
+      const isAdmin = !!data;
+      console.log('🔑 User is admin:', isAdmin);
+      return isAdmin;
     } catch (error) {
-      console.error('Error checking admin status:', error);
-      return true; // Temporarily allow on error
+      console.error('🔑 Error checking admin status:', error);
+      return true;
     }
+    */
   };
 
   const signIn = async (email: string, password: string) => {

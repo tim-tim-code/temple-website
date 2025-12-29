@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { isSupabaseConfigured } from '../../lib/supabase';
 import AnimatedButton from '../AnimatedButton';
 
 const AdminLogin: React.FC = () => {
@@ -10,52 +9,44 @@ const AdminLogin: React.FC = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { signIn } = useAuth();
+  const { signIn, user, isAdmin } = useAuth();
   const navigate = useNavigate();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    console.log('🔐 useEffect triggered - user:', user?.email, 'isAdmin:', isAdmin);
+    if (user && isAdmin) {
+      console.log('🔐 Both user and isAdmin are true, navigating to dashboard...');
+      navigate('/admin/dashboard');
+    }
+  }, [user, isAdmin, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    try {
-      const { error } = await signIn(email, password);
-      
-      if (error) {
-        setError(error.message);
-        setLoading(false);
-      } else {
-        // Wait a moment for the auth state to update
-        setTimeout(() => {
-          navigate('/admin/dashboard');
-        }, 1000);
-      }
-    } catch (err) {
-      setError('Login failed. Please try again.');
-      setLoading(false);
-    }
-  };
-
-  const handleQuickLogin = async () => {
-    setEmail('admin@dalinsi.com');
-    setPassword('temple123');
-    setLoading(true);
-    setError(null);
+    console.log('🔐 Attempting login with:', email);
 
     try {
-      const { error } = await signIn('admin@dalinsi.com', 'temple123');
-      
-      if (error) {
-        setError(error.message);
+      const result = await signIn(email, password);
+      console.log('🔐 SignIn result:', result);
+
+      if (result.error) {
+        console.error('🔐 Login error:', result.error);
+        setError(result.error.message || 'Login failed');
         setLoading(false);
       } else {
-        // Wait a moment for the auth state to update
+        console.log('🔐 Login successful, waiting for auth state...');
+        // Success - wait for auth state then redirect
         setTimeout(() => {
-          navigate('/admin/dashboard');
-        }, 1000);
+          console.log('🔐 Redirecting to dashboard...');
+          window.location.href = '/admin/dashboard';
+        }, 1500);
       }
-    } catch (err) {
-      setError('Login failed. Please try again.');
+    } catch (err: any) {
+      console.error('🔐 Login exception:', err);
+      setError(err?.message || 'Login failed. Please try again.');
       setLoading(false);
     }
   };
@@ -138,51 +129,6 @@ const AdminLogin: React.FC = () => {
             {loading ? 'Signing In...' : 'Sign In'}
           </AnimatedButton>
         </form>
-
-        {/* Quick Login Button (only show if not using real Supabase) */}
-        {!isSupabaseConfigured && (
-          <motion.button
-            onClick={handleQuickLogin}
-            disabled={loading}
-            className="w-full mt-4 px-6 py-3 bg-amber/20 backdrop-blur-sm border border-amber/40 rounded-xl text-forest hover:bg-amber/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-            whileHover={{ scale: loading ? 1 : 1.02 }}
-            whileTap={{ scale: loading ? 1 : 0.98 }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            ⚡ Quick Login (Demo)
-          </motion.button>
-        )}
-
-        {/* Demo Credentials (only show if not using real Supabase) */}
-        {!isSupabaseConfigured && (
-          <motion.div
-            className="mt-6 p-4 bg-gradient-to-br from-amber/10 via-sun/5 to-amber/5 backdrop-blur-sm rounded-xl border border-amber/20"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <h3 className="text-sm font-medium text-amber-800 mb-2">🔧 Demo Mode</h3>
-            <p className="text-xs text-amber-700 mb-3">Use these credentials to test the admin dashboard:</p>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-amber-700 font-mono">admin@dalinsi.com</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail('admin@dalinsi.com');
-                    setPassword('temple123');
-                  }}
-                  className="text-xs text-amber-800 hover:text-amber-900 underline"
-                >
-                  Use
-                </button>
-              </div>
-              <div className="text-xs text-amber-600 font-mono">Password: temple123</div>
-            </div>
-          </motion.div>
-        )}
 
         {/* Back to Home */}
         <div className="mt-6 text-center">
